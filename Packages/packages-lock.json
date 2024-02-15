@@ -305,6 +305,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "se.hertzole.scriptable-values": {
+      "version": "https://github.com/Hertzole/scriptable-values.git#package",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "afc4e891220800d770baa02fe42dec2c32da61b7"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
