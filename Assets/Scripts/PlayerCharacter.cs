@@ -1,9 +1,11 @@
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using Kitbashery.Gameplay;
 public class PlayerCharacter : Entity
 {
-
-    public TextMeshProUGUI HPText;
+    public Health EnemyHealth;
+    public TextMeshProUGUI HPText, EnemyHPText;
     public float acceleration = 50; // how fast you accelerate
     public float accSprintMultiplier = 4; // how much faster you go when "sprinting"
     public float lookSensitivity = 1; // mouse look sensitivity
@@ -92,6 +94,7 @@ public class PlayerCharacter : Entity
     public void DebugTesting()
     {
         HPText.text = "HP: " + EntityHealth.hitPoints;
+        EnemyHPText.text = "Enemy HP: " + EnemyHealth.hitPoints;
     }
 
 }
