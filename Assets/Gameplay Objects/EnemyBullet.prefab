@@ -49,9 +49,9 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -76,7 +76,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -98,7 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrigger: 1
   maxCollisions: 50
-  requiredTags: []
+  requiredTags:
+  - Enemy
+  - Player
   ignoredColliders: []
   enterEvent:
     m_PersistentCalls:
@@ -132,7 +134,7 @@ MonoBehaviour:
   healthEffect:
     name: Kinetic
     modifier: 0
-    amount: 10
+    amount: 1
     times: 1
     interval: 0
   disableOnImpact: 1
@@ -148,9 +150,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
-  triggerInteraction: 1
-  targetTag: 
-  searchRange: 10
+  triggerInteraction: 0
+  targetTag: Player
+  searchRange: 100
   seekSpeed: 10
 --- !u!23 &2260852932062432165
 MeshRenderer:
