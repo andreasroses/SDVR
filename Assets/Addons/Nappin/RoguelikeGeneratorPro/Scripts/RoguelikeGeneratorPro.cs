@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-
 namespace RoguelikeGeneratorPro
 {
     public class RoguelikeGeneratorPro : MonoBehaviour

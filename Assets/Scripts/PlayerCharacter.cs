@@ -110,6 +110,7 @@ public class PlayerCharacter : Entity
 
     IEnumerator SlowDownTime(float v)
     {
+
         Time.timeScale = 0.5f;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         yield return new WaitForSeconds(v);
