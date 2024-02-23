@@ -13,7 +13,10 @@ public class AIShootPlayerState : AIState
         if(playerTransform == null){
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
+        Debug.Log("Setting canSpawn to true in Enter method.");
+        Debug.Log("Spawner reference: " + agent.spawner);
         agent.spawner.canSpawn = true;
+        agent.spawner.DebugCurrentWave();
     }
 
     public void Update(AIAgent agent){

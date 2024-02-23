@@ -1029,6 +1029,54 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4076453617538888205, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.69404286
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076453617538888205, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.71993357
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076453617538888205, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0003271143
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076453617538888205, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.00033931702
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076453617538888205, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -92.098
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076453617538888205, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.054016113
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076453617538888205, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405135701687676770, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: <canSpawn>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405135701687676770, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: waves.Array.data[0].onSpawn.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_canSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405135701687676770, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: waves.Array.data[0].onWaveComplete.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_canSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405135701687676770, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: waves.Array.data[0].onSpawn.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Kitbashery.Gameplay.Spawner, kitbashery.game-kit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405135701687676770, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
+      propertyPath: waves.Array.data[0].onWaveComplete.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Kitbashery.Gameplay.Spawner, kitbashery.game-kit
+      objectReference: {fileID: 0}
     - target: {fileID: 5880609737977356408, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
       propertyPath: m_Name
       value: DummyEnemy (1)
@@ -1047,31 +1095,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7273595826476603086, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0000003188174
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7273595826476603086, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000017411658
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7273595826476603086, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.99983245
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7273595826476603086, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.018307503
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7273595826476603086, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 2.098
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7273595826476603086, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7273595826476603086, guid: a4d1b0bc4157e3b419f9d20b6b5bb5f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0.002
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1611,7 +1659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10120773696974110, guid: 40a19fac7dd8fae41808fb4d13fde982, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 79.66
+      value: 64.53
       objectReference: {fileID: 0}
     - target: {fileID: 10120773696974110, guid: 40a19fac7dd8fae41808fb4d13fde982, type: 3}
       propertyPath: m_LocalRotation.w
