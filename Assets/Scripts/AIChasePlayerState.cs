@@ -31,7 +31,7 @@ public class AIChasePlayerState : AIState
 
     public void Exit(AIAgent agent)
     {
-        Debug.Log("exiting");
+        //Debug.Log("exiting");
     }
 
 

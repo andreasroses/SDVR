@@ -14172,7 +14172,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pools:
   - prefab: {fileID: 7692580056455699477, guid: 89edb24674f31524fbcaedd8b9504d00, type: 3}
-    amount: 999
+    amount: 50
+    hideFlags: 0
+    sequencialNaming: 0
+    pooledObjects: []
+  - prefab: {fileID: 4096041770465146787, guid: 503c9143fa11a4f4e8f22c1384127816, type: 3}
+    amount: 50
     hideFlags: 0
     sequencialNaming: 0
     pooledObjects: []
@@ -17581,7 +17586,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1557373130}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &636642308
 MeshRenderer:
@@ -18358,8 +18363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a746ef034d374934ca8e42907c796477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <canSpawn>k__BackingField: 1
-  <spawnForward>k__BackingField: 1
+  <canSpawn>k__BackingField: 0
+  <spawnForward>k__BackingField: 0
   <forwardDistance>k__BackingField: 0
   spawnOffset: {x: 0, y: 0, z: 0}
   waves:
@@ -43452,7 +43457,6 @@ Transform:
   - {fileID: 1939580219}
   - {fileID: 1315619699}
   - {fileID: 1026577129}
-  - {fileID: 636642307}
   - {fileID: 827425719}
   - {fileID: 1519728532}
   - {fileID: 1142655037}
@@ -58524,6 +58528,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4965137104021999285, guid: 40a19fac7dd8fae41808fb4d13fde982, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.07141991
+      objectReference: {fileID: 0}
     - target: {fileID: 7877223845887525450, guid: 40a19fac7dd8fae41808fb4d13fde982, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
@@ -58610,3 +58618,4 @@ SceneRoots:
   - {fileID: 521166046}
   - {fileID: 1793333468}
   - {fileID: 1595605769}
+  - {fileID: 636642307}
