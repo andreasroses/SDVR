@@ -1,3 +1,6 @@
+/*  AIShootPlayerState
+*   AI stops movement and shoots. 
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,13 +16,10 @@ public class AIShootPlayerState : AIState
         if(playerTransform == null){
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        Debug.Log("Setting canSpawn to true in Enter method.");
-        Debug.Log("Spawner reference: " + agent.spawner);
-        agent.spawner.canSpawn = true;
-        agent.spawner.DebugCurrentWave();
+        agent.spawner.canSpawn = true; //spawner is set to shoot bullets
     }
 
-    public void Update(AIAgent agent){
+    public void Update(AIAgent agent){//rotates AI agent to look at player
         if(playerTransform != null ){
             Vector3 playerDirection = playerTransform.position - agent.transform.position;
             playerDirection.y = 0f;

@@ -1,3 +1,8 @@
+/*  AIAgentConfig
+*   Scriptable object for managing values used for states.
+*   
+*   References code by TheKiwiCoder: https://youtu.be/1H9jrKyWKs0?si=PL0S4V7rFnJ5V1fc
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,5 +16,4 @@ public class AIAgentConfig : ScriptableObject
 
     public float stopDistance = 5.0f;
     public float speed = 1.0f;
-    public LayerMask playerMask;
 }

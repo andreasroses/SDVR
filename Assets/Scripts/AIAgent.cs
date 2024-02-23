@@ -1,7 +1,9 @@
 /*  AIAgent
-*   This component manages the AIStateMachine, it initializes it to its initial state and applies the current behavior each update.
-*   Not sure if we want to use the built-in AI library for pathfinding yet, so I commented out NavMeshAgent, and am using the transform of the GameObject directly.
-*   To test, simply move a GameObject with the tag "Player", currently that object is the DummyPlayerForAITest in BasicScene
+*   This component manages the AIStateMachine, it initializes it to its initial state and applies the current behavior each update. It also
+*   holds all the referenced components for AI states to use.
+*   Testing object: DummyEnemy
+*
+*   IMPORTANT: When adding new state, make sure to call RegisterState() for it! And to add to enum list in AIState interface!
 *   Code by TheKiwiCoder: https://youtu.be/1H9jrKyWKs0?si=PL0S4V7rFnJ5V1fc
 */
 
