@@ -8,20 +8,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using UnityEngine.AI;
+using UnityEngine.AI;
+using Kitbashery.Gameplay;
 
 public class AIAgent : MonoBehaviour
 {
     public AIStateMachine stateMachine;
     public AIStateID initialState;
+    public AIAgentConfig config;
+    public NavMeshAgent navMeshAgent;
 
-    // public NavMeshAgent navMeshAgent;
+    public Spawner spawner;
 
     void Start(){
-        // navMeshAgent = GetComponent<NavMeshAgent>();
+        spawner = GetComponent<Spawner>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new AIStateMachine(this);
         stateMachine.RegisterState(new AIChasePlayerState());
         stateMachine.ChangeState(initialState);
+
     }
 
     void Update(){

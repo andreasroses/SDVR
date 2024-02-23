@@ -4,10 +4,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class AIChasePlayerState : AIState
 {
     public Transform playerTransform;
+
+    private float timer = 5.0f;
     public AIStateID GetID()
     {
         return AIStateID.ChasePlayer;
@@ -21,17 +23,31 @@ public class AIChasePlayerState : AIState
 
     public void Update(AIAgent agent)
     {
-        if(playerTransform != null ){
-            Vector3 playerDirection = playerTransform.position - agent.transform.position;
-            playerDirection.y = 0f;
-            agent.transform.rotation = Quaternion.LookRotation(playerDirection);
+        if(!agent.enabled){
+            return;
         }
-        
+        timer -= Time.deltaTime;
+        if(!agent.navMeshAgent.hasPath){
+            agent.navMeshAgent.destination = playerTransform.position; 
+            agent.navMeshAgent.stoppingDistance = agent.config.stopDistance;   
+        }
+        else if(!agent.navMeshAgent.pathPending && agent.navMeshAgent.remainingDistance <= agent.navMeshAgent.stoppingDistance){
+            agent.stateMachine.ChangeState(AIStateID.ShootPlayer);
+        }
+        if(timer < 0.0f){
+            Vector3 direction = playerTransform.position - agent.transform.position;
+            direction.y= 0;
+            if(direction.sqrMagnitude > agent.config.minDistanceFromPlayer *agent.config.minDistanceFromPlayer){
+                agent.navMeshAgent.destination = playerTransform.position; 
+                agent.navMeshAgent.stoppingDistance = agent.config.stopDistance;   
+            }
+            timer = agent.config.maxTime;
+        }
     }
 
     public void Exit(AIAgent agent)
     {
-        Debug.Log("exiting");
+        Debug.Log("exiting ChasePlayer");
     }
 
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum AIStateID{
-    ChasePlayer
+    ChasePlayer,ShootPlayer
 }
 public interface AIState
 {
