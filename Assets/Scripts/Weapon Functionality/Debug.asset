@@ -16,12 +16,14 @@ MonoBehaviour:
   WeaponID: 0
   AmmoCapacity: 300
   MagazineSize: 30
+  BurstCount: 3
+  BurstInterval: 0.05
   FireRate: 0.2
   ReloadTime: 0
   Range: 0
   RecoilRecoveryTime: 0
   MaxSpreadTime: 1
-  FiringType: 1
+  FiringType: 0
   ProjectileType: 1
   SpreadType: 1
   SimpleSpread: {x: 0.05, y: 0.05, z: 0.05}

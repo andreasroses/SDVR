@@ -10,7 +10,7 @@ public class EnemyWeapon : WeaponBase
 
     protected override void Update()
     {
-        Tick(CanShoot);
+        //Tick(CanShoot);
     }
 
     

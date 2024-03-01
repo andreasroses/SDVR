@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,9 @@ public class WeaponData : ScriptableObject
 
     [Header("Weapon Stats")]
     public int AmmoCapacity; 
-    public int MagazineSize; 
+    public int MagazineSize;
+    [Tooltip("Make sure this is used for burst fire only!")]public int BurstCount;
+    public float BurstInterval; //Time between each bullet within a burst shot
     public float FireRate;   
     public float ReloadTime;
     public float Range; 

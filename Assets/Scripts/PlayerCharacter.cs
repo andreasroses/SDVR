@@ -8,8 +8,7 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerCharacter : Entity
 {
-    public Health EnemyHealth;
-    public TextMeshProUGUI HPText, EnemyHPText;
+
     #region Movement Class and Variables
     [System.Serializable]
     public class MovementSettings
@@ -96,8 +95,6 @@ public class PlayerCharacter : Entity
         m_MouseLook.LookRotation(m_Tran, m_CamTran);
 
         // Move the character.
-       
-        DebugTesting();
 
         if (Input.GetKeyDown(KeyCode.T) && canStopTime)
         {
@@ -308,10 +305,10 @@ public class PlayerCharacter : Entity
     #endregion
 
     //This is called in Update()
-    public void DebugTesting()
-    {
-        HPText.text = Stats.EntityName + " : " + EntityHealth.hitPoints;
-        EnemyHPText.text = "Enemy HP: " + EnemyHealth.hitPoints;
-    }
+    //public void DebugTesting()
+    //{
+    //    HPText.text = Stats.EntityName + " : " + EntityHealth.hitPoints;
+    //    EnemyHPText.text = "Enemy HP: " + EnemyHealth.hitPoints;
+    //}
 
 }
