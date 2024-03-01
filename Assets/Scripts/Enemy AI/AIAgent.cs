@@ -20,10 +20,10 @@ public class AIAgent : MonoBehaviour
     public AIAgentConfig config;
     public NavMeshAgent navMeshAgent;
 
-    public Spawner spawner;
+    public EnemyWeapon enemyGun;
 
     void Start(){
-        spawner = GetComponent<Spawner>();
+        enemyGun = GetComponent<EnemyWeapon>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new AIStateMachine(this);
         stateMachine.RegisterState(new AIChasePlayerState());

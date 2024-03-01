@@ -10,18 +10,18 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] protected Transform Muzzle;
     [SerializeField] protected GameObject Model;
 
-    private float LastShootTime;
-    private float InitialClickTime;
-    private float StopShootingTime;
-    private bool LastFrameWantedToShoot;
+    protected float LastShootTime;
+    protected float InitialClickTime;
+    protected float StopShootingTime;
+    protected bool LastFrameWantedToShoot;
 
 
-    private void Update()
+    protected virtual void Update()
     {
         Tick(Input.GetKey(KeyCode.Mouse0));
     }
 
-    protected void Shoot()
+    protected virtual void Shoot()
     {
 
         if (Time.time - LastShootTime - Data.FireRate > Time.deltaTime)
@@ -60,7 +60,7 @@ public class WeaponBase : MonoBehaviour
         }
     }
 
-    protected void Tick(bool WantsToShoot)
+    protected virtual void Tick(bool WantsToShoot)
     {
 
         if (WantsToShoot)

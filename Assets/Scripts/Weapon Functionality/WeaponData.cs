@@ -97,7 +97,7 @@ public class WeaponData : ScriptableObject
     private Vector2 GetTextureDirection(float ShootTime)
     {
         Vector2 halfsize = new Vector2(
-                       SpreadTexture.width /2f, SpreadTexture.height /2f);
+        SpreadTexture.width /2f, SpreadTexture.height /2f);
         int halfSquareExtents = Mathf.CeilToInt(
             Mathf.Lerp(1, halfsize.x, Mathf.Clamp01(ShootTime / MaxSpreadTime)));
 

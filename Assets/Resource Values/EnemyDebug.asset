@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EnemyDebug
   m_EditorClassIdentifier: 
   EntityID: 1
-  EntityName: Debug Name
+  EntityName: Debug Enemy
   MaxHealth: 50
   MaxSpeed: 1
