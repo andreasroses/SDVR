@@ -16,4 +16,6 @@ public class AIAgentConfig : ScriptableObject
 
     public float stopDistance = 5.0f;
     public float speed = 1.0f;
+
+    public float rotationSpeed = 4.0f;
 }
