@@ -1,33 +1,23 @@
-using Kitbashery.Gameplay;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Kitbashery.Gameplay;
+using UnityEditor.PackageManager;
 
 public class EnemyWeapon : WeaponBase
 {
+    private bool CanShoot = false; //instead of using mouse input, this class uses a bool to switch from shooting to not shooting
+
     protected override void Update()
     {
-        Tick(Input.GetKey(KeyCode.Mouse0));
+        Tick(CanShoot);
     }
 
-    protected override void Shoot()
-    {
+    
 
-        Debug.Log("Enemy Shooting");
+    public void SwitchShootingMode(){ //switches shooting mode
+        CanShoot = !CanShoot;
     }
 
-    protected override void Tick(bool WantsToShoot)
-    {
-
-        if (WantsToShoot)
-        {
-            LastFrameWantedToShoot = true;
-            Shoot();
-        }
-        else if (!WantsToShoot && LastFrameWantedToShoot)
-        {
-            StopShootingTime = Time.time;
-            LastFrameWantedToShoot = false;
-        }
-    }
 }
+    
