@@ -1,3 +1,4 @@
+using Kitbashery.Gameplay;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EntityStats", menuName = "Entity/EntityStats")]

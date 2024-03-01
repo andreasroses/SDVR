@@ -10,7 +10,6 @@ public class PlayerCharacter : Entity
 {
     public Health EnemyHealth;
     public TextMeshProUGUI HPText, EnemyHPText;
-
     #region Movement Class and Variables
     [System.Serializable]
     public class MovementSettings
