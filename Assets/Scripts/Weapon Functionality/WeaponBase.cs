@@ -20,7 +20,7 @@ public class WeaponBase : MonoBehaviour
     protected int maxAmmo;
     protected bool isShooting;
 
-    protected void Start()
+    protected virtual void Start()
     {
         AmmoText.GetComponentInChildren<TextMeshProUGUI>();
         LastShootTime = Time.time;
@@ -55,9 +55,10 @@ public class WeaponBase : MonoBehaviour
 
     protected virtual void Shoot()
     {
+        Debug.Log("Shoot(): currentAmmo = " + currentAmmo);
         if (currentAmmo > 0)
         {
-            
+            Debug.Log("Shoot(): currentAmmo > 0");
             if (Time.time > Data.FireRate + LastShootTime)
             {
                 LastShootTime = Time.time;
@@ -69,6 +70,7 @@ public class WeaponBase : MonoBehaviour
                         StartCoroutine(FireBurst());
                         break;
                     default:
+                    Debug.Log("WeaponBase: Shooting");
                         FireBullet();
                         break;
                 }
