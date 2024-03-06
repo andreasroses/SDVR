@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,9 @@ public class WeaponData : ScriptableObject
 
     [Header("Weapon Stats")]
     public int AmmoCapacity; 
-    public int MagazineSize; 
+    public int MagazineSize;
+    [Tooltip("Make sure this is used for burst fire only!")]public int BurstCount;
+    public float BurstInterval; //Time between each bullet within a burst shot
     public float FireRate;   
     public float ReloadTime;
     public float Range; 
@@ -97,7 +100,7 @@ public class WeaponData : ScriptableObject
     private Vector2 GetTextureDirection(float ShootTime)
     {
         Vector2 halfsize = new Vector2(
-                       SpreadTexture.width /2f, SpreadTexture.height /2f);
+        SpreadTexture.width /2f, SpreadTexture.height /2f);
         int halfSquareExtents = Mathf.CeilToInt(
             Mathf.Lerp(1, halfsize.x, Mathf.Clamp01(ShootTime / MaxSpreadTime)));
 

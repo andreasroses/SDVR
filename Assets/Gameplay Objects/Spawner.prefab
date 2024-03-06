@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5035992783467462626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9033550240032123334}
+  - component: {fileID: 250354155399658853}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9033550240032123334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5035992783467462626}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 38.80719, y: 2.3171005, z: 42.79901}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &250354155399658853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5035992783467462626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a746ef034d374934ca8e42907c796477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <canSpawn>k__BackingField: 0
+  <spawnForward>k__BackingField: 0
+  <forwardDistance>k__BackingField: 0
+  spawnOffset: {x: 0, y: 0, z: 0}
+  waves:
+  - interval: 1
+    spawnAmount: 999
+    onSpawn:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 250354155399658853}
+          m_TargetAssemblyTypeName: Kitbashery.Gameplay.Spawner, kitbashery.game-kit
+          m_MethodName: set_canSpawn
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onWaveComplete:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 250354155399658853}
+          m_TargetAssemblyTypeName: Kitbashery.Gameplay.Spawner, kitbashery.game-kit
+          m_MethodName: set_canSpawn
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    poolIdentifiers:
+    - poolIndex: 0
+      prefabName: 
+    randomizeWaves: 0
+    randomPools: 
+  lastSpawned: {fileID: 0}
+  currentWave: 0
+  currentWaveSpawns: 0

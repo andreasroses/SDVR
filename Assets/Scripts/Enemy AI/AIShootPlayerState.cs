@@ -16,14 +16,20 @@ public class AIShootPlayerState : AIState
         if(playerTransform == null){
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        agent.spawner.canSpawn = true; //spawner is set to shoot bullets
+        agent.enemyGun.SwitchShootingMode(); //turns on shooting
     }
 
     public void Update(AIAgent agent){//rotates AI agent to look at player
         if(playerTransform != null ){
             Vector3 playerDirection = playerTransform.position - agent.transform.position;
-            playerDirection.y = 0f;
-            agent.transform.rotation = Quaternion.LookRotation(playerDirection);
+            Vector3 directionForRotation = playerDirection;
+            directionForRotation.y = 0f;
+            Quaternion targetRotation = Quaternion.LookRotation(directionForRotation);
+            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, targetRotation, Time.deltaTime * agent.config.rotationSpeed);
+            if(playerDirection.sqrMagnitude > (agent.config.minDistanceFromPlayer*agent.config.minDistanceFromPlayer)){
+                agent.enemyGun.SwitchShootingMode();//turns off shooting
+                agent.stateMachine.ChangeState(AIStateID.ChasePlayer);
+            }
         }
     }
 

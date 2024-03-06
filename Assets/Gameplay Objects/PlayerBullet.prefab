@@ -141,7 +141,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   useLifeTime: 1
-  lifeTime: 10
+  lifeTime: 3
   seekTarget: 0
   target: {fileID: 0}
   targetMode: 0

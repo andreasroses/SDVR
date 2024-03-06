@@ -4,17 +4,10 @@ using Unity.VisualScripting;
 using Kitbashery.Gameplay;
 using System;
 using System.Collections;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerCharacter : Entity
 {
-    public Health EnemyHealth;
-    public TextMeshProUGUI HPText, EnemyHPText;
-
-    //test for public slider
-    public Slider enemyHealthSlider;
-    
 
     #region Movement Class and Variables
     [System.Serializable]
@@ -102,8 +95,6 @@ public class PlayerCharacter : Entity
         m_MouseLook.LookRotation(m_Tran, m_CamTran);
 
         // Move the character.
-       
-        DebugTesting();
 
         if (Input.GetKeyDown(KeyCode.T) && canStopTime)
         {
@@ -111,8 +102,9 @@ public class PlayerCharacter : Entity
             StartCoroutine(SlowDownTime(5f));
         }
         m_Character.Move(m_PlayerVelocity * Time.deltaTime);
-
-        UpdateEnemyHealthSlider();
+        
+        //this confirms entity health
+        //Debug.Log("Entity health: " + EntityHealth.hitPoints);
     }
 
     IEnumerator SlowDownTime(float v)
@@ -316,25 +308,10 @@ public class PlayerCharacter : Entity
     #endregion
 
     //This is called in Update()
-    public void DebugTesting()
-    {
-        HPText.text = Stats.EntityName + " : " + EntityHealth.hitPoints;
-        EnemyHPText.text = "Enemy HP: " + EnemyHealth.hitPoints;
-    }
-
-
-    //this is a test function to update the eney health slider
-    private void UpdateEnemyHealthSlider()
-    {
-        if (enemyHealthSlider != null && EnemyHealth != null)
-        {
-            EnemyHealth.UpdateHealthbar(enemyHealthSlider);
-
-            // Optionally, apply damage to the enemy's health
-            int damageAmount = 10; // Adjust this value as needed
-            EnemyHealth.ApplyDamage(damageAmount);
-        }
-
-    }
+    //public void DebugTesting()
+    //{
+    //    HPText.text = Stats.EntityName + " : " + EntityHealth.hitPoints;
+    //    EnemyHPText.text = "Enemy HP: " + EnemyHealth.hitPoints;
+    //}
 
 }
