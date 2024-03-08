@@ -38,6 +38,7 @@ public class WeaponData : ScriptableObject
     [Header("Weapon Stats")]
     public int AmmoCapacity; 
     public int MagazineSize;
+    public int BulletsPerShot = 1;      //Mainly going to be used for multishot weapons
     [Tooltip("Make sure this is used for burst fire only!")]public int BurstCount;
     public float BurstInterval; //Time between each bullet within a burst shot
     public float FireRate;   

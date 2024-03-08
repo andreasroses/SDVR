@@ -61,6 +61,7 @@ public class WeaponBase : MonoBehaviour
             Debug.Log("Shoot(): currentAmmo > 0");
             if (Time.time > Data.FireRate + LastShootTime)
             {
+                
                 LastShootTime = Time.time;
 
                 switch (Data.FiringType)
@@ -100,7 +101,7 @@ public class WeaponBase : MonoBehaviour
 
     private void FireBullet()
     {
-        
+
         //Code is meant for recoil recovery, ignore for now
         //if (Time.time - LastShootTime - Data.FireRate > Time.deltaTime)
         //{
@@ -111,24 +112,33 @@ public class WeaponBase : MonoBehaviour
         //    InitialClickTime = Time.time - Mathf.Lerp(0, lastDuration, Mathf.Clamp01(lerpTime));
         //}
 
+        currentAmmo--;
+        
+        for (int i=0; i<Data.BulletsPerShot; i++) {
+            
         Vector3 SpreadAmount = Data.GetSpread(Time.time - InitialClickTime);//Get the spread amount based on when we started shooting & the time we've been shooting
         Vector3 ShootDirection = Muzzle.transform.forward + SpreadAmount;
-
+        Debug.Log(Data.Bullet.name);
         GameObject bullet = ObjectPools.Instance.GetPooledObject(Data.Bullet.name); //Grab a bullet from the object pool
         bullet.transform.position = Muzzle.position;
         bullet.transform.forward = ShootDirection;
         bullet.SetActive(true); //Note, the bullet will be disabled after it hits or if it's life span is up
-        currentAmmo--;
+        Debug.Log(Data.BulletsPerShot);
+        
             
         // Draw a line from the muzzle to the hit point or the shoot direction
         RaycastHit hit;
+        
         if (Physics.Raycast(Muzzle.position, ShootDirection, out hit))
         {
             Debug.DrawLine(Muzzle.position, hit.point, Color.red);
+            Debug.Log("first if");
         }
         else
         {
             Debug.DrawRay(Muzzle.position, ShootDirection * 100f, Color.red, 4);
+                Debug.Log("second if");
+            }
         }
     }
 
