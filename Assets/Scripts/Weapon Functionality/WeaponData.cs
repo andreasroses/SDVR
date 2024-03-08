@@ -11,7 +11,7 @@ public enum FiringMode
     Auto
 }
 
-public enum Projectile
+public enum ShootType
 {
     Hitscan,
     Projectile
@@ -46,7 +46,7 @@ public class WeaponData : ScriptableObject
     public float RecoilRecoveryTime; //The time it takes for the recoil to recover
     public float MaxSpreadTime; 
     public FiringMode FiringType; //The firing mode of the weapon
-    public Projectile ProjectileType; //The type of projectile the weapon fires
+    public ShootType ProjectileType; //The type of projectile the weapon fires
     public BulletSpreadType SpreadType; //The type of spread the weapon has
 
     [Header("Simple Spread")]

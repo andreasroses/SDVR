@@ -4,8 +4,9 @@ using UnityEngine;
 using Kitbashery.Gameplay;
 using UnityEditor.PackageManager;
 using TMPro;
+using UnityEngine.UIElements;
 
-public class WeaponBase : MonoBehaviour
+public class WeaponBase : MonoBehaviour, IAmmoConsumable
 {
 
     [SerializeField] protected WeaponData Data;
@@ -19,6 +20,7 @@ public class WeaponBase : MonoBehaviour
     protected int currentAmmo;
     protected int maxAmmo;
     protected bool isShooting;
+    protected bool keyPress;
 
     protected void Start()
     {
@@ -29,6 +31,7 @@ public class WeaponBase : MonoBehaviour
         currentAmmo = Data.MagazineSize;
         maxAmmo = Data.AmmoCapacity;
         isShooting = false;
+
     }
 
     protected virtual void Update()
@@ -36,19 +39,20 @@ public class WeaponBase : MonoBehaviour
         switch(Data.FiringType)
         {
             case FiringMode.Auto:
-                isShooting = Input.GetKey(KeyCode.Mouse0);
+                keyPress = Input.GetKey(KeyCode.Mouse0);
                 break;
             default:
-                isShooting = Input.GetKeyDown(KeyCode.Mouse0);
+                keyPress = Input.GetKeyDown(KeyCode.Mouse0);
                 break;
         }
-        if (isShooting)
+        if (keyPress)
         {
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reload();
+            if(!isShooting && currentAmmo < Data.MagazineSize)
+                Reload();
         }
         AmmoText.text = currentAmmo + " / " + maxAmmo;
     }
@@ -65,11 +69,12 @@ public class WeaponBase : MonoBehaviour
                 switch (Data.FiringType)
                 {
                     case FiringMode.Burst:
-                        Debug.Log("Made it to B");
                         StartCoroutine(FireBurst());
                         break;
                     default:
+                        isShooting = true;
                         FireBullet();
+                        isShooting = false;
                         break;
                 }
                 
@@ -78,7 +83,6 @@ public class WeaponBase : MonoBehaviour
         }
     }
 
-    //WARNING: Burst fire is broken, do not use
     private IEnumerator FireBurst()
     {
         isShooting = true;
@@ -112,29 +116,58 @@ public class WeaponBase : MonoBehaviour
         Vector3 SpreadAmount = Data.GetSpread(Time.time - InitialClickTime);//Get the spread amount based on when we started shooting & the time we've been shooting
         Vector3 ShootDirection = Muzzle.transform.forward + SpreadAmount;
 
-        GameObject bullet = ObjectPools.Instance.GetPooledObject(Data.Bullet.name); //Grab a bullet from the object pool
-        bullet.transform.position = Muzzle.position;
-        bullet.transform.forward = ShootDirection;
-        bullet.SetActive(true); //Note, the bullet will be disabled after it hits or if it's life span is up
-        currentAmmo--;
+        switch(Data.ProjectileType)
+        {
+            case ShootType.Projectile:
+                ProjectileFire(ShootDirection);
+                break;
+            case ShootType.Hitscan:
+                RaycastFire(ShootDirection);
+                break;
+        }
+        
             
-        // Draw a line from the muzzle to the hit point or the shoot direction
-        RaycastHit hit;
-        if (Physics.Raycast(Muzzle.position, ShootDirection, out hit))
-        {
-            Debug.DrawLine(Muzzle.position, hit.point, Color.red);
-        }
-        else
-        {
-            Debug.DrawRay(Muzzle.position, ShootDirection * 100f, Color.red, 4);
-        }
     }
 
+    private void ProjectileFire(Vector3 ShootDir)
+    {
+        GameObject bullet = ObjectPools.Instance.GetPooledObject(Data.Bullet.name); //Grab a bullet from the object pool
+        bullet.transform.position = Muzzle.position;
+        bullet.transform.forward = ShootDir;
+        bullet.SetActive(true); //Note, the bullet will be disabled after it hits or if it's life span is up
+        currentAmmo--;
+    }
+
+    private void RaycastFire(Vector3 ShootDir)
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(Muzzle.position, ShootDir, out hit, Data.Range))
+        {
+            Debug.Log(hit.transform.name);
+
+        }
+        Debug.DrawRay(Muzzle.position, ShootDir * Data.Range, Color.red, 1f);
+
+        currentAmmo--;
+    }
 
     protected virtual void Reload()
     {
-        maxAmmo -= Data.MagazineSize - currentAmmo;
-        currentAmmo = Data.MagazineSize;
+        if(maxAmmo <= 0)
+            return;
+
+
+        if (maxAmmo < Data.MagazineSize)
+        {
+            currentAmmo = maxAmmo;
+            maxAmmo = 0;
+        }
+        else
+        {
+            maxAmmo -= Data.MagazineSize - currentAmmo;
+            currentAmmo = Data.MagazineSize;    
+        }
     }
 
 
@@ -157,5 +190,9 @@ public class WeaponBase : MonoBehaviour
         }
     }
 
+    public void RestoreAmmo(int amount)
+    {
+        throw new System.NotImplementedException();
+    }
 }
     
