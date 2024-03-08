@@ -56,6 +56,11 @@ MonoBehaviour:
     hideFlags: 0
     sequencialNaming: 0
     pooledObjects: []
+  - prefab: {fileID: 4545117548700439709, guid: 59879215ca88e8f49ad105f4e0eba4c3, type: 3}
+    amount: 50
+    hideFlags: 0
+    sequencialNaming: 0
+    pooledObjects: []
 --- !u!114 &1285694969440712300
 MonoBehaviour:
   m_ObjectHideFlags: 0

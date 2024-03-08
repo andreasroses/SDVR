@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponName: EnemyDebug
   WeaponID: 1
-  AmmoCapacity: 0
-  MagazineSize: 0
-  FireRate: 0.1
-  ReloadTime: 0
+  AmmoCapacity: 60
+  MagazineSize: 30
+  BurstCount: 0
+  BurstInterval: 0
+  FireRate: 0.2
+  ReloadTime: 0.5
   Range: 0
   RecoilRecoveryTime: 0.5
   MaxSpreadTime: 1
-  FiringType: 0
+  FiringType: 2
   ProjectileType: 1
   SpreadType: 1
   SimpleSpread: {x: 0.01, y: 0.05, z: 0.05}

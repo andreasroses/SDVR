@@ -8,9 +8,23 @@ public class EnemyWeapon : WeaponBase
 {
     private bool CanShoot = false; //instead of using mouse input, this class uses a bool to switch from shooting to not shooting
 
+    protected override void Start()
+    {
+        LastShootTime = Time.time;
+        InitialClickTime = Time.time;
+        StopShootingTime = Time.time;
+        currentAmmo = Data.MagazineSize;
+        maxAmmo = Data.AmmoCapacity;
+        isShooting = false;
+    }
     protected override void Update()
     {
-        //Tick(CanShoot);
+        if(CanShoot){
+            Shoot();
+        }
+        if(currentAmmo < 0){
+            Reload();
+        }
     }
 
     
