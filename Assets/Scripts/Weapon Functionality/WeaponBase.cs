@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Kitbashery.Gameplay;
-using UnityEditor.PackageManager;
 using TMPro;
-using UnityEngine.UIElements;
 
 public class WeaponBase : MonoBehaviour, IAmmoConsumable
 {
@@ -22,7 +19,7 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
     protected bool isShooting;
     protected bool keyPress;
 
-    protected void Start()
+    protected virtual void Start()
     {
         AmmoText.GetComponentInChildren<TextMeshProUGUI>();
         LastShootTime = Time.time;
@@ -45,7 +42,7 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
                 keyPress = Input.GetKeyDown(KeyCode.Mouse0);
                 break;
         }
-        if (keyPress)
+        if (keyPress && !isShooting)
         {
             Shoot();
         }
@@ -86,16 +83,16 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
     private IEnumerator FireBurst()
     {
         isShooting = true;
-        for (int i = 0; i < Data.BurstCount; i++)
+        for (int i = 0; i < Data.BulletsPerShot; i++)
         {
             if(currentAmmo <= 0)
                 break;
             FireBullet();
 
-            if (i < Data.BurstCount - 1)
+            if (i < Data.BulletsPerShot - 1)
             {
                 yield return new WaitForSeconds(Data.BurstInterval);
-            }
+            } 
         }
         isShooting = false;
     }
@@ -115,7 +112,7 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
 
         Vector3 SpreadAmount = Data.GetSpread(Time.time - InitialClickTime);//Get the spread amount based on when we started shooting & the time we've been shooting
         Vector3 ShootDirection = Muzzle.transform.forward + SpreadAmount;
-
+        Debug.Log(ShootDirection);
         switch(Data.ProjectileType)
         {
             case ShootType.Projectile:
