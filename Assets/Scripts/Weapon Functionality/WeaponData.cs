@@ -31,9 +31,15 @@ public enum BulletSpreadType
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon Data/New Weapon")]
 public class WeaponData : ScriptableObject
 {
+    #region WEAPON VARIABLES
+
     [Header("Weapon Identification")]
     public string WeaponName; //Name of the weapon
     public int WeaponID; //Unique ID for the weapon
+
+    [Header("Weapon Audio")]
+    public AudioClip[] FireAudio;
+    public AudioClip[] ReloadAudio;
 
     [Header("Weapon Stats")]
     public int AmmoCapacity; 
@@ -43,7 +49,8 @@ public class WeaponData : ScriptableObject
     public float BurstInterval; //Time between each bullet within a burst shot
     public float FireRate;   
     public float ReloadTime;
-    public float Range; 
+    public float Range;
+    public float ReloadSpeed; //The speed at which the weapon reloads
     public float RecoilRecoveryTime; //The time it takes for the recoil to recover
     public float MaxSpreadTime; 
     public FiringMode FiringType; //The firing mode of the weapon
@@ -61,7 +68,7 @@ public class WeaponData : ScriptableObject
 
     [Header("Accesibility")]
     public bool IsAutotrigger; //If the player chooses to hold down the trigger regardless of firing mode
-
+    #endregion
 
     #region BULLET SPREAD FUNCTIONS
     public Vector3 GetSpread(float ShootTime = 0)
@@ -135,7 +142,10 @@ public class WeaponData : ScriptableObject
     }
     #endregion
 
-    
+    #region AUDIO FUNCTIONS 
+    public AudioClip GetRandomFireAudio() => FireAudio[Random.Range(0, FireAudio.Length)];
 
+    public AudioClip GetRandomReloadAudio() => ReloadAudio[Random.Range(0, ReloadAudio.Length)];
+    #endregion
 }
 

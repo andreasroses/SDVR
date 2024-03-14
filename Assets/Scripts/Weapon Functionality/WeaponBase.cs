@@ -13,6 +13,7 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
     [SerializeField] protected Transform Muzzle;
     [SerializeField] protected GameObject Model;
     [SerializeField] private TextMeshProUGUI AmmoText; //This is just for testing purposes, ideally we would have a HUD system to display ammo
+    protected AudioSource WeaponAudio;
     protected float LastShootTime;
     protected float InitialClickTime;
     protected float StopShootingTime;
@@ -22,9 +23,11 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
     protected bool isShooting;
     protected bool keyPress;
 
-    protected void Start()
+
+    protected virtual void Start()
     {
-        AmmoText.GetComponentInChildren<TextMeshProUGUI>();
+        //AmmoText.GetComponentInChildren<TextMeshProUGUI>();
+        WeaponAudio = GetComponent<AudioSource>();
         LastShootTime = Time.time;
         InitialClickTime = Time.time;
         StopShootingTime = Time.time;
@@ -54,7 +57,7 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
             if(!isShooting && currentAmmo < Data.MagazineSize)
                 Reload();
         }
-        AmmoText.text = currentAmmo + " / " + maxAmmo;
+        //AmmoText.text = currentAmmo + " / " + maxAmmo;
     }
 
     protected virtual void Shoot()
@@ -125,7 +128,8 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
                 RaycastFire(ShootDirection);
                 break;
         }
-        
+        WeaponAudio.clip = Data.GetRandomFireAudio();
+        WeaponAudio.Play();
             
     }
 
