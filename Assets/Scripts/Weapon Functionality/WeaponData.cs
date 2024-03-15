@@ -1,9 +1,6 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
+
 using System.Linq;
 using UnityEngine;
-using UnityEngine.XR;
 public enum FiringMode
 {
     Single,
@@ -44,8 +41,7 @@ public class WeaponData : ScriptableObject
     [Header("Weapon Stats")]
     public int AmmoCapacity; 
     public int MagazineSize;
-    public int BulletsPerShot = 1;      //Mainly going to be used for multishot weapons
-    [Tooltip("Make sure this is used for burst fire only!")]public int BurstCount;
+    [Tooltip("Make sure this is used for burst fire only!")]public int BulletsPerShot;
     public float BurstInterval; //Time between each bullet within a burst shot
     public float FireRate;   
     public float ReloadTime;
