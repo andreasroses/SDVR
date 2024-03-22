@@ -128,8 +128,8 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
                 RaycastFire(ShootDirection);
                 break;
         }
-        WeaponAudio.clip = Data.GetRandomFireAudio();
-        WeaponAudio.Play();
+        //WeaponAudio.clip = Data.GetRandomFireAudio();
+        //WeaponAudio.Play();
             
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
   
-    [SerializeField] protected EntityStats Stats;
+    public EntityStats Stats;
     protected Health EntityHealth;
     protected Ability PowerUp;
 
