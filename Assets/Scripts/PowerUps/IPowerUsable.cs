@@ -22,7 +22,7 @@ internal class QuadDamage : IState
 
     public virtual void UsePowerUp(Entity entityData)
     {
-        entityData.Stats.Damage = 4;
+        //entityData.Stats.Damage = 4;
     }
 
     public virtual void RemovePowerUp()

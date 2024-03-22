@@ -41,8 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8655773943164043324}
   - component: {fileID: 2466673824153433875}
-  - component: {fileID: 3309940377967072135}
-  - component: {fileID: 5882910078507777348}
+  - component: {fileID: 8941152967045129030}
+  - component: {fileID: 8606705126937888130}
   - component: {fileID: 1444850473556007007}
   m_Layer: 7
   m_Name: DroneEnemy
@@ -96,7 +96,7 @@ MonoBehaviour:
   onDead:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3309940377967072135
+--- !u!114 &8941152967045129030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: c114388da5aa61a4e9c24aeb09b58249, type: 2}
   navMeshAgent: {fileID: 0}
   enemyGun: {fileID: 0}
---- !u!114 &5882910078507777348
+--- !u!114 &8606705126937888130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b4cb2c99712344da8e42a526b5049c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: 01696886fd27164488617f5ae6c643b8, type: 2}
+  Data: {fileID: 11400000, guid: dcb8dee7f2e95d746965c2e8b705abb8, type: 2}
   Muzzle: {fileID: 2869803803755554337}
   Model: {fileID: 8416418268419735026}
   AmmoText: {fileID: 0}
