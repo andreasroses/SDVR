@@ -89,13 +89,13 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
     private IEnumerator FireBurst()
     {
         isShooting = true;
-        for (int i = 0; i < Data.BurstCount; i++)
+        for (int i = 0; i < Data.BulletsPerShot; i++)
         {
             if(currentAmmo <= 0)
                 break;
             FireBullet();
 
-            if (i < Data.BurstCount - 1)
+            if (i < Data.BulletsPerShot - 1)
             {
                 yield return new WaitForSeconds(Data.BurstInterval);
             }
