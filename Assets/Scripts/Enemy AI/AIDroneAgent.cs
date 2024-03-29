@@ -6,6 +6,7 @@ public class AIDroneAgent : AIAgent
 {
 
     protected override void Start(){
+        enemyTransform = GetComponent<Transform>();
         enemyGun = GetComponent<EnemyWeapon>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new AIStateMachine(this);

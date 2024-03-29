@@ -19,5 +19,5 @@ MonoBehaviour:
   speed: 1
   rotationSpeed: 4
   droneRadius: 8
-  droneSpeed: 2
+  droneSpeed: 1
   droneAngle: 0

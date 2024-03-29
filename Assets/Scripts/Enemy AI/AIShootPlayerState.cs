@@ -7,7 +7,10 @@ using UnityEngine;
 
 public class AIShootPlayerState : AIState
 {
-    public Transform playerTransform;
+    private Transform playerTransform;
+    private Transform enemyTransform;
+    private float minDistanceFromPlayer;
+    private float rotationSpeed;
     public AIStateID GetID()
     {
         return AIStateID.ShootPlayer;
@@ -16,17 +19,18 @@ public class AIShootPlayerState : AIState
         if(playerTransform == null){
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
+        minDistanceFromPlayer = agent.config.minDistanceFromPlayer;
+        rotationSpeed = agent.config.rotationSpeed;
+        enemyTransform = agent.enemyTransform;
         agent.enemyGun.SwitchShootingMode(); //turns on shooting
     }
 
-    public void Update(AIAgent agent){//rotates AI agent to look at player
+    public void Update(AIAgent agent){//aims at and shoots player
         if(playerTransform != null ){
-            Vector3 playerDirection = playerTransform.position - agent.transform.position;
-            Vector3 directionForRotation = playerDirection;
-            directionForRotation.y = 0f;
-            Quaternion targetRotation = Quaternion.LookRotation(directionForRotation);
-            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, targetRotation, Time.deltaTime * agent.config.rotationSpeed);
-            if(playerDirection.sqrMagnitude > (agent.config.minDistanceFromPlayer*agent.config.minDistanceFromPlayer)){
+            Vector3 playerDirection = playerTransform.position - enemyTransform.position;
+            Aim(playerDirection);
+            
+            if(playerDirection.sqrMagnitude > (minDistanceFromPlayer*minDistanceFromPlayer)){
                 agent.enemyGun.SwitchShootingMode();//turns off shooting
                 agent.stateMachine.ChangeState(AIStateID.ChasePlayer);
             }
@@ -37,5 +41,10 @@ public class AIShootPlayerState : AIState
         Debug.Log("exiting ShootPlayer");
     }
 
-    
+    private void Aim(Vector3 playerDirection){//rotates enemy to "aim" at player
+        Vector3 directionForRotation = playerDirection;
+        directionForRotation.y = 0f;
+        Quaternion targetRotation = Quaternion.LookRotation(directionForRotation);
+        enemyTransform.rotation = Quaternion.Slerp(enemyTransform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+    }
 }

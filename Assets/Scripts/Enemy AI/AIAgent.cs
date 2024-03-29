@@ -22,7 +22,10 @@ public class AIAgent : MonoBehaviour
 
     public EnemyWeapon enemyGun;
 
+    public Transform enemyTransform;
+
     protected virtual void Start(){
+        enemyTransform = GetComponent<Transform>();
         enemyGun = GetComponent<EnemyWeapon>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new AIStateMachine(this);

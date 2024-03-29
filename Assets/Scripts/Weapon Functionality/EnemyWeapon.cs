@@ -10,7 +10,7 @@ public class EnemyWeapon : WeaponBase
         if(CanShoot){
             Shoot();
         }
-        if(currentAmmo < 0){
+        if(currentAmmo <= 0){
             Reload();
         }
         

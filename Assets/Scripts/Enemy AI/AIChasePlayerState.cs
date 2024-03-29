@@ -9,7 +9,11 @@ using UnityEngine;
 using UnityEngine.AI;
 public class AIChasePlayerState : AIState
 {
-    public Transform playerTransform;
+    private Transform playerTransform;
+    private NavMeshAgent enemyNavMesh;
+    private float minDistanceFromPlayer;
+    private float maxTime;
+    private float stopDistance;
 
     private float timer = 5.0f;
     public AIStateID GetID()
@@ -21,6 +25,10 @@ public class AIChasePlayerState : AIState
         if(playerTransform == null){
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
+        enemyNavMesh = agent.navMeshAgent;
+        minDistanceFromPlayer = agent.config.minDistanceFromPlayer;
+        maxTime = agent.config.maxTime;
+        stopDistance = agent.config.stopDistance;
     }
 
     //Timer is used so .destination isn't called so often as it's an expensive operation.
@@ -31,22 +39,22 @@ public class AIChasePlayerState : AIState
             return;
         }
         timer -= Time.deltaTime;
-        if(!agent.navMeshAgent.hasPath){//if agent's path hasn't been set, it's set now
-            agent.navMeshAgent.destination = playerTransform.position; 
-            agent.navMeshAgent.stoppingDistance = agent.config.stopDistance;   
+        if(!enemyNavMesh.hasPath){//if agent's path hasn't been set, it's set now
+            enemyNavMesh.destination = playerTransform.position; 
+            enemyNavMesh.stoppingDistance = stopDistance;   
         }
-        else if(!agent.navMeshAgent.pathPending && (agent.navMeshAgent.remainingDistance <= agent.navMeshAgent.stoppingDistance)){
+        else if(!enemyNavMesh.pathPending && (enemyNavMesh.remainingDistance <= enemyNavMesh.stoppingDistance)){
             //if agent's position reaches destination of ~5 units away or has surpassed it, the AI state changes to shoot
             agent.stateMachine.ChangeState(AIStateID.ShootPlayer);
         }
         if(timer < 0.0f){ //after timer runs out, destination is set again IF player is far enough away
             Vector3 direction = playerTransform.position - agent.transform.position;
             direction.y= 0;
-            if(direction.sqrMagnitude > agent.config.minDistanceFromPlayer *agent.config.minDistanceFromPlayer){ //checks distance away from player by taking the area of it
-                agent.navMeshAgent.destination = playerTransform.position; 
-                agent.navMeshAgent.stoppingDistance = agent.config.stopDistance;   
+            if(direction.sqrMagnitude > (minDistanceFromPlayer * minDistanceFromPlayer)){ //checks distance away from player by taking the area of it
+                enemyNavMesh.destination = playerTransform.position; 
+                enemyNavMesh.stoppingDistance = stopDistance;   
             }
-            timer = agent.config.maxTime;
+            timer = maxTime;
         }
     }
 
