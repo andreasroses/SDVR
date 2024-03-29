@@ -139,9 +139,9 @@ public class WeaponData : ScriptableObject
     #endregion
 
     #region AUDIO FUNCTIONS 
-    //public AudioClip GetRandomFireAudio() => FireAudio[Random.Range(0, FireAudio.Length)];
+    public AudioClip GetRandomFireAudio() => FireAudio[Random.Range(0, FireAudio.Length)];
 
-    //public AudioClip GetRandomReloadAudio() => ReloadAudio[Random.Range(0, ReloadAudio.Length)];
+    public AudioClip GetRandomReloadAudio() => ReloadAudio[Random.Range(0, ReloadAudio.Length)];
     #endregion
 }
 

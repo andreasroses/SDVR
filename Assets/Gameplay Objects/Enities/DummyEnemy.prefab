@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7273595826476603086}
   - component: {fileID: 5021654438583299317}
+  - component: {fileID: 5196722207837685819}
   - component: {fileID: 8010649513870744567}
   - component: {fileID: 3054872378388226007}
   - component: {fileID: 4181383159149552329}
@@ -96,6 +97,19 @@ MonoBehaviour:
   onDead:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5196722207837685819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5880609737977356408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6855549a21135e48a028e74b5096aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stats: {fileID: 11400000, guid: e361bcc26b072b64eb2244ec350a9b68, type: 2}
 --- !u!114 &8010649513870744567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +141,6 @@ MonoBehaviour:
   Data: {fileID: 11400000, guid: b324510b30a9dc14090811e3d9dcd43f, type: 2}
   Muzzle: {fileID: 5429902206358729788}
   Model: {fileID: 8032138162182603864}
-  AmmoText: {fileID: 0}
 --- !u!195 &4181383159149552329
 NavMeshAgent:
   m_ObjectHideFlags: 0

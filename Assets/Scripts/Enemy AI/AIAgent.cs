@@ -22,7 +22,7 @@ public class AIAgent : MonoBehaviour
 
     public EnemyWeapon enemyGun;
 
-    protected virtual void Start(){
+    void Start(){
         enemyGun = GetComponent<EnemyWeapon>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new AIStateMachine(this);
@@ -32,7 +32,7 @@ public class AIAgent : MonoBehaviour
 
     }
 
-    protected virtual void Update(){
+    void Update(){
         stateMachine.Update();
     }
 }

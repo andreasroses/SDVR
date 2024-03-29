@@ -18,8 +18,4 @@ public class AIAgentConfig : ScriptableObject
     public float speed = 1.0f;
 
     public float rotationSpeed = 4.0f;
-
-    public float droneRadius = 2f;
-    public float droneSpeed = 2f;
-    public float droneAngle = 0f;
 }
