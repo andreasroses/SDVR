@@ -108,10 +108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282fb173f28f02f4d9af27f10be5261d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: 2
+  initialState: 0
   config: {fileID: 11400000, guid: c114388da5aa61a4e9c24aeb09b58249, type: 2}
   navMeshAgent: {fileID: 0}
   enemyGun: {fileID: 0}
+  enemyTransform: {fileID: 0}
 --- !u!114 &8606705126937888130
 MonoBehaviour:
   m_ObjectHideFlags: 0
