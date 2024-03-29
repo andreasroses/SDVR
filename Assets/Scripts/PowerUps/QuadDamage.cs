@@ -10,7 +10,7 @@ public class QuadDamage : PowerUpData
         if(stats.Stats.DamageMultiplier != (stats.Stats.DamageMultiplier * StatBoost))
         {
             stats.Stats.DamageMultiplier *= StatBoost;
-            return 
+            return;
         }
     }
 
