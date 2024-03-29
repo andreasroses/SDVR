@@ -22,5 +22,9 @@ public class EnemyWeapon : WeaponBase
         CanShoot = !CanShoot;
     }
 
+    public Transform GetMuzzle(){
+        return Muzzle;
+    }
+
 }
     

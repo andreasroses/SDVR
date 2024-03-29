@@ -9,6 +9,7 @@ public class AIShootPlayerState : AIState
 {
     private Transform playerTransform;
     private Transform enemyTransform;
+    private Transform aimTransform;
     private float minDistanceFromPlayer;
     private float rotationSpeed;
     public virtual AIStateID GetID()
@@ -19,6 +20,7 @@ public class AIShootPlayerState : AIState
         if(playerTransform == null){
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
+        aimTransform = agent.enemyGun.GetMuzzle();
         minDistanceFromPlayer = agent.config.minDistanceFromPlayer;
         rotationSpeed = agent.config.rotationSpeed;
         enemyTransform = agent.enemyTransform;
@@ -42,9 +44,8 @@ public class AIShootPlayerState : AIState
     }
 
     private void Aim(Vector3 playerDirection){//rotates enemy to "aim" at player
-        Vector3 directionForRotation = playerDirection;
-        directionForRotation.y = 0f;
-        Quaternion targetRotation = Quaternion.LookRotation(directionForRotation);
-        enemyTransform.rotation = Quaternion.Slerp(enemyTransform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        Vector3 aimDirection = aimTransform.forward;
+        Quaternion targetRotation = Quaternion.FromToRotation(aimDirection, playerDirection);
+        enemyTransform.rotation = targetRotation * enemyTransform.rotation;
     }
 }
