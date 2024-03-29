@@ -6,8 +6,7 @@ public class Entity : MonoBehaviour
 {
   
     public EntityStats Stats;
-    protected Health EntityHealth;
-    protected Ability PowerUp;
+    [HideInInspector]public Health EntityHealth;
 
     protected virtual void Awake()
     {

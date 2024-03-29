@@ -8,7 +8,7 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerCharacter : Entity
 {
-
+    [SerializeField] private TextMeshProUGUI stat1, stat2, stat3;
     #region Movement Class and Variables
     [System.Serializable]
     public class MovementSettings
@@ -65,6 +65,7 @@ public class PlayerCharacter : Entity
     
     private void Start()
     {
+
         m_Tran = transform;
         m_Character = GetComponent<CharacterController>();
 
@@ -77,6 +78,9 @@ public class PlayerCharacter : Entity
 
     private void Update()
     {
+        stat1.text = "Max Health: " + EntityHealth.hitPoints;
+        stat2.text = "Damage Mult: " + Stats.DamageMultiplier;
+        stat3.text = "Fire Rate Mult: " + Stats.FireRateMultiplier;
         m_MoveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         m_MouseLook.UpdateCursorLock();
         QueueJump();

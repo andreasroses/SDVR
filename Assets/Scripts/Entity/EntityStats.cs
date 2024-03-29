@@ -9,5 +9,6 @@ public class EntityStats : ScriptableObject
     public int MaxHealth;
     public int MaxSpeed;
     public int DamageMultiplier;
+    public int FireRateMultiplier;  
     public bool isInvisible;
 }

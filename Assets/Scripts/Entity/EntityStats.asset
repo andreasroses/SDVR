@@ -16,3 +16,6 @@ MonoBehaviour:
   EntityName: Debug
   MaxHealth: 100
   MaxSpeed: 10
+  DamageMultiplier: 1
+  FireRateMultiplier: 1
+  isInvisible: 0

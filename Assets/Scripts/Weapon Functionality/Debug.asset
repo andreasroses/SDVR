@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponName: Debug
   WeaponID: 0
+  FireAudio: []
+  ReloadAudio: []
   AmmoCapacity: 300
   MagazineSize: 30
   BulletsPerShot: 1
-  BurstCount: 5
   BurstInterval: 0.05
   FireRate: 0.5
   ReloadTime: 0
   Range: 20
+  ReloadSpeed: 0
   RecoilRecoveryTime: 0
   MaxSpreadTime: 1
   FiringType: 0
@@ -30,5 +32,5 @@ MonoBehaviour:
   SimpleSpread: {x: 0.05, y: 0.05, z: 0.05}
   SpreadScale: 0.001
   SpreadTexture: {fileID: 2800000, guid: 0c6349a8b4f29ed439b9d127585211e0, type: 3}
-  Bullet: {fileID: 4096041770465146787, guid: 31d6cfb1fcc406144acb903ac74d9130, type: 3}
+  Bullet: {fileID: 3972110772962023618, guid: 218b3126b27d68b469e7f87ab64eefb5, type: 3}
   IsAutotrigger: 0
