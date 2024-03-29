@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIDroneShootPlayerState : AIState
+public class AIDroneShootPlayerState : AIShootPlayerState
 {
     private Transform playerTransform;
     private Transform enemyTransform;
@@ -12,11 +12,8 @@ public class AIDroneShootPlayerState : AIState
     private float radius = 2f;
     private float speed = 2f;
     private float angle = 0f;
-    public AIStateID GetID()
-    {
-        return AIStateID.DroneShootPlayer;
-    }
-    public void Enter(AIAgent agent){
+
+    public override void Enter(AIAgent agent){
         if(playerTransform == null){
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
@@ -28,7 +25,7 @@ public class AIDroneShootPlayerState : AIState
         angle = agent.config.droneAngle;
     }
 
-    public void Update(AIAgent agent){//circles player and shoots
+    public override void Update(AIAgent agent){//circles player and shoots
         Aim();
         float xOffset = Mathf.Cos(angle) * radius;
         float zOffset = Mathf.Sin(angle) * radius;
@@ -39,10 +36,6 @@ public class AIDroneShootPlayerState : AIState
         angle += speed * Time.deltaTime;
 
         angle %= Mathf.PI * 2f;
-    }
-
-    public void Exit(AIAgent agent){
-        Debug.Log("exiting ShootPlayer");
     }
 
     private void Aim(){

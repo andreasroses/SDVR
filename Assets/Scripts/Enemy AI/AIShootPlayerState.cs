@@ -11,11 +11,11 @@ public class AIShootPlayerState : AIState
     private Transform enemyTransform;
     private float minDistanceFromPlayer;
     private float rotationSpeed;
-    public AIStateID GetID()
+    public virtual AIStateID GetID()
     {
         return AIStateID.ShootPlayer;
     }
-    public void Enter(AIAgent agent){
+    public virtual void Enter(AIAgent agent){
         if(playerTransform == null){
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
@@ -25,7 +25,7 @@ public class AIShootPlayerState : AIState
         agent.enemyGun.SwitchShootingMode(); //turns on shooting
     }
 
-    public void Update(AIAgent agent){//aims at and shoots player
+    public virtual void Update(AIAgent agent){//aims at and shoots player
         if(playerTransform != null ){
             Vector3 playerDirection = playerTransform.position - enemyTransform.position;
             Aim(playerDirection);
@@ -37,7 +37,7 @@ public class AIShootPlayerState : AIState
         }
     }
 
-    public void Exit(AIAgent agent){
+    public virtual void Exit(AIAgent agent){
         Debug.Log("exiting ShootPlayer");
     }
 
