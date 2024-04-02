@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d02ebbcfa185243b001002af0d8e34, type: 3}
   m_Name: AIAgentConfig_Default
   m_EditorClassIdentifier: 
-  maxTime: 1
+  maxTime: 5
   maxDistanceFromPlayer: 20
   minDistanceFromPlayer: 10
+  stopDistance: 5
   speed: 1
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 64
+  rotationSpeed: 4
+  droneRadius: 5
+  droneSpeed: 2
+  droneAngle: 0

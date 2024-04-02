@@ -18,18 +18,21 @@ public class AIDroneShootPlayerState : AIShootPlayerState
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
         aimTransform = agent.enemyGun.GetMuzzle();
-        enemyTransform = agent.transform;
+        enemyTransform = agent.enemyTransform;
         rotationSpeed = agent.config.rotationSpeed;
         agent.enemyGun.SwitchShootingMode(); //turns on shooting
         radius = agent.config.droneRadius;
         speed = agent.config.droneSpeed;
         angle = agent.config.droneAngle;
+        if(aimTransform && enemyTransform && playerTransform){
+            Debug.Log("ShootState: Transforms assigned!");
+        }
         //agent.navMeshAgent.ResetPath();
     }
 
     public override void Update(AIAgent agent){//circles player and shoots
         if(playerTransform != null ){
-            Aim();
+            //Aim();
             float xOffset = Mathf.Cos(angle) * radius;
             float zOffset = Mathf.Sin(angle) * radius;
 
