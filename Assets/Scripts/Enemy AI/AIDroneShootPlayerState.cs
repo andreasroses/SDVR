@@ -24,7 +24,7 @@ public class AIDroneShootPlayerState : AIShootPlayerState
         radius = agent.config.droneRadius;
         speed = agent.config.droneSpeed;
         angle = agent.config.droneAngle;
-        agent.navMeshAgent.ResetPath();
+        //agent.navMeshAgent.ResetPath();
     }
 
     public override void Update(AIAgent agent){//circles player and shoots
