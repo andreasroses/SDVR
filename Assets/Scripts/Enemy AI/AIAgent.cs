@@ -20,10 +20,12 @@ public class AIAgent : MonoBehaviour
     public AIAgentConfig config;
     public NavMeshAgent navMeshAgent;
 
+    public Transform enemyTransform;
     public EnemyWeapon enemyGun;
 
-    void Start(){
+    protected virtual void Start(){
         enemyGun = GetComponent<EnemyWeapon>();
+        enemyTransform = GetComponent<Transform>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new AIStateMachine(this);
         stateMachine.RegisterState(new AIChasePlayerState());
@@ -32,7 +34,7 @@ public class AIAgent : MonoBehaviour
 
     }
 
-    void Update(){
+    protected virtual void Update(){
         stateMachine.Update();
     }
 }
