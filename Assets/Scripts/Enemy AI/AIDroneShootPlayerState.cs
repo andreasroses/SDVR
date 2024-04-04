@@ -32,12 +32,12 @@ public class AIDroneShootPlayerState : AIShootPlayerState
 
     public override void Update(AIAgent agent){//circles player and shoots
         if(playerTransform != null ){
-            //Aim();
+            Aim();
             float xOffset = Mathf.Cos(angle) * radius;
             float zOffset = Mathf.Sin(angle) * radius;
 
             agentDestination = playerTransform.position + new Vector3(xOffset, 0f, zOffset);
-            enemyTransform.position = Vector3.Slerp(enemyTransform.position, agentDestination, Time.deltaTime * speed);
+            enemyTransform.position = agentDestination;
 
             angle += speed * Time.deltaTime;
 

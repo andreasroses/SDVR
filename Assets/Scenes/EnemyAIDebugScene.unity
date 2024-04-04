@@ -57594,9 +57594,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1444850473556007007, guid: 58623d6506848594585fad76df2f10a5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1726833313123506760, guid: 58623d6506848594585fad76df2f10a5, type: 3}
       propertyPath: m_Name
       value: DroneEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466673824153433875, guid: 58623d6506848594585fad76df2f10a5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8655773943164043324, guid: 58623d6506848594585fad76df2f10a5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57661,7 +57669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 719254937760990059, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 54.76
+      value: 26.91
       objectReference: {fileID: 0}
     - target: {fileID: 719254937760990059, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
       propertyPath: m_LocalRotation.w
