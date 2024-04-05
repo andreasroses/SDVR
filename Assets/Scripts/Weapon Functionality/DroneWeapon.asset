@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DroneWeapon
   m_EditorClassIdentifier: 
   WeaponName: DroneWeapon
-  WeaponID: 1
+  WeaponID: 12
   FireAudio: []
   ReloadAudio: []
-  AmmoCapacity: 30
+  AmmoCapacity: 50
   MagazineSize: 10
   BulletsPerShot: 0
   BurstInterval: 0

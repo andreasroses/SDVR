@@ -16,8 +16,8 @@ MonoBehaviour:
   maxDistanceFromPlayer: 20
   minDistanceFromPlayer: 10
   stopDistance: 5
-  speed: 1
+  speed: 3
   rotationSpeed: 4
   droneRadius: 5
-  droneSpeed: 2
+  droneSpeed: 1
   droneAngle: 0
