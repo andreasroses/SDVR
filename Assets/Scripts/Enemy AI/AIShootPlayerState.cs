@@ -23,7 +23,7 @@ public class AIShootPlayerState : AIState
         aimTransform = agent.enemyGun.GetMuzzle();
         minDistanceFromPlayer = agent.config.minDistanceFromPlayer;
         rotationSpeed = agent.config.rotationSpeed;
-        enemyTransform = agent.enemyTransform;
+        //enemyTransform = agent.enemyTransform;
         agent.enemyGun.SwitchShootingMode(); //turns on shooting
     }
 

@@ -6,13 +6,12 @@ using UnityEditor.PackageManager;
 using TMPro;
 using UnityEngine.UIElements;
 
-public class WeaponBase : MonoBehaviour, IAmmoConsumable
+public class WeaponBase : MonoBehaviour
 {
-
+    #region VALUES
     [SerializeField] protected WeaponData Data;
     [SerializeField] protected Transform Muzzle;
     [SerializeField] protected GameObject Model;
-    [SerializeField] private TextMeshProUGUI AmmoText; //This is just for testing purposes, ideally we would have a HUD system to display ammo
     protected AudioSource WeaponAudio;
     protected float LastShootTime;
     protected float InitialClickTime;
@@ -22,11 +21,10 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
     protected int maxAmmo;
     protected bool isShooting;
     protected bool keyPress;
-
+    #endregion
 
     protected virtual void Start()
-    {
-        //AmmoText.GetComponentInChildren<TextMeshProUGUI>();
+    { 
         WeaponAudio = GetComponent<AudioSource>();
         LastShootTime = Time.time;
         InitialClickTime = Time.time;
@@ -34,7 +32,6 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
         currentAmmo = Data.MagazineSize;
         maxAmmo = Data.AmmoCapacity;
         isShooting = false;
-
     }
 
     protected virtual void Update()
@@ -57,14 +54,12 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
             if(!isShooting && currentAmmo < Data.MagazineSize)
                 Reload();
         }
-        //AmmoText.text = currentAmmo + " / " + maxAmmo;
     }
 
     protected virtual void Shoot()
     {
         if (currentAmmo > 0)
         {
-            
             if (Time.time > Data.FireRate + LastShootTime)
             {
                 LastShootTime = Time.time;
@@ -79,10 +74,8 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
                         FireBullet();
                         isShooting = false;
                         break;
-                }
-                
+                } 
             }
-
         }
     }
 
@@ -105,18 +98,8 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
 
     private void FireBullet()
     {
-        
-        //Code is meant for recoil recovery, ignore for now
-        //if (Time.time - LastShootTime - Data.FireRate > Time.deltaTime)
-        //{
-        //    float lastDuration = Mathf.Clamp(0, (StopShootingTime - InitialClickTime), Data.MaxSpreadTime);
-
-        //    float lerpTime = (Data.RecoilRecoveryTime - (Time.time - StopShootingTime)) / Data.RecoilRecoveryTime;
-
-        //    InitialClickTime = Time.time - Mathf.Lerp(0, lastDuration, Mathf.Clamp01(lerpTime));
-        //}
-
-        Vector3 SpreadAmount = Data.GetSpread(Time.time - InitialClickTime);//Get the spread amount based on when we started shooting & the time we've been shooting
+        //Get the spread amount based on when we started shooting & the time we've been shooting
+        Vector3 SpreadAmount = Data.GetSpread(Time.time - InitialClickTime);
         Vector3 ShootDirection = Muzzle.transform.forward + SpreadAmount;
 
         switch(Data.ProjectileType)
@@ -130,7 +113,7 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
         }
         //WeaponAudio.clip = Data.GetRandomFireAudio();
         //WeaponAudio.Play();
-            
+
     }
 
     private void ProjectileFire(Vector3 ShootDir)
@@ -145,23 +128,19 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
     private void RaycastFire(Vector3 ShootDir)
     {
         RaycastHit hit;
-
         if (Physics.Raycast(Muzzle.position, ShootDir, out hit, Data.Range))
         {
             Debug.Log(hit.transform.name);
 
         }
         Debug.DrawRay(Muzzle.position, ShootDir * Data.Range, Color.red, 1f);
-
         currentAmmo--;
     }
 
     protected virtual void Reload()
     {
-        if(maxAmmo <= 0)
+        if (maxAmmo <= 0)
             return;
-
-
         if (maxAmmo < Data.MagazineSize)
         {
             currentAmmo = maxAmmo;
@@ -170,33 +149,16 @@ public class WeaponBase : MonoBehaviour, IAmmoConsumable
         else
         {
             maxAmmo -= Data.MagazineSize - currentAmmo;
-            currentAmmo = Data.MagazineSize;    
-        }
-    }
-
-
-    /// <summary>
-    /// I made Tick() as a means of determining how the weapon model's recoil will function. 
-    /// In enemy variants of this class, we can choose to make our own logic for this
-    /// </summary>
-
-    protected virtual void Tick(bool WantsToShoot)
-    {
-        if (WantsToShoot && currentAmmo > 0)
-        {
-            LastFrameWantedToShoot = true;
-            Shoot();
-        }
-        else if (!WantsToShoot && LastFrameWantedToShoot)
-        {
-            StopShootingTime = Time.time;
-            LastFrameWantedToShoot = false;
+            currentAmmo = Data.MagazineSize;
         }
     }
 
     public void RestoreAmmo(int amount)
     {
-        throw new System.NotImplementedException();
+      if(maxAmmo + amount > Data.AmmoCapacity)
+        maxAmmo = Data.AmmoCapacity;
+      else
+        maxAmmo += amount;
     }
 }
     

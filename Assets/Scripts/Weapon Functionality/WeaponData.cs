@@ -12,13 +12,12 @@ public enum ShootType
 {
     Hitscan,
     Projectile
-}   
+}
 
 public enum BulletSpreadType
 {
     None, //No Spread
     Simple, //Uses Vector3 for Spread Pattern
-    TextureBased //Used B/W Texture to determine spread pattern
 }
 
 /// <summary>
@@ -56,10 +55,6 @@ public class WeaponData : ScriptableObject
     [Header("Simple Spread")]
     public Vector3 SimpleSpread;
 
-    [Header("Texture Based Spread")]
-    [Range(0.001f, 5f)]
-    public float SpreadScale = 0.1f; //The scale of the spread texture
-    public Texture2D SpreadTexture; //The texture used to determine the spread pattern
     public GameObject Bullet; //The projectile object the weapon fires
 
     [Header("Accesibility")]
@@ -82,59 +77,12 @@ public class WeaponData : ScriptableObject
                 ),
                 Mathf.Clamp01(ShootTime / MaxSpreadTime));
         }
-        else if (SpreadType == BulletSpreadType.TextureBased)
-        {
-            spread = GetTextureDirection(ShootTime);
-            spread *= SpreadScale;
-        }
         else if (SpreadType == BulletSpreadType.None)
         {
             return spread;
         }
 
         return spread;
-    }
-
-
-    /// <summary>
-    /// A bit of complicated math here, but it's used to determine the spread pattern based on the texture
-    /// We get an increasingly larger sample size from a texture, and then randomly select the white pixel within it
-    /// https://www.youtube.com/watch?v=yqlFrLGeRaQ <- this is the video we used to learn how to get the texture data
-    /// </summary>
-    private Vector2 GetTextureDirection(float ShootTime)
-    {
-        Vector2 halfsize = new Vector2(
-        SpreadTexture.width /2f, SpreadTexture.height /2f);
-        int halfSquareExtents = Mathf.CeilToInt(
-            Mathf.Lerp(1, halfsize.x, Mathf.Clamp01(ShootTime / MaxSpreadTime)));
-
-        int minX = Mathf.FloorToInt(halfsize.x - halfSquareExtents);
-        int minY = Mathf.FloorToInt(halfsize.y - halfSquareExtents);
-
-        Color[] sampleColors = SpreadTexture.GetPixels(
-                       minX, minY, halfSquareExtents * 2, halfSquareExtents * 2);
-
-        float[] colorsAsGrey = System.Array.ConvertAll(sampleColors, (c) => c.grayscale);
-        float totalGreyValue = colorsAsGrey.Sum();
-
-        float grey = Random.Range(0, totalGreyValue);
-        int i = 0;
-        for(; i < colorsAsGrey.Length; i++)
-        {
-            grey -= colorsAsGrey[i];
-            if (grey <= 0)
-            {
-                break;
-            }
-        }   
-
-        int x = i % (halfSquareExtents * 2);
-        int y = i / (halfSquareExtents * 2);
-
-        Vector2 targetPosition = new Vector2(x, y);
-        Vector2 direction = (targetPosition - halfsize) / halfsize.x;
-
-        return direction;
     }
     #endregion
 
@@ -144,4 +92,3 @@ public class WeaponData : ScriptableObject
     //public AudioClip GetRandomReloadAudio() => ReloadAudio[Random.Range(0, ReloadAudio.Length)];
     #endregion
 }
-
