@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49df814edf10eda419221794ab9a80c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTrigger: 1
+  isTrigger: 0
   maxCollisions: 50
   requiredTags: []
   ignoredColliders: []
