@@ -2292,6 +2292,7 @@ GameObject:
   - component: {fileID: 69270230}
   - component: {fileID: 69270232}
   - component: {fileID: 69270231}
+  - component: {fileID: 69270233}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -2415,6 +2416,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69270229}
   m_CullTransparentMesh: 1
+--- !u!114 &69270233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69270229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c22093c550f0248b2107b5d299333b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthTxt: {fileID: 69270231}
+  playerHealth: {fileID: 961220641}
 --- !u!1 &71311847
 GameObject:
   m_ObjectHideFlags: 0
@@ -14907,8 +14922,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - prefab: {fileID: 8969687385432949069, guid: 543b8645f5c411449ad8a744f273d4a6, type: 3}
-    amount: 50
+  - prefab: {fileID: 8969687385432949069, guid: d03bb2f9dd6759d44a1411c9d226f30e, type: 3}
+    amount: 100
     hideFlags: 0
     sequencialNaming: 0
     pooledObjects: []
@@ -26559,6 +26574,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960460281}
   m_Mesh: {fileID: -2267232928022320108, guid: 7b40e3c724e16c846bf9dd8e97467f35, type: 3}
+--- !u!114 &961220641 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+  m_PrefabInstance: {fileID: 6399294972340228808}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba5fb71024046749af5e8b7a9b5caf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &961725774
 GameObject:
   m_ObjectHideFlags: 0
@@ -57686,9 +57712,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2324634458456663553, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: m_Height
+      value: 2.0335793
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324634458456663553, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: m_Center.y
+      value: -0.019794017
+      objectReference: {fileID: 0}
     - target: {fileID: 4477586787090126490, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
       propertyPath: m_Name
       value: AMDebugPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onHealed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onReceivedDamage.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onHealed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onHealed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 69270233}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onHealed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onHealed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onReceivedDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onReceivedDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 69270233}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onReceivedDamage.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onReceivedDamage.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onHealed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HealthTxt, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onReceivedDamage.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HealthTxt, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onHealed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510976961482227050, guid: c802d7a6e6d9eca4e88bd9f5d7c07ee4, type: 3}
+      propertyPath: onReceivedDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
