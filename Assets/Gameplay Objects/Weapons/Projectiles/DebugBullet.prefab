@@ -330,7 +330,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrigger: 1
   maxCollisions: 50
-  requiredTags: []
+  requiredTags:
+  - Player
   ignoredColliders: []
   enterEvent:
     m_PersistentCalls:

@@ -47,7 +47,6 @@ public class AIChasePlayerState : AIState
         }
         else if(!enemyNavMesh.pathPending && (enemyNavMesh.remainingDistance <= stopDistance)){
             //if agent's position reaches destination of ~5 units away or has surpassed it, the AI state changes to shoot
-            Debug.Log("ChaseState: no path pending, close to player, switching state!");
             agent.stateMachine.ChangeState(AIStateID.ShootPlayer);
         }
         if(timer < 0.0f){ //after timer runs out, destination is set again IF player is far enough away

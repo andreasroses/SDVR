@@ -8,7 +8,6 @@ public class AIDroneShootPlayerState : AIShootPlayerState
     private Transform enemyTransform;
     private Transform aimTransform;
     private Vector3 agentDestination;
-    private float rotationSpeed;
     private float radius = 2f;
     private float speed = 2f;
     private float angle = 0f;
@@ -19,7 +18,6 @@ public class AIDroneShootPlayerState : AIShootPlayerState
         }
         aimTransform = agent.enemyGun.GetMuzzle();
         enemyTransform = agent.enemyTransform;
-        rotationSpeed = agent.config.rotationSpeed;
         agent.enemyGun.SwitchShootingMode(); //turns on shooting
         radius = agent.config.droneRadius;
         speed = agent.config.droneSpeed;
