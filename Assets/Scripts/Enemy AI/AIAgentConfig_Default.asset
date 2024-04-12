@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: AIAgentConfig_Default
   m_EditorClassIdentifier: 
   maxTime: 5
-  maxDistanceFromPlayer: 20
-  minDistanceFromPlayer: 10
+  maxDistanceFromPlayer: 15
+  minDistanceFromPlayer: 8
   stopDistance: 5
-  speed: 1
+  speed: 3
   rotationSpeed: 4
   droneRadius: 5
-  droneSpeed: 2
+  droneSpeed: 1
   droneAngle: 0

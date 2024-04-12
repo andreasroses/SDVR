@@ -13,21 +13,22 @@ MonoBehaviour:
   m_Name: AMPlayerDebug
   m_EditorClassIdentifier: 
   WeaponName: EnemyDebug
-  WeaponID: 1
+  WeaponID: 36
+  FireAudio: []
+  ReloadAudio: []
   AmmoCapacity: 60
   MagazineSize: 30
-  BurstCount: 0
+  BulletsPerShot: 0
   BurstInterval: 0
   FireRate: 0.2
   ReloadTime: 0.5
   Range: 0
+  ReloadSpeed: 0
   RecoilRecoveryTime: 0.5
   MaxSpreadTime: 1
   FiringType: 2
   ProjectileType: 1
   SpreadType: 1
   SimpleSpread: {x: 0.01, y: 0.05, z: 0.05}
-  SpreadScale: 0.24
-  SpreadTexture: {fileID: 2800000, guid: c7d59120cdef4314c8e3547737fe6c17, type: 3}
-  Bullet: {fileID: 4096041770465146787, guid: 503c9143fa11a4f4e8f22c1384127816, type: 3}
+  Bullet: {fileID: 8969687385432949069, guid: d03bb2f9dd6759d44a1411c9d226f30e, type: 3}
   IsAutotrigger: 0

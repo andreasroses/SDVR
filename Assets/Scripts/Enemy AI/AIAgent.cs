@@ -21,6 +21,7 @@ public class AIAgent : MonoBehaviour
     public NavMeshAgent navMeshAgent;
 
     public Transform enemyTransform;
+    public Transform weaponTransform;
     public EnemyWeapon enemyGun;
 
     protected virtual void Start(){
