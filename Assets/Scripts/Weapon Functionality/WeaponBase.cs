@@ -161,5 +161,16 @@ public class WeaponBase : MonoBehaviour
       else
         maxAmmo += amount;
     }
+
+    public int GetCurrentAmmo()
+    {
+        return currentAmmo;
+    }
+
+    public int GetMaxAmmo()
+    {
+        return maxAmmo;
+    }
+
 }
-    
+
