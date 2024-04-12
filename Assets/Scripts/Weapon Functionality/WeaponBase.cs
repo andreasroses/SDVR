@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 public class WeaponBase : MonoBehaviour
 {
     #region VALUES
-    [SerializeField] protected WeaponData Data;
+    [SerializeField] public WeaponData Data;
     [SerializeField] protected Transform Muzzle;
     [SerializeField] protected GameObject Model;
     protected AudioSource WeaponAudio;
@@ -17,8 +17,8 @@ public class WeaponBase : MonoBehaviour
     protected float InitialClickTime;
     protected float StopShootingTime;
     protected bool LastFrameWantedToShoot;
-    protected int currentAmmo;
-    protected int maxAmmo;
+    public int currentAmmo;
+    public int maxAmmo;
     protected bool isShooting;
     protected bool keyPress;
     #endregion
@@ -56,7 +56,7 @@ public class WeaponBase : MonoBehaviour
         }
     }
 
-    protected virtual void Shoot()
+    public void Shoot()
     {
         if (currentAmmo > 0)
         {
@@ -102,7 +102,7 @@ public class WeaponBase : MonoBehaviour
         Vector3 SpreadAmount = Data.GetSpread(Time.time - InitialClickTime);
         Vector3 ShootDirection = Muzzle.transform.forward + SpreadAmount;
 
-        switch(Data.ProjectileType)
+        switch (Data.ProjectileType)
         {
             case ShootType.Projectile:
                 ProjectileFire(ShootDirection);
@@ -137,20 +137,21 @@ public class WeaponBase : MonoBehaviour
         currentAmmo--;
     }
 
-    protected virtual void Reload()
+    public void Reload()
     {
-        if (maxAmmo <= 0)
-            return;
-        if (maxAmmo < Data.MagazineSize)
-        {
-            currentAmmo = maxAmmo;
-            maxAmmo = 0;
-        }
-        else
-        {
-            maxAmmo -= Data.MagazineSize - currentAmmo;
-            currentAmmo = Data.MagazineSize;
-        }
+        if (!isShooting && currentAmmo < Data.MagazineSize)
+            if (maxAmmo <= 0)
+                return;
+            if (maxAmmo < Data.MagazineSize)
+            {
+                currentAmmo = maxAmmo;
+                maxAmmo = 0;
+            }
+            else
+            {
+                maxAmmo -= Data.MagazineSize - currentAmmo;
+                currentAmmo = Data.MagazineSize;
+            }
     }
 
     public void RestoreAmmo(int amount)

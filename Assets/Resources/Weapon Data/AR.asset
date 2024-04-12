@@ -27,8 +27,8 @@ MonoBehaviour:
   RecoilRecoveryTime: 0.5
   MaxSpreadTime: 3
   FiringType: 2
-  ProjectileType: 0
+  ProjectileType: 1
   SpreadType: 1
-  SimpleSpread: {x: 0.5, y: 0.5, z: 0.5}
-  Bullet: {fileID: 4096041770465146787, guid: 503c9143fa11a4f4e8f22c1384127816, type: 3}
+  SimpleSpread: {x: 0.05, y: 0.05, z: 0.05}
+  Bullet: {fileID: 8969687385432949069, guid: 543b8645f5c411449ad8a744f273d4a6, type: 3}
   IsAutotrigger: 0

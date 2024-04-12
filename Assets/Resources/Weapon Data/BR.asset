@@ -30,6 +30,6 @@ MonoBehaviour:
   FiringType: 0
   ProjectileType: 0
   SpreadType: 0
-  SimpleSpread: {x: 0, y: 0, z: 0}
+  SimpleSpread: {x: 0.05, y: 0.05, z: 0.05}
   Bullet: {fileID: 0}
   IsAutotrigger: 0

@@ -8,7 +8,7 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerCharacter : Entity
 {
-    [SerializeField] private TextMeshProUGUI stat1, stat2, stat3;
+
     #region Movement Class and Variables
     [System.Serializable]
     public class MovementSettings
@@ -65,7 +65,6 @@ public class PlayerCharacter : Entity
     
     private void Start()
     {
-
         m_Tran = transform;
         m_Character = GetComponent<CharacterController>();
 
@@ -78,9 +77,6 @@ public class PlayerCharacter : Entity
 
     private void Update()
     {
-        stat1.text = "Max Health: " + EntityHealth.hitPoints;
-        stat2.text = "Damage Mult: " + Stats.DamageMultiplier;
-        stat3.text = "Fire Rate Mult: " + Stats.FireRateMultiplier;
         m_MoveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         m_MouseLook.UpdateCursorLock();
         QueueJump();
@@ -98,24 +94,7 @@ public class PlayerCharacter : Entity
         // Rotate the character and camera.
         m_MouseLook.LookRotation(m_Tran, m_CamTran);
 
-        // Move the character.
 
-        if (Input.GetKeyDown(KeyCode.T) && canStopTime)
-        {
-            canStopTime = false;
-            StartCoroutine(SlowDownTime(5f));
-        }
-        m_Character.Move(m_PlayerVelocity * Time.deltaTime);
-    }
-
-    IEnumerator SlowDownTime(float v)
-    {
-
-        Time.timeScale = 0.5f;
-        Time.fixedDeltaTime = 0.02f * Time.timeScale;
-        yield return new WaitForSeconds(v);
-        Time.timeScale = 1f;
-        canStopTime = true;
     }
 
     #region MovementMethods
@@ -307,12 +286,4 @@ public class PlayerCharacter : Entity
     }
 
     #endregion
-
-    //This is called in Update()
-    //public void DebugTesting()
-    //{
-    //    HPText.text = Stats.EntityName + " : " + EntityHealth.hitPoints;
-    //    EnemyHPText.text = "Enemy HP: " + EnemyHealth.hitPoints;
-    //}
-
 }

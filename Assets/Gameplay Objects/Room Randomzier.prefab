@@ -18841,7 +18841,9 @@ MonoBehaviour:
   spawnCornerWalls: 1
   removeUnnaturalWalls: 0
   useSeed: 0
+  spawnRoom: 1
   generationSeed: 99
+  paddingAmmount: 4
   pathMakerDestructionChance: 30
   pathMakerSpawnChance: 39
   pathMakerRotationChance: 44
@@ -19130,6 +19132,14 @@ MonoBehaviour:
   wallOffset: 0
   overlayOffset: 0.03
   emptyOffset: 0
+  generateEnemySpawns: 0
+  enemySpawn: {fileID: 0}
+  generatePlayerSpawn: 0
+  playerSpawn: {fileID: 0}
+  generateObstacles: 0
+  obstacleList: []
+  levelObstacleList: []
+  enemySpawnList: []
 --- !u!114 &4467610909480923687
 MonoBehaviour:
   m_ObjectHideFlags: 0
