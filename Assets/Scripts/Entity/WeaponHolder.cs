@@ -61,6 +61,7 @@ public class WeaponHolder : MonoBehaviour
 
         timeSinceLastSwitch += Time.deltaTime;
 
+        weaponStatusText = weapons[selectedWeapon].GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>();
         weaponStatusText.text = weapons[selectedWeapon].GetComponent<WeaponBase>().currentAmmo.ToString() + "/" + weapons[selectedWeapon].GetComponent<WeaponBase>().maxAmmo.ToString();
 
     }
