@@ -115,7 +115,6 @@ GameObject:
   m_Component:
   - component: {fileID: 345387269351764708}
   - component: {fileID: 1581164312515549314}
-  - component: {fileID: 5146224768677804658}
   - component: {fileID: 6435656947265986501}
   - component: {fileID: 4748454780336180434}
   m_Layer: 7
@@ -170,24 +169,6 @@ MonoBehaviour:
   onDead:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5146224768677804658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3833523576974981670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba688f262155f90448f2e3f0a727ac90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialState: 0
-  config: {fileID: 11400000, guid: c114388da5aa61a4e9c24aeb09b58249, type: 2}
-  navMeshAgent: {fileID: 0}
-  enemyTransform: {fileID: 0}
-  weaponTransform: {fileID: 3862349783865860401}
-  enemyGun: {fileID: 0}
 --- !u!114 &6435656947265986501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +184,8 @@ MonoBehaviour:
   Data: {fileID: 11400000, guid: b324510b30a9dc14090811e3d9dcd43f, type: 2}
   Muzzle: {fileID: 8660919260190557601}
   Model: {fileID: 4526682803123911563}
+  currentAmmo: 0
+  maxAmmo: 0
 --- !u!195 &4748454780336180434
 NavMeshAgent:
   m_ObjectHideFlags: 0

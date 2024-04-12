@@ -10465,6 +10465,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5146224768677804658, guid: 805bbd18e5a5bd748b40d415a88d6b8f, type: 3}
+      propertyPath: initialState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8660919260190557601, guid: 805bbd18e5a5bd748b40d415a88d6b8f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -10477,10 +10481,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.0487
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5146224768677804658, guid: 805bbd18e5a5bd748b40d415a88d6b8f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3833523576974981670, guid: 805bbd18e5a5bd748b40d415a88d6b8f, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 349248499}
     - targetCorrespondingSourceObject: {fileID: 3833523576974981670, guid: 805bbd18e5a5bd748b40d415a88d6b8f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 349248493}
@@ -10511,6 +10519,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.1424851, y: 1.9647504, z: 2.1424608}
   m_Center: {x: 0.08445597, y: 0.4823752, z: 0.33549106}
+--- !u!114 &349248499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349248492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9fb8b83d9fd064086915978703218d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialState: 1
+  config: {fileID: 11400000, guid: 68fc1a2a47c50b94ba86c3cf085bc46e, type: 2}
+  navMeshAgent: {fileID: 0}
+  enemyTransform: {fileID: 0}
+  weaponTransform: {fileID: 1273522423}
+  enemyGun: {fileID: 0}
 --- !u!1 &352869786
 GameObject:
   m_ObjectHideFlags: 0
@@ -14923,8 +14949,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - prefab: {fileID: 8969687385432949069, guid: d03bb2f9dd6759d44a1411c9d226f30e, type: 3}
-    amount: 100
+  - prefab: {fileID: 8969687385432949069, guid: 543b8645f5c411449ad8a744f273d4a6, type: 3}
+    amount: 150
     hideFlags: 0
     sequencialNaming: 0
     pooledObjects: []
@@ -35218,6 +35244,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271473997}
   m_Mesh: {fileID: -2267232928022320108, guid: 7b40e3c724e16c846bf9dd8e97467f35, type: 3}
+--- !u!4 &1273522423 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3862349783865860401, guid: 805bbd18e5a5bd748b40d415a88d6b8f, type: 3}
+  m_PrefabInstance: {fileID: 349248491}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1273593083
 GameObject:
   m_ObjectHideFlags: 0
