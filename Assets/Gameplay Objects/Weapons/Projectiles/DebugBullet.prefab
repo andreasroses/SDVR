@@ -281,7 +281,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -305,10 +305,10 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -330,8 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrigger: 1
   maxCollisions: 50
-  requiredTags:
-  - Player
+  requiredTags: []
   ignoredColliders: []
   enterEvent:
     m_PersistentCalls:
@@ -343,18 +342,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6337452595128639140, guid: 280e40a84aad5bb4fb5bbedb235bfd3e, type: 3}
-        m_TargetAssemblyTypeName: HealthTxt, Assembly-CSharp
-        m_MethodName: UpdateHealth
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -375,7 +362,7 @@ MonoBehaviour:
   velocity: 500
   modifyHealthOnImpact: 1
   healthEffect:
-    name: bulletDamage
+    name: 
     modifier: 0
     amount: 10
     times: 1

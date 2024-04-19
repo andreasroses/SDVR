@@ -18,9 +18,7 @@ public class AIShootPlayerState : AIState
         return AIStateID.ShootPlayer;
     }
     public virtual void Enter(AIAgent agent){
-        if(playerTransform == null){
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        }
+        playerTransform = agent.playerTransform;
         aimTransform = agent.enemyGun.GetMuzzle();
         minDistanceFromPlayer = agent.config.minDistanceFromPlayer;
         rotationSpeed = agent.config.rotationSpeed;

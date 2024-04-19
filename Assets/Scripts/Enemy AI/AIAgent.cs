@@ -24,6 +24,8 @@ public class AIAgent : MonoBehaviour
     public Transform weaponTransform;
     public EnemyWeapon enemyGun;
 
+    public Transform playerTransform;
+
     protected virtual void Start(){
         enemyGun = GetComponent<EnemyWeapon>();
         enemyTransform = GetComponent<Transform>();

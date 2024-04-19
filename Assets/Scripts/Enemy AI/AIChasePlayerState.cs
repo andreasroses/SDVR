@@ -23,9 +23,7 @@ public class AIChasePlayerState : AIState
     }
     public void Enter(AIAgent agent)
     {
-        if(playerTransform == null){
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        }
+        playerTransform = agent.playerTransform;
         enemyTransform = agent.enemyTransform;
         enemyNavMesh = agent.navMeshAgent;
         minDistanceFromPlayer = agent.config.minDistanceFromPlayer;

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class AITankAttackPlayerState : AIShootPlayerState
 {
     private Transform playerTransform;
@@ -9,17 +9,16 @@ public class AITankAttackPlayerState : AIShootPlayerState
     private Transform weaponTransform;
     private Transform aimTransform;
     private float rotationSpeed;
-    private UnityEngine.AI.NavMeshAgent enemyNavMesh;
+    private NavMeshAgent enemyNavMesh;
     private float minDistanceFromPlayer;
     private float maxTime;
     private float stopDistance;
     private float timer = 5.0f;
     private Vector3 playerDirection;
     public override void Enter(AIAgent agent){
-        if(playerTransform == null){
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        }
+        playerTransform = agent.playerTransform;
         aimTransform = agent.enemyGun.GetMuzzle();
+        weaponTransform = agent.weaponTransform;
         enemyTransform = agent.enemyTransform;
         enemyNavMesh = agent.navMeshAgent;
         minDistanceFromPlayer = agent.config.minDistanceFromPlayer;
@@ -31,7 +30,7 @@ public class AITankAttackPlayerState : AIShootPlayerState
 
     public override void Update(AIAgent agent){
         playerDirection = playerTransform.position - enemyTransform.position;
-        playerDirection.y= 0;
+        playerDirection.y = 0;
         Aim();
         if(!agent.enabled){
             Debug.Log("AIChasePlayerState: agent not enabled");
@@ -54,13 +53,12 @@ public class AITankAttackPlayerState : AIShootPlayerState
     private void Aim(){
          //aims muzzle
         Vector3 aimDirection = aimTransform.forward;
-        Quaternion targetRotation = Quaternion.FromToRotation(aimDirection, playerDirection);
+        Vector3 aimDistance = playerTransform.position - aimTransform.position;
+        Quaternion targetRotation = Quaternion.FromToRotation(aimDirection, aimDistance);
         weaponTransform.rotation = targetRotation * weaponTransform.rotation;
 
         //rotates enemy
-        Vector3 enemyRotate = playerTransform.position - enemyTransform.position;
-        enemyRotate.y = 0;
-        Quaternion enemyRotation = Quaternion.LookRotation(enemyRotate);
+        Quaternion enemyRotation = Quaternion.LookRotation(playerDirection);
         enemyTransform.rotation = Quaternion.Slerp(enemyTransform.rotation, enemyRotation, Time.deltaTime * rotationSpeed);
     }
 }
