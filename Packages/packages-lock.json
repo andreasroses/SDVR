@@ -334,7 +334,7 @@
     },
     "com.unity.xr.oculus": {
       "version": "4.1.2",
-      "depth": 1,
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.xr.management": "4.4.0"
@@ -343,7 +343,7 @@
     },
     "com.unity.xr.openxr": {
       "version": "1.9.1",
-      "depth": 0,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.xr.management": "4.4.0",

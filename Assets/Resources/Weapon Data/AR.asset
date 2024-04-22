@@ -24,11 +24,11 @@ MonoBehaviour:
   ReloadTime: 1
   Range: 50
   ReloadSpeed: 1
-  RecoilRecoveryTime: 0.5
+  RecoilRecoveryTime: 10
   MaxSpreadTime: 3
   FiringType: 2
   ProjectileType: 1
   SpreadType: 1
-  SimpleSpread: {x: 0.05, y: 0.05, z: 0.05}
+  SimpleSpread: {x: 0.005, y: 0.005, z: 0.005}
   Bullet: {fileID: 8969687385432949069, guid: 543b8645f5c411449ad8a744f273d4a6, type: 3}
   IsAutotrigger: 0

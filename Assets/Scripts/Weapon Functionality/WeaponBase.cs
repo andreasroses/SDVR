@@ -14,9 +14,7 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] protected GameObject Model;
     protected AudioSource WeaponAudio;
     protected float LastShootTime;
-    protected float InitialClickTime;
-    protected float StopShootingTime;
-    protected bool LastFrameWantedToShoot;
+
     public int currentAmmo;
     public int maxAmmo;
     protected bool isShooting;
@@ -27,8 +25,6 @@ public class WeaponBase : MonoBehaviour
     { 
         WeaponAudio = GetComponent<AudioSource>();
         LastShootTime = Time.time;
-        InitialClickTime = Time.time;
-        StopShootingTime = Time.time;
         currentAmmo = Data.MagazineSize;
         maxAmmo = Data.AmmoCapacity;
         isShooting = false;
@@ -99,7 +95,7 @@ public class WeaponBase : MonoBehaviour
     private void FireBullet()
     {
         //Get the spread amount based on when we started shooting & the time we've been shooting
-        Vector3 SpreadAmount = Data.GetSpread(Time.time - InitialClickTime);
+        Vector3 SpreadAmount = Data.GetSpread();
         Vector3 ShootDirection = Muzzle.transform.forward + SpreadAmount;
 
         switch (Data.ProjectileType)

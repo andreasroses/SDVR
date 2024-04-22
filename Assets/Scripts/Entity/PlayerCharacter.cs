@@ -1,9 +1,5 @@
 using UnityEngine;
-using TMPro;
-using Unity.VisualScripting;
-using Kitbashery.Gameplay;
-using System;
-using System.Collections;
+
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerCharacter : Entity
@@ -81,6 +77,7 @@ public class PlayerCharacter : Entity
         m_MouseLook.UpdateCursorLock();
         QueueJump();
 
+
         // Set movement state.
         if (m_Character.isGrounded)
         {
@@ -93,7 +90,7 @@ public class PlayerCharacter : Entity
 
         // Rotate the character and camera.
         m_MouseLook.LookRotation(m_Tran, m_CamTran);
-
+        m_Character.Move(m_PlayerVelocity * Time.deltaTime);
 
     }
 
@@ -109,6 +106,7 @@ public class PlayerCharacter : Entity
 
         if (Input.GetButtonDown("Jump") && !m_JumpQueued)
         {
+            Debug.Log("Jump Queued");
             m_JumpQueued = true;
         }
 

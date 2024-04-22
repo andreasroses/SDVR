@@ -19,4 +19,5 @@ public class AIAgentConfig : ScriptableObject
     public float droneRadius = 2f;
     public float droneSpeed = 2f;
     public float droneAngle = 0f;
+    public float attackInterval = 1.0f;
 }

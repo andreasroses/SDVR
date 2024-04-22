@@ -62,20 +62,18 @@ public class WeaponData : ScriptableObject
     #endregion
 
     #region BULLET SPREAD FUNCTIONS
-    public Vector3 GetSpread(float ShootTime = 0)
+    public Vector3 GetSpread()
     {
         Vector3 spread = new Vector3(0,0,0);
 
         if(SpreadType == BulletSpreadType.Simple)
         {
-            spread = Vector3.Lerp(
-                Vector3.zero,
+            spread = 
                 new Vector3(
                     Random.Range(-SimpleSpread.x, SimpleSpread.x),
                     Random.Range(-SimpleSpread.y, SimpleSpread.y),
                     Random.Range(-SimpleSpread.y, SimpleSpread.y)
-                ),
-                Mathf.Clamp01(ShootTime / MaxSpreadTime));
+                );
         }
         else if (SpreadType == BulletSpreadType.None)
         {

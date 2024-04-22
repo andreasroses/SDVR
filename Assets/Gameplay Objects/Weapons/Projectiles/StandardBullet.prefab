@@ -5035,7 +5035,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.171875
+        value: 0.5180359
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -5190,10 +5190,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9160831234465117292}
-  - component: {fileID: 1742782255309192617}
-  - component: {fileID: 4605598483439287358}
-  - component: {fileID: 7851971857380181087}
   - component: {fileID: 9220424601853162141}
+  - component: {fileID: 3466909940494923165}
+  - component: {fileID: 5901422648880634910}
+  - component: {fileID: 2340090884215496842}
   m_Layer: 0
   m_Name: StandardBullet
   m_TagString: Untagged
@@ -5217,122 +5217,6 @@ Transform:
   - {fileID: 2103318476322441132}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1742782255309192617
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8969687385432949069}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 2
---- !u!65 &4605598483439287358
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8969687385432949069}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7851971857380181087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8969687385432949069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49df814edf10eda419221794ab9a80c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTrigger: 1
-  maxCollisions: 50
-  requiredTags: []
-  ignoredColliders: []
-  enterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7851971857380181087}
-        m_TargetAssemblyTypeName: Kitbashery.Gameplay.Projectile, kitbashery.game-kit
-        m_MethodName: Impact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  exitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  stayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  lastContact: {fileID: 0}
-  colliders: []
-  eventCollider: {fileID: 0}
-  rigid: {fileID: 0}
-  applyForceOnImpact: 1
-  impactForce: 1
-  velocity: 500
-  modifyHealthOnImpact: 0
-  healthEffect:
-    name: 
-    modifier: 0
-    amount: 1
-    times: 1
-    interval: 0
-  disableOnImpact: 1
-  ricochets: 0
-  onRicochet:
-    m_PersistentCalls:
-      m_Calls: []
-  useLifeTime: 1
-  lifeTime: 10
-  seekTarget: 0
-  target: {fileID: 0}
-  targetMode: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  triggerInteraction: 1
-  targetTag: 
-  searchRange: 10
-  seekSpeed: 10
 --- !u!96 &9220424601853162141
 TrailRenderer:
   serializedVersion: 3
@@ -5446,8 +5330,8 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!1001 &1158133170513082973
-PrefabInstance:
+--- !u!135 &3466909940494923165
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5467,7 +5351,7 @@ PrefabInstance:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7799353591351854965
+--- !u!54 &5901422648880634910
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5491,10 +5375,10 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 80
-  m_CollisionDetection: 1
---- !u!114 &4956501058944241459
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2340090884215496842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5513,7 +5397,7 @@ MonoBehaviour:
   enterEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4956501058944241459}
+      - m_Target: {fileID: 2340090884215496842}
         m_TargetAssemblyTypeName: Kitbashery.Gameplay.Projectile, kitbashery.game-kit
         m_MethodName: Impact
         m_Mode: 1
@@ -5534,10 +5418,10 @@ MonoBehaviour:
   lastContact: {fileID: 0}
   colliders: []
   eventCollider: {fileID: 0}
-  rigid: {fileID: 0}
-  applyForceOnImpact: 0
-  impactForce: 1
-  velocity: 200
+  rigid: {fileID: 5901422648880634910}
+  applyForceOnImpact: 1
+  impactForce: 0
+  velocity: 300
   modifyHealthOnImpact: 0
   healthEffect:
     name: 
@@ -5551,14 +5435,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   useLifeTime: 1
-  lifeTime: 4
+  lifeTime: 5
   seekTarget: 0
   target: {fileID: 0}
   targetMode: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   triggerInteraction: 1
-  targetTag: 
+  targetTag: Player
   searchRange: 10
   seekSpeed: 10

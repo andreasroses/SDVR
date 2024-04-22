@@ -13,10 +13,7 @@ public class EnemyWeapon : WeaponBase
         if(currentAmmo < 0){
             Reload();
         }
-        
     }
-
-    
 
     public void SwitchShootingMode(){ //switches shooting mode
         CanShoot = !CanShoot;
