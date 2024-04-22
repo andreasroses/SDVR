@@ -366,10 +366,15 @@ namespace RoguelikeGeneratorPro
         public bool generateEnemySpawns = false;
         public GameObject enemySpawn;
         public bool generatePlayerSpawn = false;
-        public GameObject playerSpawn;
+        public GameObject playerSpawn, exitPortal;
+        public GameObject spawnDoor;
         public bool generateObstacles = false;
+        public bool generateExitPortal = false;
         public List<GameObject> obstacleList = new List<GameObject>();
-
+        public List<GameObject> enemySpawnList = new List<GameObject>();
+        public List<GameObject> levelObstacleList = new List<GameObject>();
+        private GameObject placedExitPortal;
+        private GameObject setSpawnPoint;
 
 
         //PRIVATE
@@ -437,6 +442,7 @@ namespace RoguelikeGeneratorPro
 
             FindSpawnRoomLocation();
             
+            if(generateExitPortal) FindExitPortalLocation();
 
             // End of custom code
 
@@ -531,15 +537,15 @@ namespace RoguelikeGeneratorPro
 
             enemySpawnParent = new GameObject("enemySpawnParent");
             enemySpawnParent.transform.parent = this.transform;
-            enemySpawnParent.transform.localPosition = new Vector3(0f, overlayOffset, 0f);
+            enemySpawnParent.transform.localPosition = new Vector3(0f, 0f, 0f);
 
             levelObstacleParent = new GameObject("levelObstacleParent");
             levelObstacleParent.transform.parent = this.transform;
-            levelObstacleParent.transform.localPosition = new Vector3(0f, overlayOffset, 0f);
+            levelObstacleParent.transform.localPosition = new Vector3(0f, 0f, 0f);
 
             miscParent = new GameObject("miscParent");
             miscParent.transform.parent = this.transform;
-            miscParent.transform.localPosition = new Vector3(0f, overlayOffset, 0f);
+            miscParent.transform.localPosition = new Vector3(0f, 0f, 0f);
         }
 
 
@@ -2363,6 +2369,8 @@ namespace RoguelikeGeneratorPro
 
         #region Spawnroom
 
+        private List<Vector3> placedPortals = new List<Vector3>(); // Keep track of placed portals
+
         public void LevelLayout(){
             foreach(tileType tile in tiles){
                 Debug.Log(tile);
@@ -2417,10 +2425,14 @@ namespace RoguelikeGeneratorPro
             return Vector3.zero;
         }
 
-        private GameObject setSpawnPoint;
 
         private void PlaceSpawnRoom(Vector3 spawnLoc){
-            Destroy(setSpawnPoint);
+            #if UNITY_EDITOR
+                DestroyImmediate(setSpawnPoint);
+            #else
+                Destroy(setSpawnPoint);
+            #endif
+            
             int x = (int)spawnLoc.x;
             int y = (int)spawnLoc.z;
 
@@ -2462,8 +2474,11 @@ namespace RoguelikeGeneratorPro
             tiles[x-2, y-4] = tileType.wall;
             tiles[x-1, y-4] = tileType.wall;
 
+            Instantiate(spawnDoor,new Vector3(x*tileSize, 0f, (y)*tileSize),Quaternion.identity,miscParent.transform);
+
             //Spawn point
-            if(generatePlayerSpawn) setSpawnPoint = Instantiate(playerSpawn, new Vector3(x*tileSize, 1, (y-2)*tileSize), Quaternion.identity,  miscParent.transform);
+            if(generatePlayerSpawn) setSpawnPoint = Instantiate(playerSpawn, new Vector3(x*tileSize, 0f, (y-3)*tileSize), Quaternion.identity,  miscParent.transform);
+            placedPortals.Add(spawnLoc);
 
         }
 
@@ -2538,6 +2553,95 @@ namespace RoguelikeGeneratorPro
         }
 
         
+        public Vector3 FindExitPortalLocation()
+        {
+            tileType[,] levelGrid = GetTiles();
+
+            Vector2Int levelSize = GetLevelSize();
+            int width = levelSize.x;
+            int height = levelSize.y;
+
+            // Check for horizontal open spaces
+            for (int z = 0; z < height; z++)
+            {
+                for (int x = 0; x < width - 2; x++)
+                {
+                    if (IsSuitableLocationForExitPortal(levelGrid, x, z))
+                    {
+                        // Found a valid location
+                        Vector3 exitLoc = new Vector3(x + 1, 0, z);
+                        PlaceExitPortal(exitLoc);
+                        return exitLoc; // Assuming y = 0 for simplicity
+                    }
+                }
+            }
+
+            // Check for vertical open spaces
+            for (int x = 0; x < width; x++)
+            {
+                for (int z = 0; z < height - 2; z++)
+                {
+                    if (IsSuitableLocationForExitPortal(levelGrid, x, z))
+                    {
+                        // Found a valid location
+                        Vector3 exitLoc = new Vector3(x, 0, z + 1);
+                        PlaceExitPortal(exitLoc);
+                        return exitLoc; // Assuming y = 0 for simplicity
+                    }
+                }
+            }
+
+            // No valid location found
+            return Vector3.zero;
+        }
+
+        private bool IsSuitableLocationForExitPortal(tileType[,] levelGrid, int x, int z)
+        {
+            // Check if the location is suitable for placing an exit portal
+            // For example, ensure it's not too close to an existing portal
+            const int minDistanceFromPortal = 5; // Adjust as needed
+
+            if (levelGrid[x, z] != tileType.floor ||
+                overlayTiles[x, z] != overlayType.empty   
+                )
+            {
+                // Not enough space for a room
+                return false;
+            }
+
+            // Check distance from existing portals
+            foreach (var portal in placedPortals)
+            {
+                float distance = Vector3.Distance(new Vector3(x + 1, 0, z), portal);
+                if (distance < minDistanceFromPortal)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void PlaceExitPortal(Vector3 exitLoc)
+        {
+            #if UNITY_EDITOR
+                DestroyImmediate(placedExitPortal);
+            #else
+                Destroy(placedExitPortal);
+            #endif
+            
+
+            int x = (int)exitLoc.x;
+            int y = (int)exitLoc.z;
+
+            // Place exit portal at the given location
+            placedExitPortal = Instantiate(exitPortal, new Vector3(x * tileSize, 0f, y * tileSize), Quaternion.identity,  miscParent.transform);
+
+            // Update list of placed portals
+            placedPortals.Add(exitLoc);
+        }
+
+        
 
         private void CleanUpExtras()
         {
@@ -2548,13 +2652,18 @@ namespace RoguelikeGeneratorPro
         #endregion
 
         #region LevelObstacles
-        
-        public List<GameObject> levelObstacleList = new List<GameObject>();
+         
         public void InstanciateLevelObstacles()
         {
             foreach(GameObject obstacle in levelObstacleList)
             {
-                Destroy(obstacle);
+                #if UNITY_EDITOR
+                    DestroyImmediate(obstacle);
+                #else
+                    Destroy(obstacle);
+                #endif
+
+                
             }
 
             for (int x = paddingAmmount; x < levelSize.x - paddingAmmount; x++)
@@ -2564,7 +2673,9 @@ namespace RoguelikeGeneratorPro
                     if (Random.Range(0, 100) < 8 && tiles[x, y] == tileType.floor){
                         int randomValue = Random.Range(0, obstacleList.Count);
                         overlayTiles[x, y] = overlayType.LevelObstacle;
-                        GameObject instObj = GameObject.Instantiate(obstacleList[randomValue], new Vector3(x*tileSize, 0, y*tileSize), Quaternion.identity, levelObstacleParent.transform);
+                        float randomAngle = Random.Range(0f, 360f);
+                        Quaternion randomRotation = Quaternion.Euler(0f, randomAngle, 0f);
+                        GameObject instObj = GameObject.Instantiate(obstacleList[randomValue], new Vector3(x*tileSize, 0, y*tileSize), randomRotation, levelObstacleParent.transform);
                         levelObstacleList.Add(instObj);
                     } 
                 }
@@ -2574,13 +2685,16 @@ namespace RoguelikeGeneratorPro
         #endregion
 
         #region EnemySpawns
-        public List<GameObject> enemySpawnList = new List<GameObject>();
-
+       
         public void InstanciateEnemySpawns()
         {
             foreach(GameObject eSpawn in enemySpawnList)
             {
+            #if UNITY_EDITOR
+                DestroyImmediate(eSpawn);
+            #else
                 Destroy(eSpawn);
+            #endif
             }
 
             for (int x = paddingAmmount; x < levelSize.x - paddingAmmount; x++)

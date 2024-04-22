@@ -167,7 +167,8 @@ namespace RoguelikeGeneratorPro
         public Texture enemySpawn_txt;
         public Texture playerSpawn_txt;
         public Texture obstacleList_txt;
-        
+        public Texture exitPortal_txt;
+        public Texture spawnDoor_txt;
 
         private GUIStyle alignGUILeft;
         private GUIStyle alignGUIRight;
@@ -527,7 +528,9 @@ namespace RoguelikeGeneratorPro
         private SerializedProperty _playerSpawn;
         private SerializedProperty _generateObstacles;
         private SerializedProperty _obstacleList;
-        
+        private SerializedProperty _exitPortal;
+        private SerializedProperty _generateExitPortal;
+        private SerializedProperty _spawnDoor;
 
         #endregion
 
@@ -891,6 +894,9 @@ namespace RoguelikeGeneratorPro
             _generateEnemySpawns = serializedObject.FindProperty("generateEnemySpawns");
             _generateObstacles = serializedObject.FindProperty("generateObstacles");
             _generatePlayerSpawn = serializedObject.FindProperty("generatePlayerSpawn");
+            _exitPortal = serializedObject.FindProperty("exitPortal");
+            _generateExitPortal = serializedObject.FindProperty("generateExitPortal");
+            _spawnDoor = serializedObject.FindProperty("spawnDoor");
 
 
             script = (RoguelikeGeneratorPro)target;
@@ -2444,11 +2450,14 @@ namespace RoguelikeGeneratorPro
             EditorGUILayout.Space(5);
             _generateEnemySpawns.boolValue = EditorGUILayout.Toggle("Generate Enemy Spawns", script.generateEnemySpawns);
             DisplayTileObjBlock("Enemy Spawn",enemySpawn_txt, _enemySpawn, script.enemySpawn);
+            _generateExitPortal.boolValue = EditorGUILayout.Toggle("Generate Exit Portal", script.generateExitPortal);
+            DisplayTileObjBlock("Exit Portal",exitPortal_txt, _exitPortal, script.exitPortal);
             _generatePlayerSpawn.boolValue = EditorGUILayout.Toggle("Generate Player Spawn", script.generatePlayerSpawn);
             DisplayTileObjBlock("Player Spawn",playerSpawn_txt, _playerSpawn, script.playerSpawn);
             _generateObstacles.boolValue = EditorGUILayout.Toggle("Generate Obstacles", script.generateObstacles);
             EditorGUILayout.PropertyField(_obstacleList, true);
             serializedObject.ApplyModifiedProperties();
+            DisplayTileObjBlock("Spawn Door",spawnDoor_txt, _spawnDoor, script.spawnDoor);
         }
     }
 }

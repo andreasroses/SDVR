@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &656137247796731368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3128619007273846223}
+  - component: {fileID: 7482602744709998146}
+  m_Layer: 0
+  m_Name: WallObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3128619007273846223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656137247796731368}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 55, y: 0, z: 40}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7482602744709998146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656137247796731368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb48b6d41ba3b747b34a23cc0513cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallX: {fileID: 7296241807194123151, guid: 16f02e9ea4a81204e82f2f21ef438764, type: 3}
+  wallY: {fileID: 238679575849905042, guid: f16eef1fa33ff7a4cbff3e34a11bf2fa, type: 3}
+  wallT0: {fileID: 5837810962697316754, guid: af525d8c027100e4a95ea2d209ec00ba, type: 3}
+  wallT90: {fileID: 5930338978476332114, guid: 09cf8746491bc7d40b3c0c23e0437fd9, type: 3}
+  wallT180: {fileID: 395833033111523899, guid: 1788e6c806cae404eb0ba1c9b40c4a77, type: 3}
+  wallT270: {fileID: 2628852484797982019, guid: 7d33adf4c0082544094fae86c64c2476, type: 3}
+  wallCorner0: {fileID: 564204175790334388, guid: 6c9b0e21251f0b9408a4387baad021dd, type: 3}
+  wallCorner90: {fileID: 7131202079246401380, guid: 26c5791585fbc424ca1296cc5c995f64, type: 3}
+  wallCorner180: {fileID: 6206968364508912510, guid: df49b4d8afcdbe149b78c971fd3bb9fa, type: 3}
+  wallCorner270: {fileID: 3314624338180248184, guid: 5684502c110f73f419877ae2a2e5904a, type: 3}
