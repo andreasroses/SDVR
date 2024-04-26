@@ -20,7 +20,7 @@ MonoBehaviour:
   MagazineSize: 30
   BulletsPerShot: 0
   BurstInterval: 0
-  FireRate: 0.2
+  FireRate: 0.6
   ReloadTime: 0.5
   Range: 0
   ReloadSpeed: 0

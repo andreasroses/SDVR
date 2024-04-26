@@ -10,7 +10,7 @@ public class EnemyWeapon : WeaponBase
         if(CanShoot){
             Shoot();
         }
-        if(currentAmmo < 0){
+        if(currentAmmo <= 0){
             Reload();
         }
     }
@@ -19,6 +19,9 @@ public class EnemyWeapon : WeaponBase
         CanShoot = !CanShoot;
     }
 
+    public bool ShootingMode(){
+        return CanShoot;
+    }
     public Transform GetMuzzle(){
         return Muzzle;
     }

@@ -11,10 +11,12 @@ public class AITankAttackPlayerState : AIShootPlayerState
     private float rotationSpeed;
     private NavMeshAgent enemyNavMesh;
     private float minDistanceFromPlayer;
+    private float maxDistanceFromPlayer;
     private float maxTime;
     private float stopDistance;
     private float timer = 5.0f;
     private Vector3 playerDirection;
+    private NavMeshHit currHit;
     public override void Enter(AIAgent agent){
         playerTransform = agent.playerTransform;
         aimTransform = agent.enemyGun.GetMuzzle();
@@ -22,18 +24,25 @@ public class AITankAttackPlayerState : AIShootPlayerState
         enemyTransform = agent.enemyTransform;
         enemyNavMesh = agent.navMeshAgent;
         minDistanceFromPlayer = agent.config.minDistanceFromPlayer;
+        maxDistanceFromPlayer = agent.config.maxDistanceFromPlayer;
         rotationSpeed = agent.config.rotationSpeed;
         maxTime = agent.config.maxTime;
         stopDistance = agent.config.stopDistance;
-        agent.enemyGun.SwitchShootingMode();
     }
 
     public override void Update(AIAgent agent){
         playerDirection = playerTransform.position - enemyTransform.position;
+        if (enemyNavMesh.Raycast(playerTransform.position, out currHit) && agent.enemyGun.ShootingMode()){
+            agent.enemyGun.SwitchShootingMode();
+            Debug.Log("Raycast Hit - CanShoot: " + agent.enemyGun.ShootingMode());
+        }
+        else if(!agent.enemyGun.ShootingMode() && playerDirection.sqrMagnitude < (maxDistanceFromPlayer * maxDistanceFromPlayer)){
+            agent.enemyGun.SwitchShootingMode();
+            Debug.Log("Raycat no hit - CanShoot: " + agent.enemyGun.ShootingMode());
+        }
         playerDirection.y = 0;
         Aim();
         if(!agent.enabled){
-            Debug.Log("AIChasePlayerState: agent not enabled");
             return;
         }
         timer -= Time.deltaTime;
