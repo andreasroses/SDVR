@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 7671161778142645336}
   - component: {fileID: 3808594983816223227}
   - component: {fileID: 4467610909480923687}
+  - component: {fileID: 5381333290205357299}
   m_Layer: 0
   m_Name: Room Randomzier
   m_TagString: Untagged
@@ -113,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d4f4bc4e28a9ba41b5a5a814435cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelSize: {x: 28, y: 28}
+  levelSize: {x: 20, y: 20}
   tileSize: 5
   percentLevelToFill: 43
   spawnCornerWalls: 1
@@ -220,7 +221,7 @@ MonoBehaviour:
   wallTileObj_C6: {fileID: 5020728210928582457, guid: 933f7d175598e5940a8ad9f86f421338, type: 3}
   wallTileObj_C7: {fileID: 5020728210928582457, guid: c20ea5a75afc5b841b6020a21cd5ff5d, type: 3}
   wallTileObj_C8: {fileID: 5020728210928582457, guid: b39a08276bfb0154c86b08df4918c3a2, type: 3}
-  wallTileObj_C9: {fileID: 5020728210928582457, guid: da17c12ed84785b498740dc49e55a144, type: 3}
+  wallTileObj_C9: {fileID: 3155261832363537273, guid: 13ee687786b57b94d9e74a5790bf90c4, type: 3}
   wallTileObj_C10: {fileID: 5020728210928582457, guid: 8459c46024679394db10349385d60d91, type: 3}
   wallTileObj_C11: {fileID: 3155261832363537273, guid: 13ee687786b57b94d9e74a5790bf90c4, type: 3}
   wallTileObj_C12: {fileID: 5020728210928582457, guid: d325f31821e4cd147a2816fe977850db, type: 3}
@@ -410,12 +411,13 @@ MonoBehaviour:
   wallOffset: 0
   overlayOffset: 0.03
   emptyOffset: 0
-  generateEnemySpawns: 0
+  generateEnemySpawns: 1
   enemySpawn: {fileID: 4686376202099139991, guid: 43ef987c18937cf4eb11aec50fc37c01, type: 3}
   generatePlayerSpawn: 1
   playerSpawn: {fileID: 2103354241580561956, guid: b2a45d23bb4899845ad74be05c3d9a2a, type: 3}
   exitPortal: {fileID: 1285349099946074371, guid: 749b86f7436be4c40a9741041769ebb4, type: 3}
   spawnDoor: {fileID: 5629364218869427603, guid: 60bf246a88ec1bb478615f49104b390a, type: 3}
+  navMesh: {fileID: 4467610909480923687}
   generateObstacles: 1
   generateExitPortal: 1
   obstacleList:
@@ -427,6 +429,9 @@ MonoBehaviour:
   - {fileID: 3303230131236067372, guid: e7f5d568721e8f8469bb87424053ee27, type: 3}
   - {fileID: 6265174214645362475, guid: 301a7cb65ff97624585e2518eca3b82f, type: 3}
   enemySpawnList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1097,6 +1102,220 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &4467610909480923687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,8 +1345,30 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: f772cd0b511e77940ba0c129837cd934, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a6793947bd8a28e43afaa42dbadb011f, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &5381333290205357299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3116475358691407264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1d0b503bf369547a7b287dd1654a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  current_level: 1
+  next_level: 2
+  roguelikeGeneratorPro: {fileID: 3808594983816223227}
+  roomIncreaseFrequency: 3
+  roomIncreaseNumber: 1
+  spawnPortal: {fileID: 0}
+  exitPortal: {fileID: 0}
+  tempEnemyCounter: {fileID: 0}
+  _navMesh: {fileID: 4467610909480923687}
+  player: {fileID: 0}
 --- !u!1 &3314772381961472118
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,38 +1,45 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.XR.CoreUtils;
 using UnityEngine;
+using Unity.AI.Navigation;
+using TMPro;
+
 
 public class LevelManager : MonoBehaviour
 {
-    [HideInInspector]
-    public int current_level = 1, next_level = 2;
-    [SerializeField]
-    public RoguelikeGeneratorPro.RoguelikeGeneratorPro roguelikeGeneratorPro;
-    [SerializeField]
-    public int roomIncreaseFrequency, roomIncreaseNumber;
-    [SerializeField] public GameObject playerSpawnPoint, randomWallParent, enemySpawnPoint;
-    public int raycastDistance = 100; // Distance to cast the ray for spawn
-    public LayerMask obstacleLayer;
-
-    private List<GameObject> eSpawnPoints;
+    [HideInInspector] public int current_level = 1, next_level = 2;
+    [SerializeField] public RoguelikeGeneratorPro.RoguelikeGeneratorPro roguelikeGeneratorPro;
+    [SerializeField] public int roomIncreaseFrequency, roomIncreaseNumber;
+    [SerializeField] public GameObject spawnPortal, exitPortal;
+    [SerializeField] public TextMeshProUGUI tempEnemyCounter;
+    private GameObject[] enemies;
+    public NavMeshSurface _navMesh;
+    public static int enemiesRemaining = 0;
+    public GameObject player;
 
     private void Start()
     {
-        
+        GetAllEnemies();
+        tempEnemyCounter.SetText(enemiesRemaining.ToString());
+        spawnPortal = GameObject.Find("SpawnPortal(Clone)");
+        exitPortal = GameObject.Find("ExitPortal(Clone)");
+        exitPortal.SetActive(false);
+
+        player.transform.position = spawnPortal.transform.position;
     }
 
     void Update()
     {
         // Tempoprary keybind for level generation while testing
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            GoToNextLevel();
-        }else if (Input.GetKeyDown(KeyCode.G)){
-            Debug.Log(roguelikeGeneratorPro.FindSpawnRoomLocation());
-        }
-            
+            if(enemiesRemaining != 0){
+                KillEnemy();
+                tempEnemyCounter.SetText(enemiesRemaining.ToString());
+            }
+            if(enemiesRemaining == 0){
+                exitPortal.SetActive(true);
+            }
+        }   
     }
 
     
@@ -52,5 +59,35 @@ public class LevelManager : MonoBehaviour
 
         current_level = next_level;
         next_level++;
+        StartCoroutine(PostGeneration());
+    }
+
+    IEnumerator PostGeneration()
+    {
+        yield return new WaitForSeconds(.05f);
+        GetAllEnemies();
+
+        _navMesh.RemoveData();
+        _navMesh.BuildNavMesh();
+        
+        spawnPortal = GameObject.Find("SpawnPortal(Clone)");
+        exitPortal = GameObject.Find("ExitPortal(Clone)");
+
+        exitPortal.SetActive(false);
+
+        player.transform.position = spawnPortal.transform.position;
+        player.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    }
+
+    public void GetAllEnemies()
+    {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemiesRemaining = enemies.Length;
+        tempEnemyCounter.SetText(enemiesRemaining.ToString());
+    }
+
+    public static void KillEnemy()
+    {
+        enemiesRemaining--;
     }
 }
