@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335443037567398540}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000017411658, y: -0.99983245, z: 0.018307503, w: 0.0000003188174}
+  m_LocalRotation: {x: 3.637979e-12, y: -0.99987537, z: 0.015792862, w: 0.0000005500519}
   m_LocalPosition: {x: 0.087, y: 0.43, z: 0.35}
   m_LocalScale: {x: 2.1492991, y: 2.1493, z: 2.1492996}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 345387269351764708}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.81, y: -180, z: 0}
 --- !u!33 &6784858695556194578
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -115,8 +115,10 @@ GameObject:
   m_Component:
   - component: {fileID: 345387269351764708}
   - component: {fileID: 1581164312515549314}
+  - component: {fileID: 4885666329232072099}
   - component: {fileID: 6435656947265986501}
   - component: {fileID: 4748454780336180434}
+  - component: {fileID: 6666826644319100947}
   m_Layer: 7
   m_Name: TankEnemy
   m_TagString: Enemy
@@ -162,13 +164,44 @@ MonoBehaviour:
   regenRate: 0.1
   onReceivedDamage:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HealthTxt, Assembly-CSharp
+        m_MethodName: UpdateHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHealed:
     m_PersistentCalls:
       m_Calls: []
   onDead:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4885666329232072099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3833523576974981670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9fb8b83d9fd064086915978703218d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialState: 1
+  config: {fileID: 11400000, guid: 68fc1a2a47c50b94ba86c3cf085bc46e, type: 2}
+  navMeshAgent: {fileID: 0}
+  enemyTransform: {fileID: 0}
+  weaponTransform: {fileID: 3862349783865860401}
+  enemyGun: {fileID: 0}
+  playerTransform: {fileID: 0}
 --- !u!114 &6435656947265986501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +228,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3833523576974981670}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -208,6 +241,27 @@ NavMeshAgent:
   m_BaseOffset: 0.72
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &6666826644319100947
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3833523576974981670}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 1
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.1424851, y: 2.1690412, z: 2.1470428}
+  m_Center: {x: 0.08445597, y: 0.45250908, z: 0.32676017}
 --- !u!1 &4774234094516730118
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +287,7 @@ Transform:
   m_GameObject: {fileID: 4774234094516730118}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0058199884, z: 0.07141991}
+  m_LocalPosition: {x: -0, y: 0.005, z: 0.0487}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -297,11 +351,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5746a947ed248443a0c426a99ede1de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.51
+      value: 1.686
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5746a947ed248443a0c426a99ede1de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.39
+      value: 1.384
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5746a947ed248443a0c426a99ede1de, type: 3}
       propertyPath: m_LocalRotation.w

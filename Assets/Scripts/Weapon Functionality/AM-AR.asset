@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edb00627eca562e4292503f7c79f56a5, type: 3}
-  m_Name: EnemyDebug
+  m_Name: AM-AR
   m_EditorClassIdentifier: 
-  WeaponName: EnemyDebug
-  WeaponID: 1
+  WeaponName: Auto Rifle
+  WeaponID: 56
   FireAudio: []
   ReloadAudio: []
-  AmmoCapacity: 60
-  MagazineSize: 30
-  BulletsPerShot: 0
+  AmmoCapacity: 600
+  MagazineSize: 60
+  BulletsPerShot: 1
   BurstInterval: 0
   FireRate: 0.2
-  ReloadTime: 0.5
-  Range: 0
-  ReloadSpeed: 0
-  RecoilRecoveryTime: 0.5
-  MaxSpreadTime: 1
+  ReloadTime: 1
+  Range: 50
+  ReloadSpeed: 1
+  RecoilRecoveryTime: 10
+  MaxSpreadTime: 3
   FiringType: 2
   ProjectileType: 1
   SpreadType: 1
-  SimpleSpread: {x: 0.01, y: 0.05, z: 0.05}
-  Bullet: {fileID: 8969687385432949069, guid: 0e98b3ff8ce0cdb49892c0e233ce1fb6, type: 3}
+  SimpleSpread: {x: 0.005, y: 0.005, z: 0.005}
+  Bullet: {fileID: 8969687385432949069, guid: f286ce7e1a4592d4fa4251b5d7f7bab9, type: 3}
   IsAutotrigger: 0

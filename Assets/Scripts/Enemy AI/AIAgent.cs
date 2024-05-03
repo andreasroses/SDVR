@@ -27,17 +27,27 @@ public class AIAgent : MonoBehaviour
     public Transform playerTransform;
 
     protected virtual void Start(){
+        if(playerTransform == null){
+            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        }
         enemyGun = GetComponent<EnemyWeapon>();
         enemyTransform = GetComponent<Transform>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new AIStateMachine(this);
-        stateMachine.RegisterState(new AIChasePlayerState());
-        stateMachine.RegisterState(new AIShootPlayerState());
+        RegisterAgentStates();
         stateMachine.ChangeState(initialState);
-
+        enemyGun.StartShooting();
     }
 
+    protected virtual void RegisterAgentStates(){
+        stateMachine.RegisterState(new AIChasePlayerState());
+        stateMachine.RegisterState(new AIShootPlayerState());
+    }
     protected virtual void Update(){
         stateMachine.Update();
+    }
+
+    public void Die(){
+        gameObject.SetActive(false);
     }
 }

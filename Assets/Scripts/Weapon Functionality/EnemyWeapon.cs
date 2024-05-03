@@ -1,18 +1,16 @@
-
+using System.Collections;
 using UnityEngine;
 
 public class EnemyWeapon : WeaponBase
 {
     private bool CanShoot = false; //instead of using mouse input, this class uses a bool to switch from shooting to not shooting
-
-    protected override void Update()
-    {
-        if(CanShoot){
-            Shoot();
-        }
-        if(currentAmmo <= 0){
-            Reload();
-        }
+    [SerializeField] float shootDelay = 3;
+    protected override void Update(){
+        return;
+    }
+    public void StartShooting(){
+        Debug.Log("EnemyWeapon: Coroutine started");
+        StartCoroutine(ShootingDelay());
     }
 
     public void SwitchShootingMode(){ //switches shooting mode
@@ -25,6 +23,20 @@ public class EnemyWeapon : WeaponBase
     public Transform GetMuzzle(){
         return Muzzle;
     }
+
+    private IEnumerator ShootingDelay()
+    {
+        Debug.Log("Running coroutine");
+        while(CanShoot){
+            Debug.Log("Shooting");
+            if(currentAmmo <= 0){
+                Reload();
+            }
+            Shoot();
+        }
+        yield return new WaitForSeconds(shootDelay);
+    }
+
 
 }
     

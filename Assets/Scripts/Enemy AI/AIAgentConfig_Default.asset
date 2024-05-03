@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTime: 3
   maxDistanceFromPlayer: 15
-  minDistanceFromPlayer: 8
-  stopDistance: 5
-  shootDistance: 15
+  minDistanceFromPlayer: 10
+  stopDistance: 6
   speed: 3
   rotationSpeed: 4
   droneRadius: 5
