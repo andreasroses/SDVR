@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AIAgentConfig_Default
   m_EditorClassIdentifier: 
   maxTime: 3
+  IdleTime: 5
   maxDistanceFromPlayer: 20
   minDistanceFromPlayer: 10
   stopDistance: 6
@@ -22,5 +23,6 @@ MonoBehaviour:
   droneSpeed: 1
   droneAngle: 0
   attackInterval: 1
-  AgentHeight: 6
-  WaypointRange: 10
+  agentHeight: 2
+  waypointRange: 20
+  numWaypoints: 6

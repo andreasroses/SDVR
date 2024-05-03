@@ -20,7 +20,8 @@ public class AITankAttackPlayerState : AIShootPlayerState
     }
 
     public override void Update(AIAgent agent){
-        playerDirection = playerTransform.position - enemyTransform.position;
+        if(playerTransform != null && enemyTransform != null){
+            playerDirection = playerTransform.position - enemyTransform.position;
         if (enemyNavMesh.Raycast(playerTransform.position, out currHit) && agent.enemyGun.ShootingMode()){
             agent.enemyGun.SwitchShootingMode();
         }
@@ -47,6 +48,7 @@ public class AITankAttackPlayerState : AIShootPlayerState
                 enemyNavMesh.stoppingDistance = stopDistance;   
             }
             timer = maxTime;
+        }
         }
     }
 

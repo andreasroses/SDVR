@@ -5,7 +5,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class AIStateMachine
 {
     public AIState[] states;
@@ -34,5 +33,10 @@ public class AIStateMachine
         GetState(currentState)?.Exit(agent);
         currentState = newState;
         GetState(currentState)?.Enter(agent);
+    }
+
+    public void StartMachine(AIStateID initialState){
+        GetState(initialState)?.Enter(agent);
+        currentState = initialState;
     }
 }

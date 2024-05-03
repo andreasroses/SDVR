@@ -188,7 +188,7 @@ MonoBehaviour:
   initialState: 2
   config: {fileID: 11400000, guid: 68fc1a2a47c50b94ba86c3cf085bc46e, type: 2}
   navMeshAgent: {fileID: 0}
-  enemyTransform: {fileID: 0}
+  enemyTransform: {fileID: 345387269351764708}
   weaponTransform: {fileID: 3862349783865860401}
   enemyGun: {fileID: 0}
   playerTransform: {fileID: 0}
@@ -219,7 +219,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3833523576974981670}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.75
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50

@@ -12,6 +12,7 @@ public class AIPatrolState : AIState{
     private float idleTime;
     private int destPoint = 0;
     private float waypointRange;
+    private float numWaypoints;
     private float agentHeight;
     private float timer;
     private NavMeshHit currHit;
@@ -25,8 +26,9 @@ public class AIPatrolState : AIState{
         maxDistanceFromPlayer = agent.config.minDistanceFromPlayer;
         idleTime = agent.config.IdleTime;
         timer = idleTime;
-        waypointRange= agent.config.WaypointRange;
-        agentHeight = agent.config.AgentHeight;
+        waypointRange= agent.config.waypointRange;
+        agentHeight = agent.config.agentHeight;
+        numWaypoints = agent.config.numWaypoints;
         SetWaypoints();
     }
 
@@ -40,7 +42,6 @@ public class AIPatrolState : AIState{
         }
         if(timer < 0.0f){
             if (!enemyNavMesh.pathPending && enemyNavMesh.remainingDistance < 0.5f){
-                Debug.Log("going to next point");
                 GotoNextPoint();
             }
             timer = idleTime;
@@ -74,17 +75,13 @@ public class AIPatrolState : AIState{
     }
 
     private void SetWaypoints(){
-        Debug.Log("Setting Waypoints");
         int counter = 0;
         Vector3 waypoint;
-        while(counter < 3){
+        while(counter < numWaypoints-1){
             if(GetWaypoint(enemyTransform.position,waypointRange,out waypoint)){
-                Debug.Log(counter);
                 patrolPoints.Add(waypoint);
                 counter++;
             }
-            Debug.Log(waypoint);
         }
-        Debug.Log("AIPatrolState: " + counter);
     }
 }

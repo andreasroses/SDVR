@@ -16,7 +16,7 @@ using Kitbashery.Gameplay;
 public class AIAgent : MonoBehaviour
 {
     public AIStateMachine stateMachine;
-    [SerializeField]public AIStateID initialState;
+    public AIStateID initialState;
     public AIAgentConfig config;
     public NavMeshAgent navMeshAgent;
     public Transform enemyTransform;
@@ -28,16 +28,17 @@ public class AIAgent : MonoBehaviour
         if(playerTransform == null){
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        enemyGun = GetComponent<EnemyWeapon>();
-        enemyTransform = GetComponent<Transform>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        enemyGun = gameObject.GetComponent<EnemyWeapon>();
+        enemyTransform = gameObject.GetComponent<Transform>();
+        navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+        
     }
+
     protected virtual void Start(){
         stateMachine = new AIStateMachine(this);
         RegisterAgentStates();
-        stateMachine.ChangeState(initialState);
+        stateMachine.StartMachine(initialState);
     }
-
     protected virtual void RegisterAgentStates(){
         stateMachine.RegisterState(new AIPatrolState());
         stateMachine.RegisterState(new AIChasePlayerState());
