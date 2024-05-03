@@ -13,10 +13,6 @@ public class EnemyWeapon : WeaponBase
             Shoot();
         }
     }
-    public void StartShooting(){
-        Debug.Log("EnemyWeapon: Coroutine called");
-        //StartCoroutine(ShootingDelay());
-    }
 
     public void SwitchShootingMode(){ //switches shooting mode
         CanShoot = !CanShoot;
@@ -28,20 +24,5 @@ public class EnemyWeapon : WeaponBase
     public Transform GetMuzzle(){
         return Muzzle;
     }
-
-    private IEnumerator ShootingDelay()
-    {
-        Debug.Log("Running coroutine");
-        while(CanShoot){
-            Debug.Log("Shooting");
-            if(currentAmmo <= 0){
-                Reload();
-            }
-            Shoot();
-        }
-        yield return new WaitForSeconds(shootDelay);
-    }
-
-
 }
     

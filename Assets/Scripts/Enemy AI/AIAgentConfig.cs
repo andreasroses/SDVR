@@ -21,6 +21,7 @@ public class AIAgentConfig : ScriptableObject
     public float droneSpeed = 2f;
     public float droneAngle = 0f;
     public float attackInterval = 1.0f;
-    public float AgentHeight;
-    public float WaypointRange;
+    public float agentHeight;
+    public float waypointRange;
+    public float numWaypoints;
 }

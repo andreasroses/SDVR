@@ -10176,6 +10176,10 @@ PrefabInstance:
       propertyPath: m_NavMeshData
       value: 
       objectReference: {fileID: 23800000, guid: 02f5c252d44d36640a130681883466ef, type: 2}
+    - target: {fileID: 4467610909480923687, guid: 4aa6fd2edf0a355419cd62b28da9e8d8, type: 3}
+      propertyPath: m_UseGeometry
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7671161778142645336, guid: 4aa6fd2edf0a355419cd62b28da9e8d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -18131,7 +18135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 345387269351764708, guid: 805bbd18e5a5bd748b40d415a88d6b8f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 129.71
+      value: 120.3
       objectReference: {fileID: 0}
     - target: {fileID: 345387269351764708, guid: 805bbd18e5a5bd748b40d415a88d6b8f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18169,6 +18173,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TankEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4885666329232072099, guid: 805bbd18e5a5bd748b40d415a88d6b8f, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 4189105835192221845}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -85316,7 +85324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7273595826476603086, guid: b2d73822a56d7424d81aebb5dcc62dab, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 58.14877
+      value: 68.15
       objectReference: {fileID: 0}
     - target: {fileID: 7273595826476603086, guid: b2d73822a56d7424d81aebb5dcc62dab, type: 3}
       propertyPath: m_LocalRotation.w
