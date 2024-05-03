@@ -8,9 +8,14 @@ public class AITankAttackPlayerState : AIShootPlayerState
     private float stopDistance;
     private float timer = 5.0f;
     private Vector3 playerDirection;
+
+    public override AIStateID GetID(){
+        return AIStateID.ChasePlayer;
+    }
     public override void Enter(AIAgent agent){
         base.Enter(agent);
         maxTime = agent.config.maxTime;
+        timer = maxTime;
         stopDistance = agent.config.stopDistance;
     }
 
@@ -31,6 +36,10 @@ public class AITankAttackPlayerState : AIShootPlayerState
         if(!enemyNavMesh.hasPath ){//if agent's path hasn't been set, it's set now
             enemyNavMesh.destination = playerTransform.position; 
             enemyNavMesh.stoppingDistance = stopDistance;   
+        }
+        if(playerDirection.sqrMagnitude > (maxDistanceFromPlayer * maxDistanceFromPlayer) && enemyNavMesh.Raycast(playerTransform.position,out currHit)){
+            enemyNavMesh.ResetPath();
+            agent.stateMachine.ChangeState(AIStateID.Patrol);
         }
         if(timer < 0.0f){ //after timer runs out, destination is set again IF player is far enough away
             if(playerDirection.sqrMagnitude > (minDistanceFromPlayer * minDistanceFromPlayer)){ //checks distance away from player by taking the area of it

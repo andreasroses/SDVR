@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3903980679438480565}
   - component: {fileID: 6784858695556194578}
   - component: {fileID: 8386631723581149627}
-  - component: {fileID: 5901994873444147791}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5901994873444147791
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335443037567398540}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3833523576974981670
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +160,19 @@ MonoBehaviour:
       m_Calls: []
   onDead:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4885666329232072099}
+        m_TargetAssemblyTypeName: AIAgent, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4885666329232072099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f9fb8b83d9fd064086915978703218d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: 1
+  initialState: 2
   config: {fileID: 11400000, guid: 68fc1a2a47c50b94ba86c3cf085bc46e, type: 2}
   navMeshAgent: {fileID: 0}
   enemyTransform: {fileID: 0}
@@ -219,6 +209,7 @@ MonoBehaviour:
   Model: {fileID: 4526682803123911563}
   currentAmmo: 0
   maxAmmo: 0
+  shootDelay: 3
 --- !u!195 &4748454780336180434
 NavMeshAgent:
   m_ObjectHideFlags: 0

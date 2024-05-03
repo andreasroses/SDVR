@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba688f262155f90448f2e3f0a727ac90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: 0
+  initialState: 2
   config: {fileID: 11400000, guid: c114388da5aa61a4e9c24aeb09b58249, type: 2}
   navMeshAgent: {fileID: 0}
   enemyTransform: {fileID: 0}
@@ -200,10 +200,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.39200568
-  m_Height: 2.2864144
+  m_Radius: 0.60404736
+  m_Height: 2.3047328
   m_Direction: 1
-  m_Center: {x: -0.0033419728, y: 0.15967429, z: 3.0813643e-10}
+  m_Center: {x: -0.0037596822, y: 0.168833, z: 0.031597793}
 --- !u!54 &3824277834067907818
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5880609737977356408}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 30
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

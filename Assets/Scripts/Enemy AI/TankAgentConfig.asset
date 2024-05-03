@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d02ebbcfa185243b001002af0d8e34, type: 3}
   m_Name: TankAgentConfig
   m_EditorClassIdentifier: 
-  maxTime: 2
-  maxDistanceFromPlayer: 25
-  minDistanceFromPlayer: 15
+  maxTime: 5
+  IdleTime: 3
+  maxDistanceFromPlayer: 20
+  minDistanceFromPlayer: 10
   stopDistance: 5
   speed: 3
   rotationSpeed: 4
@@ -22,3 +23,5 @@ MonoBehaviour:
   droneSpeed: 1
   droneAngle: 0
   attackInterval: 1
+  AgentHeight: 6
+  WaypointRange: 10

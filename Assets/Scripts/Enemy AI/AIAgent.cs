@@ -16,30 +16,30 @@ using Kitbashery.Gameplay;
 public class AIAgent : MonoBehaviour
 {
     public AIStateMachine stateMachine;
-    public AIStateID initialState;
+    [SerializeField]public AIStateID initialState;
     public AIAgentConfig config;
     public NavMeshAgent navMeshAgent;
-
     public Transform enemyTransform;
     public Transform weaponTransform;
     public EnemyWeapon enemyGun;
-
     public Transform playerTransform;
 
-    protected virtual void Start(){
+    protected virtual void Awake(){
         if(playerTransform == null){
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
         enemyGun = GetComponent<EnemyWeapon>();
         enemyTransform = GetComponent<Transform>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+    }
+    protected virtual void Start(){
         stateMachine = new AIStateMachine(this);
         RegisterAgentStates();
         stateMachine.ChangeState(initialState);
-        enemyGun.StartShooting();
     }
 
     protected virtual void RegisterAgentStates(){
+        stateMachine.RegisterState(new AIPatrolState());
         stateMachine.RegisterState(new AIChasePlayerState());
         stateMachine.RegisterState(new AIShootPlayerState());
     }
@@ -50,4 +50,6 @@ public class AIAgent : MonoBehaviour
     public void Die(){
         gameObject.SetActive(false);
     }
+
+    
 }

@@ -6,11 +6,16 @@ public class EnemyWeapon : WeaponBase
     private bool CanShoot = false; //instead of using mouse input, this class uses a bool to switch from shooting to not shooting
     [SerializeField] float shootDelay = 3;
     protected override void Update(){
-        return;
+        if(CanShoot){
+            if(currentAmmo <= 0){
+                Reload();
+            }
+            Shoot();
+        }
     }
     public void StartShooting(){
-        Debug.Log("EnemyWeapon: Coroutine started");
-        StartCoroutine(ShootingDelay());
+        Debug.Log("EnemyWeapon: Coroutine called");
+        //StartCoroutine(ShootingDelay());
     }
 
     public void SwitchShootingMode(){ //switches shooting mode
