@@ -4,28 +4,19 @@ using UnityEngine;
 
 public class AIDroneShootPlayerState : AIShootPlayerState
 {
-    private Transform playerTransform;
-    private Transform enemyTransform;
-    private Transform aimTransform;
     private Vector3 agentDestination;
     private float radius = 2f;
     private float speed = 2f;
     private float angle = 0f;
 
     public override void Enter(AIAgent agent){
-        if(playerTransform == null){
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        }
-        aimTransform = agent.enemyGun.GetMuzzle();
-        enemyTransform = agent.enemyTransform;
-        agent.enemyGun.SwitchShootingMode(); //turns on shooting
+        base.Enter(agent);
         radius = agent.config.droneRadius;
         speed = agent.config.droneSpeed;
         angle = agent.config.droneAngle;
-        if(aimTransform && enemyTransform && playerTransform){
-            Debug.Log("ShootState: Transforms assigned!");
+        if(!agent.enemyGun.ShootingMode()){
+            agent.enemyGun.SwitchShootingMode();//turns on shooting
         }
-        //agent.navMeshAgent.ResetPath();
     }
 
     public override void Update(AIAgent agent){//circles player and shoots
@@ -42,12 +33,5 @@ public class AIDroneShootPlayerState : AIShootPlayerState
             angle %= Mathf.PI * 2f;
         }
         
-    }
-
-    private void Aim(){
-        Vector3 aimDirection = aimTransform.forward;
-        Vector3 playerDirection = playerTransform.position - aimTransform.position;
-        Quaternion targetRotation = Quaternion.FromToRotation(aimDirection, playerDirection);
-        enemyTransform.rotation = targetRotation * enemyTransform.rotation;
     }
 }

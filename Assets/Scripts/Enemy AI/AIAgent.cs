@@ -19,25 +19,38 @@ public class AIAgent : MonoBehaviour
     public AIStateID initialState;
     public AIAgentConfig config;
     public NavMeshAgent navMeshAgent;
-
     public Transform enemyTransform;
     public Transform weaponTransform;
     public EnemyWeapon enemyGun;
-
     public Transform playerTransform;
 
-    protected virtual void Start(){
-        enemyGun = GetComponent<EnemyWeapon>();
-        enemyTransform = GetComponent<Transform>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        stateMachine = new AIStateMachine(this);
-        stateMachine.RegisterState(new AIChasePlayerState());
-        stateMachine.RegisterState(new AIShootPlayerState());
-        stateMachine.ChangeState(initialState);
-
+    protected virtual void Awake(){
+        if(playerTransform == null){
+            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+        enemyGun = gameObject.GetComponent<EnemyWeapon>();
+        enemyTransform = gameObject.GetComponent<Transform>();
+        navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+        
     }
 
+    protected virtual void Start(){
+        stateMachine = new AIStateMachine(this);
+        RegisterAgentStates();
+        stateMachine.StartMachine(initialState);
+    }
+    protected virtual void RegisterAgentStates(){
+        stateMachine.RegisterState(new AIPatrolState());
+        stateMachine.RegisterState(new AIChasePlayerState());
+        stateMachine.RegisterState(new AIShootPlayerState());
+    }
     protected virtual void Update(){
         stateMachine.Update();
     }
+
+    public void Die(){
+        gameObject.SetActive(false);
+    }
+
+    
 }

@@ -11,6 +11,7 @@ using UnityEngine;
 public class AIAgentConfig : ScriptableObject
 {
     public float maxTime = 1.0f;
+    public float IdleTime = 1.0f;
     public float maxDistanceFromPlayer = 20.0f;
     public float minDistanceFromPlayer = 10.0f;
     public float stopDistance = 5.0f;
@@ -20,4 +21,7 @@ public class AIAgentConfig : ScriptableObject
     public float droneSpeed = 2f;
     public float droneAngle = 0f;
     public float attackInterval = 1.0f;
+    public float agentHeight;
+    public float waypointRange;
+    public float numWaypoints;
 }

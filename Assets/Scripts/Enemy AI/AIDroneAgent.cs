@@ -4,15 +4,11 @@ using UnityEngine;
 using UnityEngine.AI;
 public class AIDroneAgent : AIAgent
 {
-    protected override void Start(){
-        enemyTransform = GetComponent<Transform>();
-        enemyGun = GetComponent<EnemyWeapon>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        stateMachine = new AIStateMachine(this);
+    protected override void RegisterAgentStates(){
+        stateMachine.RegisterState(new AIPatrolState());
         stateMachine.RegisterState(new AIChasePlayerState());
         stateMachine.RegisterState(new AIDroneShootPlayerState());
-        stateMachine.ChangeState(initialState);
-
+        
     }
 
 }

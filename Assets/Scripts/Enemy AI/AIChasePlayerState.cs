@@ -12,7 +12,9 @@ public class AIChasePlayerState : AIState
     private Transform playerTransform;
     private Transform enemyTransform;
     private NavMeshAgent enemyNavMesh;
+    private NavMeshHit currHit;
     private float minDistanceFromPlayer;
+    private float maxDistanceFromPlayer;
     private float maxTime;
     private float stopDistance;
 
@@ -27,7 +29,9 @@ public class AIChasePlayerState : AIState
         enemyTransform = agent.enemyTransform;
         enemyNavMesh = agent.navMeshAgent;
         minDistanceFromPlayer = agent.config.minDistanceFromPlayer;
+        maxDistanceFromPlayer = agent.config.maxDistanceFromPlayer;
         maxTime = agent.config.maxTime;
+        timer = maxTime;
         stopDistance = agent.config.stopDistance;
     }
 
@@ -45,10 +49,17 @@ public class AIChasePlayerState : AIState
         }
         else if(!enemyNavMesh.pathPending && (enemyNavMesh.remainingDistance <= stopDistance)){
             //if agent's position reaches destination of ~5 units away or has surpassed it, the AI state changes to shoot
+            enemyNavMesh.ResetPath();
             agent.stateMachine.ChangeState(AIStateID.ShootPlayer);
         }
+        Vector3 direction = playerTransform.position - enemyTransform.position;
+        direction.y = 0;
+        if(direction.sqrMagnitude > (maxDistanceFromPlayer * maxDistanceFromPlayer) && enemyNavMesh.Raycast(playerTransform.position,out currHit)){
+            enemyNavMesh.ResetPath();
+            agent.stateMachine.ChangeState(AIStateID.Patrol);
+        }
         if(timer < 0.0f){ //after timer runs out, destination is set again IF player is far enough away
-            Vector3 direction = playerTransform.position - enemyTransform.position;
+            direction = playerTransform.position - enemyTransform.position;
             direction.y= 0;
             if(direction.sqrMagnitude > (minDistanceFromPlayer * minDistanceFromPlayer)){ //checks distance away from player by taking the area of it
                 enemyNavMesh.destination = playerTransform.position; 

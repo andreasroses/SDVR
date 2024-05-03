@@ -7,14 +7,15 @@ using TMPro;
 public class HealthTxt : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI healthTxt;
-    [SerializeField] private Health playerHealth;
+    [SerializeField] private Health entityHealth;
+    [SerializeField] private string entityName;
 
     void Start(){
-        string currHealth = "Health: " + playerHealth.hitPoints.ToString();
+        string currHealth = entityName + " Health: " + entityHealth.hitPoints.ToString();
         healthTxt.text = currHealth;
     }
     public void UpdateHealth(){
-        string currHealth = "Health: " + playerHealth.hitPoints.ToString();
+        string currHealth = entityName + " Health: " + entityHealth.hitPoints.ToString();
         healthTxt.text = currHealth;
     }
 }

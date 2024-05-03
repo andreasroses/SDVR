@@ -191,6 +191,7 @@ namespace Kitbashery.Gameplay
                 if (modifyHealthOnImpact == true)
                 {
                     lastHealth = lastContact.GetComponent<Health>();
+                    Debug.Log(lastHealth.name);
                     if (healthEffect.times > 1)
                     {
                         lastHealth.ModifyHealthOverTime(healthEffect);
