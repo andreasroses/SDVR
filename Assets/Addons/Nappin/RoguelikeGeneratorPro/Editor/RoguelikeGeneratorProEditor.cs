@@ -169,7 +169,8 @@ namespace RoguelikeGeneratorPro
         public Texture obstacleList_txt;
         public Texture exitPortal_txt;
         public Texture spawnDoor_txt;
-
+        public Texture navMesh_txt;
+        
         private GUIStyle alignGUILeft;
         private GUIStyle alignGUIRight;
 
@@ -531,6 +532,7 @@ namespace RoguelikeGeneratorPro
         private SerializedProperty _exitPortal;
         private SerializedProperty _generateExitPortal;
         private SerializedProperty _spawnDoor;
+        private SerializedProperty _navMesh;
 
         #endregion
 
@@ -897,6 +899,7 @@ namespace RoguelikeGeneratorPro
             _exitPortal = serializedObject.FindProperty("exitPortal");
             _generateExitPortal = serializedObject.FindProperty("generateExitPortal");
             _spawnDoor = serializedObject.FindProperty("spawnDoor");
+            _navMesh = serializedObject.FindProperty("navMesh");
 
 
             script = (RoguelikeGeneratorPro)target;
@@ -2458,6 +2461,9 @@ namespace RoguelikeGeneratorPro
             EditorGUILayout.PropertyField(_obstacleList, true);
             serializedObject.ApplyModifiedProperties();
             DisplayTileObjBlock("Spawn Door",spawnDoor_txt, _spawnDoor, script.spawnDoor);
+            EditorGUILayout.PropertyField(_navMesh, true);
+            serializedObject.ApplyModifiedProperties();
+            
         }
     }
 }

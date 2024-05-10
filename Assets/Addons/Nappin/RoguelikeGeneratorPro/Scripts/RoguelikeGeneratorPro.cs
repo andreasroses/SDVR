@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
+using Oculus.Interaction.Surfaces;
 using Unity.VisualScripting;
+using UnityEditor.AI;
 using UnityEngine;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 using UnityEngine.Tilemaps;
 
 namespace RoguelikeGeneratorPro
@@ -368,11 +372,13 @@ namespace RoguelikeGeneratorPro
         public bool generatePlayerSpawn = false;
         public GameObject playerSpawn, exitPortal;
         public GameObject spawnDoor;
+        public Unity.AI.Navigation.NavMeshSurface navMesh;
         public bool generateObstacles = false;
         public bool generateExitPortal = false;
         public List<GameObject> obstacleList = new List<GameObject>();
         public List<GameObject> enemySpawnList = new List<GameObject>();
         public List<GameObject> levelObstacleList = new List<GameObject>();
+        private List<Vector3> placedPortals = new List<Vector3>(); 
         private GameObject placedExitPortal;
         private GameObject setSpawnPoint;
 
@@ -444,6 +450,8 @@ namespace RoguelikeGeneratorPro
             
             if(generateExitPortal) FindExitPortalLocation();
 
+            
+
             // End of custom code
 
             if(generation != genType.noGeneration) Spawn();
@@ -454,6 +462,7 @@ namespace RoguelikeGeneratorPro
             if (generation == genType.generateObj && createWall2DCompositeCollider) GenerateWallCompositeCollider2D();
 
             CleanUpExtras();
+            BakeNavMesh();
         }
 
         #endregion
@@ -2366,18 +2375,23 @@ namespace RoguelikeGeneratorPro
 
         #endregion
 
+        /*
+        For adding in values that are intended to be set in the editor, you must add them in the 
+        Nappin/RoguelikeGeneratorPro/Editor/RoguelikeGeneratorProEditor.cs file. Follow the other
+        "additional items" examples, here is an example of the lines that will be needed in their 
+        respective places/funcitons:
+
+        Declare as
+            private SerializedProperty _generateEnemySpawns;
+        In OnEnable
+            _generateEnemySpawns = serializedObject.FindProperty("generateEnemySpawns");
+        In AdditionalItems section
+            _generateEnemySpawns.boolValue = EditorGUILayout.Toggle("Generate Enemy Spawns", script.generateEnemySpawns);
+            DisplayTileObjBlock("Enemy Spawn",enemySpawn_txt, _enemySpawn, script.enemySpawn);
+        */
 
         #region Spawnroom
-
-        private List<Vector3> placedPortals = new List<Vector3>(); // Keep track of placed portals
-
-        public void LevelLayout(){
-            foreach(tileType tile in tiles){
-                Debug.Log(tile);
-            }
-        }
-
-         // Function to find a valid location for a spawn room
+        // Function to find a valid location for a spawn room
         public Vector3 FindSpawnRoomLocation()
         {
             // Floor tile name: floorTileObj_1, wall tile name: wallTileObj_1
@@ -2400,7 +2414,7 @@ namespace RoguelikeGeneratorPro
                         // Found a valid location
                         PlaceSpawnRoom(new Vector3(x+1, 0, z));
                        
-                        return new Vector3(x + 1, 0, z); // Assuming y = 0 for simplicity
+                        return new Vector3(x + 1, 0, z);
                     }
                 }
             }
@@ -2417,7 +2431,7 @@ namespace RoguelikeGeneratorPro
                         // Found a valid location
                         PlaceSpawnRoom(new Vector3(x, 0, z + 1));
                         
-                        return new Vector3(x, 0, z + 1); // Assuming y = 0 for simplicity
+                        return new Vector3(x, 0, z + 1);
                     }
                 }
             }
@@ -2426,12 +2440,14 @@ namespace RoguelikeGeneratorPro
         }
 
 
-        private void PlaceSpawnRoom(Vector3 spawnLoc){
-            #if UNITY_EDITOR
-                DestroyImmediate(setSpawnPoint);
-            #else
-                Destroy(setSpawnPoint);
-            #endif
+        // Place the spawn Room; hard coded spawn room tile placement
+        private void PlaceSpawnRoom(Vector3 spawnLoc)
+        {
+            // #if UNITY_EDITOR
+            //     DestroyImmediate(setSpawnPoint);
+            // #else
+            //     Destroy(setSpawnPoint);
+            // #endif
             
             int x = (int)spawnLoc.x;
             int y = (int)spawnLoc.z;
@@ -2482,6 +2498,7 @@ namespace RoguelikeGeneratorPro
 
         }
 
+        // Pad tiles on each size in order to allow for placement of things such as the spawn room
         private void PaddTiles(){
             int originalRows = levelSize.x;
             int originalColumns = levelSize.y;
@@ -2561,37 +2578,23 @@ namespace RoguelikeGeneratorPro
             int width = levelSize.x;
             int height = levelSize.y;
 
-            // Check for horizontal open spaces
-            for (int z = 0; z < height; z++)
+            int maxAttempts = width * height; // Maximum number of attempts to find a suitable location
+
+            for (int i = 0; i < maxAttempts; i++)
             {
-                for (int x = 0; x < width - 2; x++)
+                int x = Random.Range(0, width);
+                int z = Random.Range(0, height);
+
+                if (IsSuitableLocationForExitPortal(levelGrid, x, z))
                 {
-                    if (IsSuitableLocationForExitPortal(levelGrid, x, z))
-                    {
-                        // Found a valid location
-                        Vector3 exitLoc = new Vector3(x + 1, 0, z);
-                        PlaceExitPortal(exitLoc);
-                        return exitLoc; // Assuming y = 0 for simplicity
-                    }
+                    // Found a valid location
+                    Vector3 exitLoc = new Vector3(x, 0, z);
+                    PlaceExitPortal(exitLoc);
+                    return exitLoc; // Assuming y = 0 for simplicity
                 }
             }
 
-            // Check for vertical open spaces
-            for (int x = 0; x < width; x++)
-            {
-                for (int z = 0; z < height - 2; z++)
-                {
-                    if (IsSuitableLocationForExitPortal(levelGrid, x, z))
-                    {
-                        // Found a valid location
-                        Vector3 exitLoc = new Vector3(x, 0, z + 1);
-                        PlaceExitPortal(exitLoc);
-                        return exitLoc; // Assuming y = 0 for simplicity
-                    }
-                }
-            }
-
-            // No valid location found
+            // No valid location found after maximum attempts
             return Vector3.zero;
         }
 
@@ -2602,10 +2605,9 @@ namespace RoguelikeGeneratorPro
             const int minDistanceFromPortal = 5; // Adjust as needed
 
             if (levelGrid[x, z] != tileType.floor ||
-                overlayTiles[x, z] != overlayType.empty   
-                )
+                overlayTiles[x, z] != overlayType.empty)
             {
-                // Not enough space for a room
+                // Not enough space for a portal
                 return false;
             }
 
@@ -2624,13 +2626,6 @@ namespace RoguelikeGeneratorPro
 
         private void PlaceExitPortal(Vector3 exitLoc)
         {
-            #if UNITY_EDITOR
-                DestroyImmediate(placedExitPortal);
-            #else
-                Destroy(placedExitPortal);
-            #endif
-            
-
             int x = (int)exitLoc.x;
             int y = (int)exitLoc.z;
 
@@ -2642,7 +2637,7 @@ namespace RoguelikeGeneratorPro
         }
 
         
-
+        // Remove the additional padding prior to increasing level size/generating new level
         private void CleanUpExtras()
         {
             levelSize.x -= 2*paddingAmmount;
@@ -2655,17 +2650,7 @@ namespace RoguelikeGeneratorPro
          
         public void InstanciateLevelObstacles()
         {
-            foreach(GameObject obstacle in levelObstacleList)
-            {
-                #if UNITY_EDITOR
-                    DestroyImmediate(obstacle);
-                #else
-                    Destroy(obstacle);
-                #endif
-
-                
-            }
-
+            // Skip the padding as it will not contain any floors
             for (int x = paddingAmmount; x < levelSize.x - paddingAmmount; x++)
             {
                 for (int y = paddingAmmount; y < levelSize.y - paddingAmmount; y++)
@@ -2686,17 +2671,10 @@ namespace RoguelikeGeneratorPro
 
         #region EnemySpawns
        
+       
         public void InstanciateEnemySpawns()
         {
-            foreach(GameObject eSpawn in enemySpawnList)
-            {
-            #if UNITY_EDITOR
-                DestroyImmediate(eSpawn);
-            #else
-                Destroy(eSpawn);
-            #endif
-            }
-
+            // Skip the padding as it will not contain any floors
             for (int x = paddingAmmount; x < levelSize.x - paddingAmmount; x++)
             {
                 for (int y = paddingAmmount; y < levelSize.y - paddingAmmount; y++)
@@ -2709,6 +2687,25 @@ namespace RoguelikeGeneratorPro
                 }
             }
         }
+
+        #endregion
+
+        #region Other
+
+        public void BakeNavMesh()
+        {
+            navMesh.RemoveData();
+            navMesh.BuildNavMesh();
+        }
+        #endregion
+
+        #region ToDo
+
+        // Need to rebake a navmesh generate upon the completion of level
+
+        // Add a roof? 
+
+        // Add colliders to the game
 
         #endregion
     }
