@@ -24,6 +24,9 @@ public class LevelManager : MonoBehaviour
         exitPortal = GameObject.Find("ExitPortal(Clone)");
         exitPortal.SetActive(false);
 
+        _navMesh.RemoveData();
+        _navMesh.BuildNavMesh();
+
         player.transform.position = spawnPortal.transform.position;
     }
 
@@ -53,6 +56,8 @@ public class LevelManager : MonoBehaviour
             Debug.Log($"Progressing to {next_level}th level, increasing room dimensions by {roomIncreaseNumber}");
             roguelikeGeneratorPro.levelSize.x+=roomIncreaseNumber;
             roguelikeGeneratorPro.levelSize.y+=roomIncreaseNumber;
+            roguelikeGeneratorPro.minEnemies+=2;
+            roguelikeGeneratorPro.maxEnemies+=2;
         }
 
         roguelikeGeneratorPro.RigenenerateLevel();

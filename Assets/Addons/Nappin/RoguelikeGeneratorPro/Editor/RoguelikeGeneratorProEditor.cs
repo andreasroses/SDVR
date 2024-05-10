@@ -524,7 +524,7 @@ namespace RoguelikeGeneratorPro
         //Additional items
         
         private SerializedProperty _generateEnemySpawns;
-        private SerializedProperty _enemySpawn;
+        private SerializedProperty _enemySpawnList;
         private SerializedProperty _generatePlayerSpawn;
         private SerializedProperty _playerSpawn;
         private SerializedProperty _generateObstacles;
@@ -890,7 +890,7 @@ namespace RoguelikeGeneratorPro
             _emptyOffset = serializedObject.FindProperty("emptyOffset");
 
             //Additional
-            _enemySpawn = serializedObject.FindProperty("enemySpawn");
+            _enemySpawnList = serializedObject.FindProperty("enemySpawnList");
             _playerSpawn = serializedObject.FindProperty("playerSpawn");
             _obstacleList = serializedObject.FindProperty("obstacleList");
             _generateEnemySpawns = serializedObject.FindProperty("generateEnemySpawns");
@@ -2452,7 +2452,8 @@ namespace RoguelikeGeneratorPro
             EditorGUILayout.LabelField("Additional Items", EditorStyles.boldLabel);
             EditorGUILayout.Space(5);
             _generateEnemySpawns.boolValue = EditorGUILayout.Toggle("Generate Enemy Spawns", script.generateEnemySpawns);
-            DisplayTileObjBlock("Enemy Spawn",enemySpawn_txt, _enemySpawn, script.enemySpawn);
+            EditorGUILayout.PropertyField(_enemySpawnList, true);
+            serializedObject.ApplyModifiedProperties();
             _generateExitPortal.boolValue = EditorGUILayout.Toggle("Generate Exit Portal", script.generateExitPortal);
             DisplayTileObjBlock("Exit Portal",exitPortal_txt, _exitPortal, script.exitPortal);
             _generatePlayerSpawn.boolValue = EditorGUILayout.Toggle("Generate Player Spawn", script.generatePlayerSpawn);
