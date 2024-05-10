@@ -59,8 +59,8 @@ GameObject:
   - component: {fileID: 8655773943164043324}
   - component: {fileID: 2466673824153433875}
   - component: {fileID: 1444850473556007007}
-  - component: {fileID: 5571087281317249253}
   - component: {fileID: 6192805398388104768}
+  - component: {fileID: 1896365339192019837}
   m_Layer: 7
   m_Name: DroneEnemy
   m_TagString: Enemy
@@ -134,34 +134,6 @@ NavMeshAgent:
   m_BaseOffset: 0.72
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5571087281317249253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726833313123506760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67e6a8716eb69c74582a6198deae7753, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 1024
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 20
-  timePerAttack: 0
-  sightRange: 10
-  attackRange: 8
-  bulletSpeed: 0
-  health: {fileID: 0}
-  state: 0
-  weapon: {fileID: 0}
 --- !u!136 &6192805398388104768
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -185,6 +157,25 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1896365339192019837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726833313123506760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282fb173f28f02f4d9af27f10be5261d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialState: 0
+  config: {fileID: 11400000, guid: c114388da5aa61a4e9c24aeb09b58249, type: 2}
+  navMeshAgent: {fileID: 1444850473556007007}
+  enemyTransform: {fileID: 8655773943164043324}
+  weaponTransform: {fileID: 3261896435895174776}
+  enemyGun: {fileID: 0}
+  playerTransform: {fileID: 0}
 --- !u!1001 &543246583918210109
 PrefabInstance:
   m_ObjectHideFlags: 0

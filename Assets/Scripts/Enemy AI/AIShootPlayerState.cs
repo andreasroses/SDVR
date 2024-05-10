@@ -22,7 +22,7 @@ public class AIShootPlayerState : AIState
     }
     public virtual void Enter(AIAgent agent){
         playerTransform = agent.playerTransform;
-        aimTransform = agent.enemyGun.GetMuzzle();
+        aimTransform = agent.enemyGun.Muzzle;
         minDistanceFromPlayer = agent.config.minDistanceFromPlayer;
         maxDistanceFromPlayer = agent.config.maxDistanceFromPlayer;
         rotationSpeed = agent.config.rotationSpeed;

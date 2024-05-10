@@ -26,7 +26,7 @@ public class AIAgent : MonoBehaviour
 
     protected virtual void Awake(){
         if(playerTransform == null){
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+            playerTransform = GameObject.Find("VR Player").GetComponent<Transform>();
         }
         enemyGun = gameObject.GetComponent<EnemyWeapon>();
         enemyTransform = gameObject.GetComponent<Transform>();

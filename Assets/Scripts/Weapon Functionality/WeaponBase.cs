@@ -10,7 +10,7 @@ public class WeaponBase : MonoBehaviour
 {
     #region VALUES
     [SerializeField] public WeaponData Data;
-    [SerializeField] protected Transform Muzzle;
+    [SerializeField] public Transform Muzzle;
     [SerializeField] protected GameObject Model;
     [SerializeField] protected TextMeshProUGUI AmmoText;
     protected AudioSource WeaponAudio;

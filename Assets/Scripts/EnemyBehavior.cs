@@ -3,8 +3,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-
 public class EnemyBehavior : MonoBehaviour
 {
     public enum State
@@ -13,7 +11,7 @@ public class EnemyBehavior : MonoBehaviour
         CHASE,
         ATTACK
     }
-    
+
     private NavMeshAgent agent;
     [SerializeField] private Transform player;
     [SerializeField] private LayerMask whatIsGround, playerLayer;
@@ -36,7 +34,7 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     void Update()
-    {  
+    {
         if (health.hitPoints <= 0)
         {
             OnDeath();
@@ -49,19 +47,19 @@ public class EnemyBehavior : MonoBehaviour
             Patroling();
             state = State.PATROL;
         }
-            
+
         if (playerInSightRange && !playerInAttackRange)
         {
             state = State.CHASE;
             ChasePlayer();
         }
-            
+
         if (playerInAttackRange && playerInSightRange)
         {
             AttackPlayer();
             state = State.ATTACK;
         }
-            
+
     }
 
     private void Patroling()
@@ -129,4 +127,3 @@ public class EnemyBehavior : MonoBehaviour
         gameObject.SetActive(false);
     }
 }
-

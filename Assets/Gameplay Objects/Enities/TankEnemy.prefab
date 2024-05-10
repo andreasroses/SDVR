@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 345387269351764708}
   - component: {fileID: 1581164312515549314}
-  - component: {fileID: 2494719205401866243}
   - component: {fileID: 5046411939045634817}
   - component: {fileID: -833786639822570303}
+  - component: {fileID: 8864775064112141030}
   m_Layer: 7
   m_Name: TankEnemy
   m_TagString: Enemy
@@ -89,34 +89,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2494719205401866243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3833523576974981670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67e6a8716eb69c74582a6198deae7753, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 1024
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 8
-  timePerAttack: 0
-  sightRange: 10
-  attackRange: 9
-  bulletSpeed: 0
-  health: {fileID: 0}
-  state: 0
-  weapon: {fileID: 0}
 --- !u!195 &5046411939045634817
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -136,7 +108,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!136 &-833786639822570303
@@ -162,6 +134,34 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &8864775064112141030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3833523576974981670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cda89759103fd549b1994f4b084a36c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1024
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  walkPoint: {x: 0, y: 0, z: 0}
+  walkPointRange: 10
+  timePerAttack: 0
+  sightRange: 15
+  attackRange: 10
+  bulletSpeed: 0
+  health: {fileID: 0}
+  state: 0
+  weapon: {fileID: 0}
 --- !u!1001 &865274710948952586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,14 +324,73 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4548996776359853000, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4787785570022088849, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2288057569919229978, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6711703703733172529}
+    - targetCorrespondingSourceObject: {fileID: 247384376356544499, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8206880337479085640}
   m_SourcePrefab: {fileID: 100100000, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+--- !u!1 &632534923927886339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2288057569919229978, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+  m_PrefabInstance: {fileID: 1659549068318079513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6711703703733172529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632534923927886339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44b4cb2c99712344da8e42a526b5049c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 90268c955a8abd84b8efef75295998e0, type: 2}
+  Muzzle: {fileID: 7620743874086421816}
+  Model: {fileID: 0}
+  AmmoText: {fileID: 0}
+  currentAmmo: 0
+  maxAmmo: 0
+  shootDelay: 3
+--- !u!1 &1470713154221336042 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 247384376356544499, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+  m_PrefabInstance: {fileID: 1659549068318079513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8206880337479085640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470713154221336042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9f5d5997b74d944b3025ddd9848689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 90268c955a8abd84b8efef75295998e0, type: 2}
+  Muzzle: {fileID: 6601159400641299113}
+  Model: {fileID: 0}
+  AmmoText: {fileID: 0}
+  currentAmmo: 0
+  maxAmmo: 0
 --- !u!4 &6601159400641299113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5520252702528469168, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+  m_PrefabInstance: {fileID: 1659549068318079513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7620743874086421816 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9134906673784831777, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
   m_PrefabInstance: {fileID: 1659549068318079513}
   m_PrefabAsset: {fileID: 0}
