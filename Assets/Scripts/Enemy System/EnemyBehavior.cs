@@ -5,8 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private Animator enemyAnimator;
+    private NavMeshAgent agent;
     [SerializeField] private Transform player;
     [SerializeField] private LayerMask whatIsGround, playerLayer;
     [SerializeField] private Vector3 walkPoint;
@@ -19,8 +18,9 @@ public class EnemyBehavior : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("NewPlayer").GetComponent<Transform>();
+        player = GameObject.Find("VR Player").GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
+        health = GetComponent<Health>();
     }
 
     void Update()
@@ -34,11 +34,6 @@ public class EnemyBehavior : MonoBehaviour
             ChasePlayer();
         if (playerInAttackRange && playerInSightRange)
             AttackPlayer();
-
-        if(enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Die") && enemyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     private void Patroling()
