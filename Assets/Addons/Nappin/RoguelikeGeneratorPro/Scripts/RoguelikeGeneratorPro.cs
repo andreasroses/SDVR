@@ -445,10 +445,10 @@ namespace RoguelikeGeneratorPro
             
             if(generateObstacles) InstanciateLevelObstacles();
 
+            FindSpawnRoomLocation();
+
             if(generateEnemySpawns) InstanciateEnemySpawns();
 
-            FindSpawnRoomLocation();
-            
             if(generateExitPortal) FindExitPortalLocation();
 
             
@@ -2444,12 +2444,6 @@ namespace RoguelikeGeneratorPro
         // Place the spawn Room; hard coded spawn room tile placement
         private void PlaceSpawnRoom(Vector3 spawnLoc)
         {
-            // #if UNITY_EDITOR
-            //     DestroyImmediate(setSpawnPoint);
-            // #else
-            //     Destroy(setSpawnPoint);
-            // #endif
-            
             int x = (int)spawnLoc.x;
             int y = (int)spawnLoc.z;
 
@@ -2686,7 +2680,7 @@ namespace RoguelikeGeneratorPro
                 int x = Random.Range(0, levelSize.x);
                 int y = Random.Range(0, levelSize.y);
 
-                if (tiles[x, y] == tileType.floor && overlayTiles[x, y] == overlayType.empty){
+                if (tiles[x, y] == tileType.floor && overlayTiles[x, y] == overlayType.empty && Vector3.Distance(new Vector3(x*tileSize, 1, y*tileSize), setSpawnPoint.transform.position) >= 7 * tileSize){
                     overlayTiles[x, y] = overlayType.eSpawn;
                     //random enemyspawn
                     enemySpawn = enemySpawnList[Random.Range(0, enemySpawnList.Count)];
