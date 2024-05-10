@@ -463,7 +463,7 @@ namespace RoguelikeGeneratorPro
             if (generation == genType.generateObj && createWall2DCompositeCollider) GenerateWallCompositeCollider2D();
 
             CleanUpExtras();
-            BakeNavMesh();
+            //BakeNavMesh();
         }
 
         #endregion
@@ -2684,7 +2684,7 @@ namespace RoguelikeGeneratorPro
                     overlayTiles[x, y] = overlayType.eSpawn;
                     //random enemyspawn
                     enemySpawn = enemySpawnList[Random.Range(0, enemySpawnList.Count)];
-                    GameObject instObj = GameObject.Instantiate(enemySpawn, new Vector3(x*tileSize, 1, y*tileSize), Quaternion.identity, enemySpawnParent.transform);
+                    GameObject instObj = GameObject.Instantiate(enemySpawn, new Vector3(x*tileSize, 1.5f, y*tileSize), Quaternion.identity, enemySpawnParent.transform);
                     enemyCount++;
                 } 
             }

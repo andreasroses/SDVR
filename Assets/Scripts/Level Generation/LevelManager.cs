@@ -16,25 +16,15 @@ public class LevelManager : MonoBehaviour
     public static int enemiesRemaining = 0;
     public GameObject player;
 
-    private void Start()
+    private void Awake()
     {
-        tempEnemyCounter.SetText(enemiesRemaining.ToString());
-        GoToNextLevel();
+        //tempEnemyCounter.SetText(enemiesRemaining.ToString());
+        //GoToNextLevel();
     }
 
     void Update()
     {
-        // Tempoprary keybind for level generation while testing
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            if(enemiesRemaining != 0){
-                KillEnemy();
-                tempEnemyCounter.SetText(enemiesRemaining.ToString());
-            }
-            if(enemiesRemaining == 0){
-                exitPortal.SetActive(true);
-            }
-        }   
+          
     }
 
 
@@ -64,8 +54,7 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(.05f);
         GetAllEnemies();
 
-        _navMesh.RemoveData();
-        _navMesh.BuildNavMesh();
+        
         
         spawnPortal = GameObject.Find("SpawnPortal(Clone)");
         exitPortal = GameObject.Find("ExitPortal(Clone)");
@@ -74,6 +63,9 @@ public class LevelManager : MonoBehaviour
 
         player.transform.position = spawnPortal.transform.position;
         player.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+        _navMesh.RemoveData();
+        _navMesh.BuildNavMesh();
     }
 
     public void GetAllEnemies()

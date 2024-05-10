@@ -12,11 +12,12 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] public WeaponData Data;
     [SerializeField] protected Transform Muzzle;
     [SerializeField] protected GameObject Model;
+    [SerializeField] protected TextMeshProUGUI AmmoText;
     protected AudioSource WeaponAudio;
     protected float LastShootTime;
 
-    public int currentAmmo;
-    public int maxAmmo;
+    [HideInInspector] public int currentAmmo;
+    [HideInInspector] public int maxAmmo;
     protected bool isShooting;
     protected bool keyPress;
     #endregion
@@ -32,6 +33,8 @@ public class WeaponBase : MonoBehaviour
 
     protected virtual void Update()
     {
+        if(transform.parent.tag != "Enemy")
+            AmmoText.text = currentAmmo + " / " + maxAmmo;
         //Check what firing mode the weapon is using
         switch(Data.FiringType)
         {

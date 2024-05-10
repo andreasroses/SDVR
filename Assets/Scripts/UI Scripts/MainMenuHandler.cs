@@ -8,7 +8,7 @@ public class MainMenuHandler : MonoBehaviour
     public void OnPlayButton()
     {
         // in loadScene, enter the name of the scene in paranethese ("level 1") 
-        SceneManager.LoadScene("EnemyAIDebugScene");
+        SceneManager.LoadScene("LevelGeneration");
     }
 
     public void OnQuitButton()

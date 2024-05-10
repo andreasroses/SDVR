@@ -30,5 +30,5 @@ MonoBehaviour:
   ProjectileType: 1
   SpreadType: 1
   SimpleSpread: {x: 0.005, y: 0.005, z: 0.005}
-  Bullet: {fileID: 8969687385432949069, guid: 543b8645f5c411449ad8a744f273d4a6, type: 3}
+  Bullet: {fileID: 8969687385432949069, guid: 0e98b3ff8ce0cdb49892c0e233ce1fb6, type: 3}
   IsAutotrigger: 0

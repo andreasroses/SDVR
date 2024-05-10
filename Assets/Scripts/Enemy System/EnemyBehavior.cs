@@ -3,8 +3,17 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+
 public class EnemyBehavior : MonoBehaviour
 {
+    public enum State
+    {
+        PATROL,
+        CHASE,
+        ATTACK
+    }
+    
     private NavMeshAgent agent;
     [SerializeField] private Transform player;
     [SerializeField] private LayerMask whatIsGround, playerLayer;
@@ -12,28 +21,47 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private float walkPointRange, timePerAttack, sightRange, attackRange, bulletSpeed;
 
     public Health health;
+    [SerializeField] private State state;
     private bool walkPointSet, justAttacked;
     [SerializeField] private WeaponBase weapon;
 
 
     void Start()
     {
+        state = State.PATROL;
         player = GameObject.Find("VR Player").GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
         health = GetComponent<Health>();
+        weapon = GetComponentInChildren<WeaponBase>();
     }
 
     void Update()
-    {
+    {  
+        if (health.hitPoints <= 0)
+        {
+            OnDeath();
+        }
         bool playerInSightRange = Physics.CheckSphere(transform.position, sightRange, playerLayer);
         bool playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLayer);
 
         if (!playerInSightRange && !playerInAttackRange)
+        {
             Patroling();
+            state = State.PATROL;
+        }
+            
         if (playerInSightRange && !playerInAttackRange)
+        {
+            state = State.CHASE;
             ChasePlayer();
+        }
+            
         if (playerInAttackRange && playerInSightRange)
+        {
             AttackPlayer();
+            state = State.ATTACK;
+        }
+            
     }
 
     private void Patroling()
@@ -74,11 +102,9 @@ public class EnemyBehavior : MonoBehaviour
         if (!justAttacked)
         {
             // Attack code here
-            // GB();
+            transform.LookAt(player);
 
-            // Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            // rb.velocity = transform.forward * bulletSpeed;
-            // rb.AddForce(transform.up * 0f, ForceMode.Impulse);
+            weapon.Shoot();
 
             justAttacked = true;
             Invoke(nameof(ResetAttack), timePerAttack);

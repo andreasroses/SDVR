@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Anchor
   - Enemy
+  - RoomLight
+  - SamplesInfoPanel
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -18,7 +21,7 @@ TagManager:
   - EnemyBullet
   - PlayerBullet
   - Ground
-  - 
+  - Weapon
   - 
   - 
   - 

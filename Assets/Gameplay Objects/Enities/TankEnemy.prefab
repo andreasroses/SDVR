@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1581164312515549314}
   - component: {fileID: 2494719205401866243}
   - component: {fileID: 5046411939045634817}
+  - component: {fileID: -833786639822570303}
   m_Layer: 7
   m_Name: TankEnemy
   m_TagString: Enemy
@@ -108,12 +109,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 10
+  walkPointRange: 8
   timePerAttack: 0
-  sightRange: 5
-  attackRange: 10
+  sightRange: 10
+  attackRange: 9
   bulletSpeed: 0
   health: {fileID: 0}
+  state: 0
   weapon: {fileID: 0}
 --- !u!195 &5046411939045634817
 NavMeshAgent:
@@ -137,6 +139,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &-833786639822570303
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3833523576974981670}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &865274710948952586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,15 +184,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32f3ddd5cface104987cf7b0f608d5c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 3.637979e-12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32f3ddd5cface104987cf7b0f608d5c8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32f3ddd5cface104987cf7b0f608d5c8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.0000000018626451
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32f3ddd5cface104987cf7b0f608d5c8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -201,6 +226,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MechaTrooper
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 32f3ddd5cface104987cf7b0f608d5c8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 32f3ddd5cface104987cf7b0f608d5c8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -219,21 +252,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 345387269351764708}
     m_Modifications:
+    - target: {fileID: 247384376356544499, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781033215868297615, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2288057569919229978, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
       propertyPath: m_Name
       value: Shotgun
       objectReference: {fileID: 0}
+    - target: {fileID: 2288057569919229978, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647155288175151105, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548996776359853000, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 90268c955a8abd84b8efef75295998e0, type: 2}
     - target: {fileID: 4937649528063083865, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5520252702528469168, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000000009772748
+      value: -0.000000009763653
       objectReference: {fileID: 0}
     - target: {fileID: 5520252702528469168, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 0.74999994
       objectReference: {fileID: 0}
     - target: {fileID: 5520252702528469168, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
       propertyPath: m_LocalPosition.z
@@ -266,6 +319,10 @@ PrefabInstance:
     - target: {fileID: 5520252702528469168, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528083746647683071, guid: f1ddec62b96f2534086fc6dc3ba35e07, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

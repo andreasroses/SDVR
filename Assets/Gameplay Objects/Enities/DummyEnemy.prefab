@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5021654438583299317}
   - component: {fileID: 4181383159149552329}
   - component: {fileID: 6218557401302228884}
+  - component: {fileID: 4038189961432627506}
   m_Layer: 7
   m_Name: DummyEnemy
   m_TagString: Enemy
@@ -98,7 +99,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.7
-  m_Speed: 2
+  m_Speed: 4
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 100
@@ -132,11 +133,35 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 10
   timePerAttack: 0
-  sightRange: 0
-  attackRange: 0
+  sightRange: 11
+  attackRange: 9
   bulletSpeed: 0
   health: {fileID: 0}
+  state: 0
   weapon: {fileID: 0}
+--- !u!136 &4038189961432627506
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5880609737977356408}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Height: 2.3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &17077008720664930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -148,6 +173,22 @@ PrefabInstance:
     - target: {fileID: 2288057569919229978, guid: 7dcd065cc2235ad4aad74942a7a72828, type: 3}
       propertyPath: m_Name
       value: BurstRifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2288057569919229978, guid: 7dcd065cc2235ad4aad74942a7a72828, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647155288175151105, guid: 7dcd065cc2235ad4aad74942a7a72828, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548996776359853000, guid: 7dcd065cc2235ad4aad74942a7a72828, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: a8800ec846ae4164cb0e78d28ca8329e, type: 2}
+    - target: {fileID: 4809159839718615704, guid: 7dcd065cc2235ad4aad74942a7a72828, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5520252702528469168, guid: 7dcd065cc2235ad4aad74942a7a72828, type: 3}
       propertyPath: m_LocalScale.x
@@ -200,6 +241,14 @@ PrefabInstance:
     - target: {fileID: 5520252702528469168, guid: 7dcd065cc2235ad4aad74942a7a72828, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7349950292966242367, guid: 7dcd065cc2235ad4aad74942a7a72828, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484562339012301952, guid: 7dcd065cc2235ad4aad74942a7a72828, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -274,6 +323,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 960a58a995c229d4788b90c0e132e21b, type: 3}
       propertyPath: m_Name
       value: FieldFighter
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 960a58a995c229d4788b90c0e132e21b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 960a58a995c229d4788b90c0e132e21b, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

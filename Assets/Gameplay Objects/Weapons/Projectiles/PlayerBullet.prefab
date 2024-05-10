@@ -5340,10 +5340,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 129
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 577
+    m_Bits: 576
   m_LayerOverridePriority: 2
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -5367,17 +5367,17 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 129
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 577
+    m_Bits: 576
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Interpolate: 1
+  m_Constraints: 48
+  m_CollisionDetection: 2
 --- !u!114 &2340090884215496842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5426,7 +5426,7 @@ MonoBehaviour:
   healthEffect:
     name: 
     modifier: 0
-    amount: 5
+    amount: 50
     times: 1
     interval: 0
   disableOnImpact: 1
@@ -5441,8 +5441,8 @@ MonoBehaviour:
   targetMode: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 0
   triggerInteraction: 1
   targetTag: Player
-  searchRange: 10
+  searchRange: 10.3
   seekSpeed: 10
