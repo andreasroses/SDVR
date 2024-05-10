@@ -32,6 +32,7 @@ public class WeaponBase : MonoBehaviour
 
     protected virtual void Update()
     {
+        //Check what firing mode the weapon is using
         switch(Data.FiringType)
         {
             case FiringMode.Auto:
@@ -45,6 +46,7 @@ public class WeaponBase : MonoBehaviour
         {
             Shoot();
         }
+        //Check if the player is reloading
         if (Input.GetKeyDown(KeyCode.R))
         {
             if(!isShooting && currentAmmo < Data.MagazineSize)

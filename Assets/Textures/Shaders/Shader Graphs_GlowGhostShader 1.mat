@@ -53,14 +53,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 1
+    - _Alpha: 0.545
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 10
-    - _Effect: 0.7
+    - _Effect: 1.175
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5

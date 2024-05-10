@@ -19,7 +19,6 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         GetAllEnemies();
-        tempEnemyCounter.SetText(enemiesRemaining.ToString());
         spawnPortal = GameObject.Find("SpawnPortal(Clone)");
         exitPortal = GameObject.Find("ExitPortal(Clone)");
         exitPortal.SetActive(false);
@@ -27,32 +26,33 @@ public class LevelManager : MonoBehaviour
         player.transform.position = spawnPortal.transform.position;
     }
 
-    void Update()
+    private void Update()
     {
-        // Tempoprary keybind for level generation while testing
+        // Temporary keybind for level generation while testing
         if (Input.GetKeyDown(KeyCode.L))
         {
-            if(enemiesRemaining != 0){
+            if (enemiesRemaining != 0)
+            {
                 KillEnemy();
                 tempEnemyCounter.SetText(enemiesRemaining.ToString());
             }
-            if(enemiesRemaining == 0){
+            if (enemiesRemaining == 0)
+            {
                 exitPortal.SetActive(true);
             }
-        }   
+        }
     }
 
-    
     public void GoToNextLevel()
     {
         Debug.Log($"Level {current_level} Completed. Generating Level {next_level}");
-        
-        // *temp* Increase room size each level
-        if (next_level % roomIncreaseFrequency-1 == 0)
+
+        // Temporary: Increase room size each level
+        if (next_level % roomIncreaseFrequency - 1 == 0)
         {
             Debug.Log($"Progressing to {next_level}th level, increasing room dimensions by {roomIncreaseNumber}");
-            roguelikeGeneratorPro.levelSize.x+=roomIncreaseNumber;
-            roguelikeGeneratorPro.levelSize.y+=roomIncreaseNumber;
+            roguelikeGeneratorPro.levelSize.x += roomIncreaseNumber;
+            roguelikeGeneratorPro.levelSize.y += roomIncreaseNumber;
         }
 
         roguelikeGeneratorPro.RigenenerateLevel();
@@ -62,31 +62,30 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(PostGeneration());
     }
 
-    IEnumerator PostGeneration()
+    private IEnumerator PostGeneration()
     {
-        yield return new WaitForSeconds(.05f);
+        yield return new WaitForSeconds(0.05f);
         GetAllEnemies();
 
         _navMesh.RemoveData();
         _navMesh.BuildNavMesh();
-        
+
         spawnPortal = GameObject.Find("SpawnPortal(Clone)");
         exitPortal = GameObject.Find("ExitPortal(Clone)");
 
         exitPortal.SetActive(false);
 
         player.transform.position = spawnPortal.transform.position;
-        player.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        player.transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 
-    public void GetAllEnemies()
+    private void GetAllEnemies()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         enemiesRemaining = enemies.Length;
-        tempEnemyCounter.SetText(enemiesRemaining.ToString());
     }
 
-    public static void KillEnemy()
+    private static void KillEnemy()
     {
         enemiesRemaining--;
     }

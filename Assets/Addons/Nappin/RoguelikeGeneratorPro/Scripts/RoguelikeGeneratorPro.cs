@@ -2682,6 +2682,8 @@ namespace RoguelikeGeneratorPro
                     if (Random.Range(0, 100) < 4 && tiles[x, y] == tileType.floor && overlayTiles[x, y] == overlayType.empty){
                         overlayTiles[x, y] = overlayType.eSpawn;
                         GameObject instObj = GameObject.Instantiate(enemySpawn, new Vector3(x*tileSize, 1, y*tileSize), Quaternion.identity, enemySpawnParent.transform);
+
+
                         enemySpawnList.Add(instObj);
                     } 
                 }
