@@ -381,7 +381,8 @@ namespace RoguelikeGeneratorPro
         private List<Vector3> placedPortals = new List<Vector3>(); 
         private GameObject placedExitPortal;
         private GameObject setSpawnPoint;
-
+        public int maxEnemies = 15;
+        public int minEnemies = 5;
 
         //PRIVATE
         private tileType[,] tiles;
@@ -444,10 +445,10 @@ namespace RoguelikeGeneratorPro
             
             if(generateObstacles) InstanciateLevelObstacles();
 
+            FindSpawnRoomLocation();
+
             if(generateEnemySpawns) InstanciateEnemySpawns();
 
-            FindSpawnRoomLocation();
-            
             if(generateExitPortal) FindExitPortalLocation();
 
             
@@ -2443,12 +2444,6 @@ namespace RoguelikeGeneratorPro
         // Place the spawn Room; hard coded spawn room tile placement
         private void PlaceSpawnRoom(Vector3 spawnLoc)
         {
-            // #if UNITY_EDITOR
-            //     DestroyImmediate(setSpawnPoint);
-            // #else
-            //     Destroy(setSpawnPoint);
-            // #endif
-            
             int x = (int)spawnLoc.x;
             int y = (int)spawnLoc.z;
 
@@ -2674,19 +2669,24 @@ namespace RoguelikeGeneratorPro
        
         public void InstanciateEnemySpawns()
         {
-            // Skip the padding as it will not contain any floors
-            for (int x = paddingAmmount; x < levelSize.x - paddingAmmount; x++)
+            
+            int enemyCount = 0;
+
+            //random 
+            int enemyToSpawn = Random.Range(minEnemies, maxEnemies+1);
+
+            while (enemyCount <= enemyToSpawn)
             {
-                for (int y = paddingAmmount; y < levelSize.y - paddingAmmount; y++)
-                {
-                    if (Random.Range(0, 100) < 4 && tiles[x, y] == tileType.floor && overlayTiles[x, y] == overlayType.empty){
-                        overlayTiles[x, y] = overlayType.eSpawn;
-                        GameObject instObj = GameObject.Instantiate(enemySpawn, new Vector3(x*tileSize, 1, y*tileSize), Quaternion.identity, enemySpawnParent.transform);
+                int x = Random.Range(0, levelSize.x);
+                int y = Random.Range(0, levelSize.y);
 
-
-                        enemySpawnList.Add(instObj);
-                    } 
-                }
+                if (tiles[x, y] == tileType.floor && overlayTiles[x, y] == overlayType.empty && Vector3.Distance(new Vector3(x*tileSize, 1, y*tileSize), setSpawnPoint.transform.position) >= 7 * tileSize){
+                    overlayTiles[x, y] = overlayType.eSpawn;
+                    //random enemyspawn
+                    enemySpawn = enemySpawnList[Random.Range(0, enemySpawnList.Count)];
+                    GameObject instObj = GameObject.Instantiate(enemySpawn, new Vector3(x*tileSize, 1, y*tileSize), Quaternion.identity, enemySpawnParent.transform);
+                    enemyCount++;
+                } 
             }
         }
 
