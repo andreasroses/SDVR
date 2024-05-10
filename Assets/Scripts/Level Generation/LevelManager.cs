@@ -6,7 +6,7 @@ using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
-    [HideInInspector] public int current_level = 1, next_level = 2;
+    [HideInInspector] public int current_level = 0, next_level = 1;
     [SerializeField] public RoguelikeGeneratorPro.RoguelikeGeneratorPro roguelikeGeneratorPro;
     [SerializeField] public int roomIncreaseFrequency, roomIncreaseNumber;
     [SerializeField] public GameObject spawnPortal, exitPortal;
@@ -18,16 +18,8 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        GetAllEnemies();
         tempEnemyCounter.SetText(enemiesRemaining.ToString());
-        spawnPortal = GameObject.Find("SpawnPortal(Clone)");
-        exitPortal = GameObject.Find("ExitPortal(Clone)");
-        exitPortal.SetActive(false);
-
-        _navMesh.RemoveData();
-        _navMesh.BuildNavMesh();
-
-        player.transform.position = spawnPortal.transform.position;
+        GoToNextLevel();
     }
 
     void Update()
@@ -45,13 +37,13 @@ public class LevelManager : MonoBehaviour
         }   
     }
 
-    
+
     public void GoToNextLevel()
     {
         Debug.Log($"Level {current_level} Completed. Generating Level {next_level}");
         
         // *temp* Increase room size each level
-        if (next_level % roomIncreaseFrequency-1 == 0)
+        if (next_level % roomIncreaseFrequency-1 == 0 && current_level!=0)
         {
             Debug.Log($"Progressing to {next_level}th level, increasing room dimensions by {roomIncreaseNumber}");
             roguelikeGeneratorPro.levelSize.x+=roomIncreaseNumber;
