@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edb00627eca562e4292503f7c79f56a5, type: 3}
+  m_Name: Debug
+  m_EditorClassIdentifier: 
+  WeaponName: Auto Rifle
+  WeaponID: 0
+  FireAudio: []
+  ReloadAudio:
+  - {fileID: 8300000, guid: 105e2d6925f77034a945f0cf806aba7e, type: 3}
+  - {fileID: 8300000, guid: d59c255448eb4b640a7b3bb8da8e78f8, type: 3}
+  - {fileID: 8300000, guid: 9c1bad6461396f342aba91a9966902eb, type: 3}
+  AmmoCapacity: 300
+  MagazineSize: 30
+  BulletsPerShot: 1
+  BurstInterval: 0.05
+  FireRate: 0.5
+  ReloadTime: 0
+  Range: 20
+  ReloadSpeed: 0
+  RecoilRecoveryTime: 0
+  MaxSpreadTime: 1
+  FiringType: 0
+  ProjectileType: 1
+  SpreadType: 2
+  SimpleSpread: {x: 0.05, y: 0.05, z: 0.05}
+  Bullet: {fileID: 3972110772962023618, guid: 218b3126b27d68b469e7f87ab64eefb5, type: 3}
+  IsAutotrigger: 0

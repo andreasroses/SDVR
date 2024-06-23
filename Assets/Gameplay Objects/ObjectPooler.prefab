@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3680204079212232078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5108867495517785233}
+  - component: {fileID: 8386954334066900616}
+  - component: {fileID: 1285694969440712300}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5108867495517785233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3680204079212232078}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -750.59033, y: -271.50458, z: 37.98534}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8386954334066900616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3680204079212232078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0106a81881bee9248bb49427003b5364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - prefab: {fileID: 8969687385432949069, guid: 543b8645f5c411449ad8a744f273d4a6, type: 3}
+    amount: 150
+    hideFlags: 0
+    sequencialNaming: 0
+    pooledObjects: []
+--- !u!114 &1285694969440712300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3680204079212232078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d286f65bd2844b8498ac95cfbd8de857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  togglePauseKey: 9
+  <pauseAudio>k__BackingField: 1
+  <pauseTime>k__BackingField: 1
+  <showCursor>k__BackingField: 0
+  onPause:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnPause:
+    m_PersistentCalls:
+      m_Calls: []
+  paused: 0
+  modifyingTimeScale: 0
+  currentTimeDuration: 0
+  currentTimeMultiplier: 0
+  debugFPS: 0
+  fpsCounter: {fileID: 0}
+  fpsCounterTMP: {fileID: 0}
+  targetFPS: 60
+  currentFPS: 0
+  onBelowTargetFPS:
+    m_PersistentCalls:
+      m_Calls: []
+  onAboveTargetFPS:
+    m_PersistentCalls:
+      m_Calls: []

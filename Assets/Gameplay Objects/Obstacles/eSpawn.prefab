@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4686376202099139991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 205370021775502252}
+  - component: {fileID: 1894414238642673135}
+  m_Layer: 0
+  m_Name: eSpawn
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &205370021775502252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4686376202099139991}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.14, y: 27.967472, z: -2.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1894414238642673135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4686376202099139991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a746ef034d374934ca8e42907c796477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <canSpawn>k__BackingField: 1
+  <spawnForward>k__BackingField: 1
+  <forwardDistance>k__BackingField: 0
+  spawnOffset: {x: 0, y: 0, z: 0}
+  waves:
+  - interval: 3
+    spawnAmount: 3
+    onSpawn:
+      m_PersistentCalls:
+        m_Calls: []
+    onWaveComplete:
+      m_PersistentCalls:
+        m_Calls: []
+    poolIdentifiers:
+    - poolIndex: 2
+      prefabName: 
+    - poolIndex: 3
+      prefabName: 
+    - poolIndex: 4
+      prefabName: 
+    randomizeWaves: 1
+    randomPools: 
+  lastSpawned: {fileID: 0}
+  currentWave: 0
+  currentWaveSpawns: 0

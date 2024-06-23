@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
+using Oculus.Interaction.Surfaces;
+using Unity.VisualScripting;
+using UnityEditor.AI;
 using UnityEngine;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 using UnityEngine.Tilemaps;
-
 
 namespace RoguelikeGeneratorPro
 {
@@ -11,7 +15,7 @@ namespace RoguelikeGeneratorPro
 
         //Types
         public enum tileType { empty, floor, wall, detail };
-        public enum overlayType { empty, wallPattern, wallRandom, floorPattern, floorRandom };
+        public enum overlayType { empty, wallPattern, wallRandom, floorPattern, floorRandom, eSpawn, LevelObstacle};
         public enum patternType { perlinNoise, checker, wideChecker, lineLeft, lineRight };
         public enum levelRotation { XZ, XY , ZY};
         public enum genType { generateObj, generateTile, noGeneration };
@@ -25,7 +29,11 @@ namespace RoguelikeGeneratorPro
         public bool spawnCornerWalls = true;
         public bool removeUnnaturalWalls = false;
         public bool useSeed = false;
+        public bool spawnRoom = true;
         public int generationSeed = 99;
+
+        public int paddingAmmount = 4;
+        
 
 
         //PathMaker properties
@@ -358,6 +366,23 @@ namespace RoguelikeGeneratorPro
         public float overlayOffset = 0.03f;
         public float emptyOffset = 0f;
 
+        //Additional items
+        public bool generateEnemySpawns = false;
+        public GameObject enemySpawn;
+        public bool generatePlayerSpawn = false;
+        public GameObject playerSpawn, exitPortal;
+        public GameObject spawnDoor;
+        public Unity.AI.Navigation.NavMeshSurface navMesh;
+        public bool generateObstacles = false;
+        public bool generateExitPortal = false;
+        public List<GameObject> obstacleList = new List<GameObject>();
+        public List<GameObject> enemySpawnList = new List<GameObject>();
+        public List<GameObject> levelObstacleList = new List<GameObject>();
+        private List<Vector3> placedPortals = new List<Vector3>(); 
+        private GameObject placedExitPortal;
+        private GameObject setSpawnPoint;
+        public int maxEnemies = 15;
+        public int minEnemies = 5;
 
         //PRIVATE
         private tileType[,] tiles;
@@ -372,6 +397,9 @@ namespace RoguelikeGeneratorPro
         private GameObject wallParent;
         private GameObject emptyParent;
         private GameObject overlayParent;
+        private GameObject enemySpawnParent;
+        private GameObject levelObstacleParent;
+        private GameObject miscParent;
 
         #endregion
 
@@ -403,12 +431,39 @@ namespace RoguelikeGeneratorPro
             if (drawFloorOverlayPatternTiles) InstanciateFloorOverlay();
             if (drawWallOverlayPatternTiles) InstanciateWallOverlay();
 
+            /* Seths Added Code
+            Order for the generation:
+            1.Padd level
+
+            Last.   CleanUpExtras() to fix any issues or discrepencies made when padding for example, 
+                    otherwise level size would increase by 6 each level
+            */
+            
+            
+
+            PaddTiles();
+            
+            if(generateObstacles) InstanciateLevelObstacles();
+
+            FindSpawnRoomLocation();
+
+            if(generateEnemySpawns) InstanciateEnemySpawns();
+
+            if(generateExitPortal) FindExitPortalLocation();
+
+            
+
+            // End of custom code
+
             if(generation != genType.noGeneration) Spawn();
 
             if (generation == genType.generateObj && createLevelSizedFloorCollider) GenerateFloorCollider();
             else if (generation == genType.generateTile && createWallGridCollider) GenerateWallTileCollider();
 
             if (generation == genType.generateObj && createWall2DCompositeCollider) GenerateWallCompositeCollider2D();
+
+            CleanUpExtras();
+            //BakeNavMesh();
         }
 
         #endregion
@@ -489,6 +544,18 @@ namespace RoguelikeGeneratorPro
                 overlayParent.transform.parent = this.transform;
                 overlayParent.transform.localPosition = new Vector3(0f, overlayOffset, 0f);
             }
+
+            enemySpawnParent = new GameObject("enemySpawnParent");
+            enemySpawnParent.transform.parent = this.transform;
+            enemySpawnParent.transform.localPosition = new Vector3(0f, 0f, 0f);
+
+            levelObstacleParent = new GameObject("levelObstacleParent");
+            levelObstacleParent.transform.parent = this.transform;
+            levelObstacleParent.transform.localPosition = new Vector3(0f, 0f, 0f);
+
+            miscParent = new GameObject("miscParent");
+            miscParent.transform.parent = this.transform;
+            miscParent.transform.localPosition = new Vector3(0f, 0f, 0f);
         }
 
 
@@ -2306,6 +2373,341 @@ namespace RoguelikeGeneratorPro
         {
             return generation;
         }
+
+        #endregion
+
+        /*
+        For adding in values that are intended to be set in the editor, you must add them in the 
+        Nappin/RoguelikeGeneratorPro/Editor/RoguelikeGeneratorProEditor.cs file. Follow the other
+        "additional items" examples, here is an example of the lines that will be needed in their 
+        respective places/funcitons:
+
+        Declare as
+            private SerializedProperty _generateEnemySpawns;
+        In OnEnable
+            _generateEnemySpawns = serializedObject.FindProperty("generateEnemySpawns");
+        In AdditionalItems section
+            _generateEnemySpawns.boolValue = EditorGUILayout.Toggle("Generate Enemy Spawns", script.generateEnemySpawns);
+            DisplayTileObjBlock("Enemy Spawn",enemySpawn_txt, _enemySpawn, script.enemySpawn);
+        */
+
+        #region Spawnroom
+        // Function to find a valid location for a spawn room
+        public Vector3 FindSpawnRoomLocation()
+        {
+            // Floor tile name: floorTileObj_1, wall tile name: wallTileObj_1
+            
+            tileType[,] levelGrid = GetTiles();
+
+            Vector2Int levelSize = GetLevelSize();
+            int width = levelSize.x;
+            int height = levelSize.y;
+
+            // Check for horizontal walls
+            for (int z = 0; z < height; z++)
+            {
+                for (int x = 0; x < width - 2; x++)
+                {
+                    if (levelGrid[x, z] == tileType.wall &&
+                        levelGrid[x + 1, z] == tileType.wall &&
+                        levelGrid[x + 2, z] == tileType.wall)
+                    {
+                        // Found a valid location
+                        PlaceSpawnRoom(new Vector3(x+1, 0, z));
+                       
+                        return new Vector3(x + 1, 0, z);
+                    }
+                }
+            }
+
+            // Check for vertical walls
+            for (int x = 0; x < width; x++)
+            {
+                for (int z = 0; z < height - 2; z++)
+                {
+                    if (levelGrid[x, z] == tileType.wall &&
+                        levelGrid[x, z + 1] == tileType.wall &&
+                        levelGrid[x, z + 2] == tileType.wall)
+                    {
+                        // Found a valid location
+                        PlaceSpawnRoom(new Vector3(x, 0, z + 1));
+                        
+                        return new Vector3(x, 0, z + 1);
+                    }
+                }
+            }
+            // No valid location found
+            return Vector3.zero;
+        }
+
+
+        // Place the spawn Room; hard coded spawn room tile placement
+        private void PlaceSpawnRoom(Vector3 spawnLoc)
+        {
+            int x = (int)spawnLoc.x;
+            int y = (int)spawnLoc.z;
+
+            // Floors
+            tiles[x, y] = tileType.floor;
+
+            tiles[x, y-1] = tileType.floor;
+            tiles[x, y-2] = tileType.floor; // This is the center tile, place the spawnPoint here new Vector3(x*4, 0, (y-2)*4)
+            tiles[x, y-3] = tileType.floor;
+
+            tiles[x-1, y-1] = tileType.floor;
+            tiles[x-1, y-2] = tileType.floor;
+            tiles[x-1, y-3] = tileType.floor;
+
+            tiles[x+1, y-1] = tileType.floor;
+            tiles[x+1, y-2] = tileType.floor;
+            tiles[x+1, y-3] = tileType.floor;
+
+
+            //Walls 
+            tiles[x, y-4] = tileType.wall;
+            tiles[x-1, y] = tileType.wall;
+            tiles[x-2, y] = tileType.wall;
+            
+            tiles[x+1, y] = tileType.wall;
+            tiles[x+2, y] = tileType.wall;
+
+            tiles[x+2, y] = tileType.wall;
+            tiles[x+2, y-1] = tileType.wall;
+            tiles[x+2, y-2] = tileType.wall;
+            tiles[x+2, y-3] = tileType.wall;
+            tiles[x+2, y-4] = tileType.wall;
+            tiles[x+1, y-4] = tileType.wall;
+            
+            tiles[x-2, y] = tileType.wall;
+            tiles[x-2, y-1] = tileType.wall;
+            tiles[x-2, y-2] = tileType.wall;
+            tiles[x-2, y-3] = tileType.wall;
+            tiles[x-2, y-4] = tileType.wall;
+            tiles[x-1, y-4] = tileType.wall;
+
+            Instantiate(spawnDoor,new Vector3(x*tileSize, 0f, (y)*tileSize),Quaternion.identity,miscParent.transform);
+
+            //Spawn point
+            if(generatePlayerSpawn) setSpawnPoint = Instantiate(playerSpawn, new Vector3(x*tileSize, 0f, (y-3)*tileSize), Quaternion.identity,  miscParent.transform);
+            placedPortals.Add(spawnLoc);
+
+        }
+
+        // Pad tiles on each size in order to allow for placement of things such as the spawn room
+        private void PaddTiles(){
+            int originalRows = levelSize.x;
+            int originalColumns = levelSize.y;
+            
+            int newRows = originalRows + 2*paddingAmmount; // Add 4 rows on top and 4 rows on bottom
+            int newColumns = originalColumns + 2*paddingAmmount; // Add 4 columns on left and 4 columns on right
+
+            tileType[,] paddedTiles = new tileType[newRows, newColumns];
+            overlayType [,] paddedOverlayTiles = new overlayType[newRows, newColumns];
+
+            tileType emptyTile = tileType.empty;
+
+            // Copy the original tiles into the new array with padding
+            for (int i = 0; i < originalRows; i++)
+            {
+                for (int j = 0; j < originalColumns; j++)
+                {
+                    // Copy the original tile
+                    paddedTiles[i + 4, j + 4] = tiles[i, j];
+                    paddedOverlayTiles[i+4, j+4] = overlayTiles[i, j];
+                }   
+            }
+
+            // Fill the top 4 rows with empty tiles
+            for (int i = 0; i < paddingAmmount; i++)
+            {
+                for (int j = 0; j < newColumns; j++)
+                {
+                    paddedTiles[i, j] = emptyTile;
+                    paddedOverlayTiles[i, j] = overlayType.empty;
+                }
+            }
+
+            // Fill the bottom 4 rows with empty tiles
+            for (int i = newRows - paddingAmmount; i < newRows; i++)
+            {
+                for (int j = 0; j < newColumns; j++)
+                {
+                    paddedTiles[i, j] = emptyTile;
+                    paddedOverlayTiles[i, j] = overlayType.empty;
+                }
+            }
+
+            // Fill the left 4 columns with empty tiles
+            for (int i = 0; i < newRows; i++)
+            {
+                for (int j = 0; j < paddingAmmount; j++)
+                {
+                    paddedTiles[i, j] = emptyTile;
+                    paddedOverlayTiles[i, j] = overlayType.empty;
+                }
+            }
+
+            // Fill the right 4 columns with empty tiles
+            for (int i = 0; i < newRows; i++)
+            {
+                for (int j = newColumns - paddingAmmount; j < newColumns; j++)
+                {
+                    paddedTiles[i, j] = emptyTile;
+                    paddedOverlayTiles[i, j] = overlayType.empty;
+                }
+            }
+
+            levelSize.x += 2*paddingAmmount;
+            levelSize.y += 2*paddingAmmount;
+
+            overlayTiles = paddedOverlayTiles;
+            tiles = paddedTiles;
+        }
+
+        
+        public Vector3 FindExitPortalLocation()
+        {
+            tileType[,] levelGrid = GetTiles();
+
+            Vector2Int levelSize = GetLevelSize();
+            int width = levelSize.x;
+            int height = levelSize.y;
+
+            int maxAttempts = width * height; // Maximum number of attempts to find a suitable location
+
+            for (int i = 0; i < maxAttempts; i++)
+            {
+                int x = Random.Range(0, width);
+                int z = Random.Range(0, height);
+
+                if (IsSuitableLocationForExitPortal(levelGrid, x, z))
+                {
+                    // Found a valid location
+                    Vector3 exitLoc = new Vector3(x, 0, z);
+                    PlaceExitPortal(exitLoc);
+                    return exitLoc; // Assuming y = 0 for simplicity
+                }
+            }
+
+            // No valid location found after maximum attempts
+            return Vector3.zero;
+        }
+
+        private bool IsSuitableLocationForExitPortal(tileType[,] levelGrid, int x, int z)
+        {
+            // Check if the location is suitable for placing an exit portal
+            // For example, ensure it's not too close to an existing portal
+            const int minDistanceFromPortal = 5; // Adjust as needed
+
+            if (levelGrid[x, z] != tileType.floor ||
+                overlayTiles[x, z] != overlayType.empty)
+            {
+                // Not enough space for a portal
+                return false;
+            }
+
+            // Check distance from existing portals
+            foreach (var portal in placedPortals)
+            {
+                float distance = Vector3.Distance(new Vector3(x + 1, 0, z), portal);
+                if (distance < minDistanceFromPortal)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void PlaceExitPortal(Vector3 exitLoc)
+        {
+            int x = (int)exitLoc.x;
+            int y = (int)exitLoc.z;
+
+            // Place exit portal at the given location
+            placedExitPortal = Instantiate(exitPortal, new Vector3(x * tileSize, 0f, y * tileSize), Quaternion.identity,  miscParent.transform);
+
+            // Update list of placed portals
+            placedPortals.Add(exitLoc);
+        }
+
+        
+        // Remove the additional padding prior to increasing level size/generating new level
+        private void CleanUpExtras()
+        {
+            levelSize.x -= 2*paddingAmmount;
+            levelSize.y -= 2*paddingAmmount;
+        }
+
+        #endregion
+
+        #region LevelObstacles
+         
+        public void InstanciateLevelObstacles()
+        {
+            // Skip the padding as it will not contain any floors
+            for (int x = paddingAmmount; x < levelSize.x - paddingAmmount; x++)
+            {
+                for (int y = paddingAmmount; y < levelSize.y - paddingAmmount; y++)
+                {
+                    if (Random.Range(0, 100) < 8 && tiles[x, y] == tileType.floor){
+                        int randomValue = Random.Range(0, obstacleList.Count);
+                        overlayTiles[x, y] = overlayType.LevelObstacle;
+                        float randomAngle = Random.Range(0f, 360f);
+                        Quaternion randomRotation = Quaternion.Euler(0f, randomAngle, 0f);
+                        GameObject instObj = GameObject.Instantiate(obstacleList[randomValue], new Vector3(x*tileSize, 0, y*tileSize), randomRotation, levelObstacleParent.transform);
+                        levelObstacleList.Add(instObj);
+                    } 
+                }
+            }
+        }
+
+        #endregion
+
+        #region EnemySpawns
+       
+       
+        public void InstanciateEnemySpawns()
+        {
+            
+            int enemyCount = 0;
+
+            //random 
+            int enemyToSpawn = Random.Range(minEnemies, maxEnemies+1);
+
+            while (enemyCount <= enemyToSpawn)
+            {
+                int x = Random.Range(0, levelSize.x);
+                int y = Random.Range(0, levelSize.y);
+
+                if (tiles[x, y] == tileType.floor && overlayTiles[x, y] == overlayType.empty && Vector3.Distance(new Vector3(x*tileSize, 1, y*tileSize), setSpawnPoint.transform.position) >= 7 * tileSize){
+                    overlayTiles[x, y] = overlayType.eSpawn;
+                    //random enemyspawn
+                    enemySpawn = enemySpawnList[Random.Range(0, enemySpawnList.Count)];
+                    GameObject instObj = GameObject.Instantiate(enemySpawn, new Vector3(x*tileSize, 1.5f, y*tileSize), Quaternion.identity, enemySpawnParent.transform);
+                    enemyCount++;
+                } 
+            }
+        }
+
+        #endregion
+
+        #region Other
+
+        public void BakeNavMesh()
+        {
+            navMesh.RemoveData();
+            navMesh.BuildNavMesh();
+        }
+        #endregion
+
+        #region ToDo
+
+        // Need to rebake a navmesh generate upon the completion of level
+
+        // Add a roof? 
+
+        // Add colliders to the game
 
         #endregion
     }

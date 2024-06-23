@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using static RoguelikeGeneratorPro.RoguelikeGeneratorPro;
@@ -163,6 +164,13 @@ namespace RoguelikeGeneratorPro
         public Texture wallTileRandomObj_14_txt;
         public Texture wallTileRandomObj_15_txt;
 
+        public Texture enemySpawn_txt;
+        public Texture playerSpawn_txt;
+        public Texture obstacleList_txt;
+        public Texture exitPortal_txt;
+        public Texture spawnDoor_txt;
+        public Texture navMesh_txt;
+        
         private GUIStyle alignGUILeft;
         private GUIStyle alignGUIRight;
 
@@ -179,6 +187,7 @@ namespace RoguelikeGeneratorPro
         private SerializedProperty _removeUnnaturalWalls;
         private SerializedProperty _useSeed;
         private SerializedProperty _generationSeed;
+        private SerializedProperty _paddingAmmount;
 
 
         //PathMaker properties
@@ -189,7 +198,7 @@ namespace RoguelikeGeneratorPro
         private SerializedProperty _pathMakerRotatesRight;
         private SerializedProperty _pathMakerRotatesBackwords;
         private SerializedProperty _pathMakerMaxDensity;
-
+        
 
         //Chunk properties
         private SerializedProperty _chunkSpawnChance;
@@ -512,6 +521,19 @@ namespace RoguelikeGeneratorPro
         private SerializedProperty _overlayOffset;
         private SerializedProperty _emptyOffset;
 
+        //Additional items
+        
+        private SerializedProperty _generateEnemySpawns;
+        private SerializedProperty _enemySpawnList;
+        private SerializedProperty _generatePlayerSpawn;
+        private SerializedProperty _playerSpawn;
+        private SerializedProperty _generateObstacles;
+        private SerializedProperty _obstacleList;
+        private SerializedProperty _exitPortal;
+        private SerializedProperty _generateExitPortal;
+        private SerializedProperty _spawnDoor;
+        private SerializedProperty _navMesh;
+
         #endregion
 
 
@@ -532,6 +554,7 @@ namespace RoguelikeGeneratorPro
             _removeUnnaturalWalls = serializedObject.FindProperty("removeUnnaturalWalls");
             _useSeed = serializedObject.FindProperty("useSeed");
             _generationSeed = serializedObject.FindProperty("generationSeed");
+            _paddingAmmount = serializedObject.FindProperty("paddingAmmount");
 
 
             //PathMaker properties
@@ -866,6 +889,18 @@ namespace RoguelikeGeneratorPro
             _overlayOffset = serializedObject.FindProperty("overlayOffset");
             _emptyOffset = serializedObject.FindProperty("emptyOffset");
 
+            //Additional
+            _enemySpawnList = serializedObject.FindProperty("enemySpawnList");
+            _playerSpawn = serializedObject.FindProperty("playerSpawn");
+            _obstacleList = serializedObject.FindProperty("obstacleList");
+            _generateEnemySpawns = serializedObject.FindProperty("generateEnemySpawns");
+            _generateObstacles = serializedObject.FindProperty("generateObstacles");
+            _generatePlayerSpawn = serializedObject.FindProperty("generatePlayerSpawn");
+            _exitPortal = serializedObject.FindProperty("exitPortal");
+            _generateExitPortal = serializedObject.FindProperty("generateExitPortal");
+            _spawnDoor = serializedObject.FindProperty("spawnDoor");
+            _navMesh = serializedObject.FindProperty("navMesh");
+
 
             script = (RoguelikeGeneratorPro)target;
         }
@@ -936,6 +971,12 @@ namespace RoguelikeGeneratorPro
             {
                 _generationSeed.intValue = EditorGUILayout.IntField("Generation Seed", script.generationSeed);
             }
+
+            #endregion
+
+            #region PaddingAmmount
+
+            _paddingAmmount.intValue = EditorGUILayout.IntField("Padding Ammount", script.paddingAmmount);
 
             #endregion
 
@@ -1728,11 +1769,17 @@ namespace RoguelikeGeneratorPro
 
 
                 LayerOffsets();
-
+                
 
                 #region RotateLevel
 
                 _rotateLevel.intValue = (int)(patternType)EditorGUILayout.EnumPopup("Level Rotation", script.levelRot);
+
+                #endregion
+
+                #region Additional items
+
+                AdditionalItems();
 
                 #endregion
             }
@@ -2250,6 +2297,7 @@ namespace RoguelikeGeneratorPro
 
 
                 LayerOffsets();
+                AdditionalItems();
             }
             else _generation.intValue = 2;
 
@@ -2396,6 +2444,27 @@ namespace RoguelikeGeneratorPro
             _wallOffset.floatValue = EditorGUILayout.FloatField("Wall Offset", script.wallOffset);
             _overlayOffset.floatValue = EditorGUILayout.FloatField("Overlay Offset", script.overlayOffset);
             _emptyOffset.floatValue = EditorGUILayout.FloatField("Empty Offset", script.emptyOffset);
+        }
+
+        private void AdditionalItems()
+        {
+            EditorGUILayout.Space(20);
+            EditorGUILayout.LabelField("Additional Items", EditorStyles.boldLabel);
+            EditorGUILayout.Space(5);
+            _generateEnemySpawns.boolValue = EditorGUILayout.Toggle("Generate Enemy Spawns", script.generateEnemySpawns);
+            EditorGUILayout.PropertyField(_enemySpawnList, true);
+            serializedObject.ApplyModifiedProperties();
+            _generateExitPortal.boolValue = EditorGUILayout.Toggle("Generate Exit Portal", script.generateExitPortal);
+            DisplayTileObjBlock("Exit Portal",exitPortal_txt, _exitPortal, script.exitPortal);
+            _generatePlayerSpawn.boolValue = EditorGUILayout.Toggle("Generate Player Spawn", script.generatePlayerSpawn);
+            DisplayTileObjBlock("Player Spawn",playerSpawn_txt, _playerSpawn, script.playerSpawn);
+            _generateObstacles.boolValue = EditorGUILayout.Toggle("Generate Obstacles", script.generateObstacles);
+            EditorGUILayout.PropertyField(_obstacleList, true);
+            serializedObject.ApplyModifiedProperties();
+            DisplayTileObjBlock("Spawn Door",spawnDoor_txt, _spawnDoor, script.spawnDoor);
+            EditorGUILayout.PropertyField(_navMesh, true);
+            serializedObject.ApplyModifiedProperties();
+            
         }
     }
 }

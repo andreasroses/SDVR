@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edb00627eca562e4292503f7c79f56a5, type: 3}
+  m_Name: BR
+  m_EditorClassIdentifier: 
+  WeaponName: Burst Rifle
+  WeaponID: 2
+  FireAudio:
+  - {fileID: 8300000, guid: 386b95e98afdd884f96edf4495223554, type: 3}
+  ReloadAudio: []
+  AmmoCapacity: 0
+  MagazineSize: 0
+  BulletsPerShot: 0
+  BurstInterval: 0
+  FireRate: 0
+  ReloadTime: 0
+  Range: 0
+  ReloadSpeed: 0
+  RecoilRecoveryTime: 0
+  MaxSpreadTime: 0
+  FiringType: 0
+  ProjectileType: 0
+  SpreadType: 0
+  SimpleSpread: {x: 0.05, y: 0.05, z: 0.05}
+  Bullet: {fileID: 0}
+  IsAutotrigger: 0
